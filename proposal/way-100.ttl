@@ -1,0 +1,45 @@
+PREFIX osmnode: <https://www.openstreetmap.org/node/>
+PREFIX osmway: <https://www.openstreetmap.org/way/>
+# @TODO other prefixes
+
+osmway:100
+    osmm:changeset 115876760;
+    osmm:timestamp '2022-01-07T13:12:29Z'^^xsd:dateTime;
+    osmm:type 'w';
+    osmm:user 'XXXVII';
+    osmm:userid 13801736;
+    osmm:version 16;
+    # visible="true" ?
+    osmt:bicycle 'use_sidepath';
+    osmt:foot 'use_sidepath';
+    osmt:highway 'secondary';
+    osmt:junction 'roundabout';
+    osmt:maxspeed 'roundabout';
+    osmt:maxspeed '100';
+    osmt:ref 'St 2069';
+    osmt:surface 'St 2069';
+    osmt:surface 'asphalt';
+    osmt:tmc 'DE:32282/32283';
+    osmt:zone:traffic 'DE:rural';
+    # @TODO
+    # <nd ref="260904" />
+    # <nd ref="456386831" />
+    # <nd ref="260897" />
+    # <nd ref="456386832" />
+    # <nd ref="260898" />
+    # <nd ref="456386833" />
+    # <nd ref="185986175" />
+    # <nd ref="456386834" />
+    # <nd ref="260899" />
+    # <nd ref="456386835" />
+    # <nd ref="260900" />
+    # <nd ref="456386836" />
+    # <nd ref="260901" />
+    # <nd ref="456386837" />
+    # <nd ref="260902" />
+    # <nd ref="456386838" />
+    # <nd ref="1807516891" />
+    # <nd ref="260903" />
+    # <nd ref="456386839" />
+    # <nd ref="260904" />
+.

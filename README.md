@@ -1,4 +1,4 @@
-## Request for Feedback: OpenStreetMap RDF Schema 2022
+## [EARLY DRAFT] Request for Feedback: OpenStreetMap RDF Schema 2022
 [early draft][proof of concept] RDF/OWL samples from/to other OpenStreetMap data formats. See https://www.openstreetmap.org/user/fititnt/diary/400329
 
 ## Reference vs RFC
