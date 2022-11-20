@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osmChange version="0.6" generator="CGImap 0.8.8 (721022 spike-08.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+  <create>
+    <node id="5" visible="false" version="1" changeset="1" timestamp="2005-04-09T19:54:13Z" user="Steve" uid="1" />
+  </create>
+  <create>
+    <node id="6" visible="false" version="1" changeset="1" timestamp="2005-04-09T19:54:39Z" user="Steve" uid="1" />
+  </create>
+</osmChange>

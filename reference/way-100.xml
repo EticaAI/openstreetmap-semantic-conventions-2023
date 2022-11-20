@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="CGImap 0.8.8 (721017 spike-08.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+  <way id="100" visible="true" version="16" changeset="115876760" timestamp="2022-01-07T13:12:29Z" user="XXXVII" uid="13801736">
+    <nd ref="260904" />
+    <nd ref="456386831" />
+    <nd ref="260897" />
+    <nd ref="456386832" />
+    <nd ref="260898" />
+    <nd ref="456386833" />
+    <nd ref="185986175" />
+    <nd ref="456386834" />
+    <nd ref="260899" />
+    <nd ref="456386835" />
+    <nd ref="260900" />
+    <nd ref="456386836" />
+    <nd ref="260901" />
+    <nd ref="456386837" />
+    <nd ref="260902" />
+    <nd ref="456386838" />
+    <nd ref="1807516891" />
+    <nd ref="260903" />
+    <nd ref="456386839" />
+    <nd ref="260904" />
+    <tag k="bicycle" v="use_sidepath" />
+    <tag k="foot" v="use_sidepath" />
+    <tag k="highway" v="secondary" />
+    <tag k="junction" v="roundabout" />
+    <tag k="maxspeed" v="100" />
+    <tag k="ref" v="St 2069" />
+    <tag k="surface" v="asphalt" />
+    <tag k="tmc" v="DE:32282/32283" />
+    <tag k="zone:traffic" v="DE:rural" />
+  </way>
+</osm>
