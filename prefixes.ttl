@@ -1,7 +1,7 @@
 PREFIX osmnode: <https://www.openstreetmap.org/node/>
 PREFIX osmway: <https://www.openstreetmap.org/way/>
 PREFIX osmrel: <https://www.openstreetmap.org/relation/>
-
+PREFIX osmm: <https://localhost/todo-osmm/>
 
 # https://wiki.openstreetmap.org/wiki/Sophox_Editor
 # PREFIX osmt: <????>

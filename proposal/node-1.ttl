@@ -1,0 +1,21 @@
+PREFIX osmnode: <https://www.openstreetmap.org/node/>
+# @TODO other prefixes
+
+osmnode:1
+    osmm:changeset 124176968;
+    osmm:loc 'Point(42.7957187 13.5690032)'^^geo:wktLiteral;
+    osmm:timestamp '2022-07-28T09:47:39Z'^^xsd:dateTime;
+    osmm:type 'n';
+    osmm:user 'owene';
+    osmm:userid 29598;
+    osmm:version 33;
+    # visible="true" ?
+    osmt:communication:microwave 'yes';
+    osmt:communication:radio 'fm';
+    osmt:description 'Radio Subasio';
+    osmt:frequency '105.5 MHz';
+    osmt:man_made 'mast';
+    osmt:name 'Monte Piselli - San Giacomo';
+    osmt:tower:construction 'lattice';
+    osmt:tower:type 'communication';
+.

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="CGImap 0.8.8 (2833720 spike-06.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+  <relation id="10000" visible="true" version="6" changeset="105419300" timestamp="2021-05-27T10:47:23Z" user="salgo60" uid="305854">
+    <member type="way" ref="23641716" role="outer" />
+    <member type="way" ref="223698907" role="inner" />
+    <member type="way" ref="225434252" role="inner" />
+    <member type="way" ref="223698903" role="inner" />
+    <member type="way" ref="23729231" role="inner" />
+    <member type="way" ref="223698904" role="inner" />
+    <member type="way" ref="223698908" role="inner" />
+    <member type="way" ref="225434253" role="inner" />
+    <member type="way" ref="23729234" role="inner" />
+    <tag k="name" v="Kyrksjön" />
+    <tag k="natural" v="water" />
+    <tag k="source:lake" v="Review by So9q using LM Topographic Map" />
+    <tag k="type" v="multipolygon" />
+    <tag k="water" v="lake" />
+    <tag k="wikidata" v="Q18133662" />
+  </relation>
+</osm>
