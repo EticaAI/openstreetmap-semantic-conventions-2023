@@ -25,16 +25,56 @@
 # ==============================================================================
 
 """A simple example of a hug API call with versioning"""
+import json
+import os
+import requests
 import hug
+
+DE_FACTO_API_BASE = os.getenv(
+    'DE_FACTO_API', 'https://www.openstreetmap.org/api/0.6')
+
+
+@hug.format.content_type('application/xml')
+def format_as_xml(data, request=None, response=None):
+    return str(data).encode('utf8')
+
+
+suffix_output = hug.output_format.suffix({
+    # '.xml': format_as_xml,
+    '.json': hug.output_format.json,
+    # '.xml': hug.output_format.html,
+    # '.html': hug.output_format.html,
+    '.xml': hug.output_format.text,
+    '': hug.output_format.text,
+})
 
 
 @hug.get('/echo', versions=1)
 def echo(text):
     return text
 
-@hug.get('/changeset')
-def echo(changeset_number):
-    return changeset_number
+
+# http://localhost:8000/changeset/1.json
+
+@hug.get('/changeset/{changeset_and_format}', output=suffix_output)
+def api_changeset_xml(changeset_and_format):
+    print(DE_FACTO_API_BASE + '/changeset/' + changeset_and_format)
+    content = requests.get(
+        DE_FACTO_API_BASE + '/changeset/' + changeset_and_format)
+
+    if changeset_and_format.endswith('.json'):
+        result = json.loads(content.text)
+    else:
+        result = content.text
+    return result
+
+
+# @hug.get('/changeset/{changeset_id}.{format}', output=suffix_output)
+# def api_changeset_anyformat(changeset_id, format):
+#     print(DE_FACTO_API_BASE + '/changeset/' + changeset_id + '.' + format)
+#     content = requests.get(
+#         DE_FACTO_API_BASE + '/changeset/' + changeset_id + '.' + format)
+#     return content
 # https://www.openstreetmap.org/api/0.6/changeset/129373852
 
 # @hug.get('/echo', versions=range(2, 5))
