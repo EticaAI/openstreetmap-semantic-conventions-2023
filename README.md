@@ -12,7 +12,7 @@
   - source: https://www.openstreetmap.org/api/0.6/relation/10000
     - source full: https://www.openstreetmap.org/api/0.6/relation/10000/full
 - [reference/way-100.xml](reference/way-100.xml)
-  - (...)
+  - [proposal/way-100.ttl](proposal/way-100.ttl)
 
 ## Acknowledgments
 

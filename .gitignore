@@ -1,3 +1,5 @@
 __pycache__
 
 proxy/osm2rdfproxy-old.py
+
+osmapi_cache.sqlite
