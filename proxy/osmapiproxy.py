@@ -4,7 +4,6 @@
 #          FILE:  osmapiproxy.py
 #
 #         USAGE:  ./proxy/osmapiproxy.py
-#                 ./proxy/osmapiproxy.py --help
 #                 hug --port 8000 -f ./proxy/osmapiproxy.py
 #                 # curl http://localhost:8000/
 #
@@ -24,7 +23,6 @@
 #      REVISION:  ---
 # ==============================================================================
 
-"""A simple example of a hug API call with versioning"""
 import json
 import os
 import requests
@@ -36,14 +34,12 @@ DE_FACTO_API_BASE = os.getenv(
 
 @hug.format.content_type('application/xml')
 def format_as_xml(data, request=None, response=None):
+    # @FIXME temporary, needs be fixed
     return str(data).encode('utf8')
 
 
 suffix_output = hug.output_format.suffix({
-    # '.xml': format_as_xml,
     '.json': hug.output_format.json,
-    # '.xml': hug.output_format.html,
-    # '.html': hug.output_format.html,
     '.xml': hug.output_format.text,
     '': hug.output_format.text,
 })
@@ -55,33 +51,57 @@ def echo(text):
 
 
 # http://localhost:8000/changeset/1.json
-
-@hug.get('/changeset/{changeset_and_format}', output=suffix_output)
-def api_changeset_xml(changeset_and_format):
-    print(DE_FACTO_API_BASE + '/changeset/' + changeset_and_format)
+@hug.get('/changeset/{changeset_uid}', output=suffix_output)
+def api_changeset(changeset_uid):
+    print(DE_FACTO_API_BASE + '/changeset/' + changeset_uid)
     content = requests.get(
-        DE_FACTO_API_BASE + '/changeset/' + changeset_and_format)
+        DE_FACTO_API_BASE + '/changeset/' + changeset_uid)
 
-    if changeset_and_format.endswith('.json'):
+    if changeset_uid.endswith('.json'):
         result = json.loads(content.text)
     else:
         result = content.text
     return result
 
 
-# @hug.get('/changeset/{changeset_id}.{format}', output=suffix_output)
-# def api_changeset_anyformat(changeset_id, format):
-#     print(DE_FACTO_API_BASE + '/changeset/' + changeset_id + '.' + format)
-#     content = requests.get(
-#         DE_FACTO_API_BASE + '/changeset/' + changeset_id + '.' + format)
-#     return content
-# https://www.openstreetmap.org/api/0.6/changeset/129373852
+# http://localhost:8000/node/1.json
+@hug.get('/node/{node_uid}', output=suffix_output)
+def api_node(node_uid):
+    print(DE_FACTO_API_BASE + '/node/' + node_uid)
+    content = requests.get(
+        DE_FACTO_API_BASE + '/node/' + node_uid)
 
-# @hug.get('/echo', versions=range(2, 5))
-# def echo(text):
-#     return 'Echo: {text}'.format(**locals())
+    if node_uid.endswith('.json'):
+        result = json.loads(content.text)
+    else:
+        result = content.text
+    return result
 
 
-@hug.get('/unversioned')
-def hello():
-    return 'Hello world!'
+# http://localhost:8000/relation/10000.json
+@hug.get('/relation/{relation_uid}', output=suffix_output)
+def api_relation(relation_uid):
+    print(DE_FACTO_API_BASE + '/relation/' + relation_uid)
+    content = requests.get(
+        DE_FACTO_API_BASE + '/relation/' + relation_uid)
+
+    if relation_uid.endswith('.json'):
+        result = json.loads(content.text)
+    else:
+        result = content.text
+    return result
+
+# http://localhost:8000/way/100.json
+
+
+@hug.get('/way/{way_uid}', output=suffix_output)
+def api_way(way_uid):
+    print(DE_FACTO_API_BASE + '/way/' + way_uid)
+    content = requests.get(
+        DE_FACTO_API_BASE + '/way/' + way_uid)
+
+    if way_uid.endswith('.json'):
+        result = json.loads(content.text)
+    else:
+        result = content.text
+    return result
