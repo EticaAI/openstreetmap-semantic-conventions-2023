@@ -22,6 +22,7 @@
 #      REVISION:  ---
 # ==============================================================================
 
+import xml.etree.ElementTree as XMLElementTree
 
 RDF_TURTLE_PREFIXES = [
     'PREFIX osmnode: <https://www.openstreetmap.org/node/>',
@@ -29,7 +30,60 @@ RDF_TURTLE_PREFIXES = [
 ]
 
 
+class OSMApiv06Xml:
+    """OSMApiv06Xml
+
+    Not so optimized quick parser for XML files that can fit into memory
+    """
+
+    iterator: None
+    xmlroot: None  # xml.etree.ElementTree.Element
+    root_tag: str  # Example: osm
+    root_attrib: dict
+    child_1_tag: str
+    child_1_attr: dict
+    # @TODO for full dumps, will have 1-n child items
+
+    def __init__(self, file_or_string: str) -> None:
+
+        # @TODO maybe eventually implement from file (the large ones)
+        # self.iterator = XMLElementTree.iterparse(
+        #     source=file_or_string,
+        #     events=('start', 'end')
+        # )
+
+        # self.iterator = XMLElementTree.fromstring(
+        #     file_or_string,
+        #     events=('start', 'end')
+        # )
+        root = XMLElementTree.fromstring(file_or_string)
+        self.xmlroot = root
+        self.root_tag = root.tag
+        self.root_attrib = root.attrib
+        print(root)
+        print(root.tag)
+        print(root.attrib)
+        print(type(root.attrib))
+        print(type(root))
+
+        for child in root:
+            print('>>>>> ', child.tag, child.attrib)
+
+        # print(root.findall("."))
+        # print(root.findall(".[0]"))
+
+        # child_1 = next(root)
+        # self.child_1_tag = child_1.tag
+        # self.child_1_attr: child_1.attrib
+
+        # print(self.child_1_tag, self.child_1_attr)
+        # pass
+
+
 def osmrdf_node_xml2ttl(data_xml: str):
+
+    osmx = OSMApiv06Xml(data_xml)
+
     output = []
     output.extend(RDF_TURTLE_PREFIXES)
     output.append('')
