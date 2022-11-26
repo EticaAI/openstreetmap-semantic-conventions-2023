@@ -26,7 +26,8 @@
 # ==============================================================================
 
 from osmrdf2022 import (
-    osmrdf_node_xml2ttl
+    osmrdf_node_xml2ttl,
+    osmrdf_way_xml2ttl
 )
 import json
 import os
@@ -81,15 +82,12 @@ def api_changeset(changeset_uid):
 
 
 # http://localhost:8000/node/1.ttl
+# rdfpipe --input-format='ttl' --output-format=longturtle http://localhost:8000/node/2.ttl
 @hug.get('/node/{node_uid}.ttl', output=format_as_turtle)
 def api_node_ttl(node_uid):
-    # print(DE_FACTO_API_BASE + '/node/' + node_uid)
     content = requests.get(
         DE_FACTO_API_BASE + '/node/' + node_uid + '.xml')
 
-    # if node_uid.endswith('.json'):
-    #     result = json.loads(content.text)
-    # else:
     result = osmrdf_node_xml2ttl(content.text)
     return result
 
@@ -134,4 +132,16 @@ def api_way(way_uid):
         result = json.loads(content.text)
     else:
         result = content.text
+    return result
+
+# http://localhost:8000/way/100.ttl
+# rdfpipe --input-format='ttl' --output-format=longturtle http://localhost:8000/way/100.ttl
+
+
+@hug.get('/way/{way_id}.ttl', output=format_as_turtle)
+def api_node_ttl(way_id):
+    content = requests.get(
+        DE_FACTO_API_BASE + '/way/' + way_id + '.xml')
+
+    result = osmrdf_way_xml2ttl(content.text)
     return result

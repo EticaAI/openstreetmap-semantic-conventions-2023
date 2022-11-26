@@ -25,9 +25,14 @@
 from dataclasses import dataclass
 import xml.etree.ElementTree as XMLElementTree
 
+
+# See also: https://wiki.openstreetmap.org/wiki/Sophox#How_OSM_data_is_stored
 RDF_TURTLE_PREFIXES = [
+    'PREFIX geo: <http://www.opengis.net/ont/geosparql#>',
     'PREFIX osmnode: <https://www.openstreetmap.org/node/>',
     'PREFIX osmway: <https://www.openstreetmap.org/way/>',
+    'PREFIX osmm: <https://example.org/todo/>',
+    'PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>',
 ]
 
 OSM_ELEMENT_PREFIX = {
@@ -66,14 +71,14 @@ class OSMApiv06Xml:
         self.xmlroot = root
         self.root_tag = root.tag
         self.root_attrib = root.attrib
-        print(root)
-        print(root.tag)
-        print(root.attrib)
-        print(type(root.attrib))
-        print(type(root))
+        # print(root)
+        # print(root.tag)
+        # print(root.attrib)
+        # print(type(root.attrib))
+        # print(type(root))
 
-        for child in root:
-            print('>>>>> ', child.tag, child.attrib)
+        # for child in root:
+        #     print('>>>>> ', child.tag, child.attrib)
 
         # print(root.findall("."))
         # print(root.findall(".[0]"))
@@ -140,23 +145,24 @@ class OSMElement:
         data.append(self._basegroup)
 
         if self.changeset:
-            data.append(f'    osmm:changeset {self.changeset};')
+            data.append(f'    osmm:changeset {self.changeset} ;')
         if self.lat and self.lon:
             data.append(
-                f'    osmm:loc "Point({self.lat} {self.lon})"^^geo:wktLiteral;')
+                f'    osmm:loc "Point({self.lat} {self.lon})"^^geo:wktLiteral ;')
         if self.timestamp:
             data.append(
-                f'    osmm:timestamp "{self.timestamp}"^^xsd:dateTime;')
+                f'    osmm:timestamp "{self.timestamp}"^^xsd:dateTime ;')
         if self.user:
             data.append(
-                f'    osmm:user "{self.user}";')
+                f'    osmm:user "{self.user}" ;')
         if self.userid:
             data.append(
-                f'    osmm:userid "{self.userid}";')
+                f'    osmm:userid {self.userid} ;')
         if self.version:
             data.append(
-                f'    osmm:version "{self.version}";')
+                f'    osmm:version {self.version} ;')
 
+        data.append('    # TODO implement the tags')
         data.append('.')
         return data
 
@@ -180,18 +186,42 @@ def osmrdf_node_xml2ttl(data_xml: str):
 
     # print(osmnode)
     # print(type(osmnode))
-    print(osmnode.to_ttl())
-    print(type(osmnode.to_ttl()))
+    # print(osmnode.to_ttl())
+    # print(type(osmnode.to_ttl()))
 
     output = []
     output.extend(RDF_TURTLE_PREFIXES)
     output.append('')
 
-    output.append('# TODO turtle here')
     output.extend(osmnode.to_ttl())
 
     output.append('')
-    comment = "# " + "\n# ".join(data_xml.split("\n"))
-    output.append(comment)
+    # DEBUG: next 2 lines will print the XML node, commented
+    # comment = "# " + "\n# ".join(data_xml.split("\n"))
+    # output.append(comment)
+
+    return "\n".join(output)
+
+
+def osmrdf_way_xml2ttl(data_xml: str):
+
+    osmx = OSMApiv06Xml(data_xml)
+    osmnode = osmx.node()
+
+    # print(osmnode)
+    # print(type(osmnode))
+    # print(osmnode.to_ttl())
+    # print(type(osmnode.to_ttl()))
+
+    output = []
+    output.extend(RDF_TURTLE_PREFIXES)
+    output.append('')
+
+    output.extend(osmnode.to_ttl())
+
+    output.append('')
+    # DEBUG: next 2 lines will print the XML node, commented
+    # comment = "# " + "\n# ".join(data_xml.split("\n"))
+    # output.append(comment)
 
     return "\n".join(output)
