@@ -11,7 +11,8 @@
 #       OPTIONS:  ---
 #
 #  REQUIREMENTS:  - python3
-#          BUGS:  ---
+#          BUGS:  - No big XML dumps output format support (not yet)
+#                 - No support for PBF Format (...not yet)
 #         NOTES:  ---
 #       AUTHORS:  Emerson Rocha <rocha[at]ieee.org>
 # COLLABORATORS:  ---

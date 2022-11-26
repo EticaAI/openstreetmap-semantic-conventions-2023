@@ -3,20 +3,26 @@
 #
 #          FILE:  osmapi2rdfproxy.py
 #
-#         USAGE:  ./proxy/osmapi2rdfproxy.py
-#                 hug --port 8000 -f ./proxy/osmapi2rdfproxy.py
-#                 # curl http://localhost:8000/
+#         USAGE:  hug -f ./osmapi2rdfproxy.py --help
+#                 # Expose http://localhost:8000/ as API endpoint:
+#                     hug --port 8000 -f ./osmapi2rdfproxy.py
+#                 # Disable cache of de facto API calls
+#                     RDFPROXY_TTL="-1" hug -f ./osmapi2rdfproxy.py
 #
-#   DESCRIPTION:  This is a proof of concept for the "Request for Feedback:
-#                 OpenStreetMap RDF Schema 2022" which can be run on anyone's
-#                 local machine interested either test existing proposals
-#                 or customize for yours needs.
+#   DESCRIPTION:  Proxy over de facto public OpenStreetMap v0.6 API that adds
+#                 turtle format as additional output intented to be used for
+#                 local testing and/or feedback on the conventions.
+#                 This is not intended for production or near-production use,
+#                 however it implements python Hug (https://www.hug.rest/)
+#                 (great at benchmarks, yet less code) and requests-cache
+#                 (https://requests-cache.readthedocs.io/) so it is out of the
+#                 box a great starting point, even if you don't know python.
 #
 #       OPTIONS:  ---
 #
 #  REQUIREMENTS:  - python3
 #                   - hug (pip install hug -U)
-#                   - hug (pip install requests-cache)
+#                   - requests-cache (pip install requests-cache)
 #                 - osmrdf2022.py (Python library)
 #          BUGS:  ---
 #         NOTES:  ---
@@ -41,42 +47,62 @@ import requests
 import requests_cache
 import hug
 
+# user configuration ________________________________________________________
+
+# TIP: enviroment variable DE_FACTO_API_BASE="" can be customized!
 DE_FACTO_API_BASE = os.getenv(
     'DE_FACTO_API', 'https://www.openstreetmap.org/api/0.6')
 
 # @see https://requests-cache.readthedocs.io/en/stable/
-requests_cache.install_cache('osmapi_cache')
+# File osmapi_cache.sqlite will cache backend calls
+requests_cache.install_cache(
+    'osmapi_cache',
+    # https://requests-cache.readthedocs.io/en/stable/user_guide/backends.html
+    backend=os.getenv('RDFPROXY_CACHE', 'sqlite'),
+    # https://requests-cache.readthedocs.io/en/stable/user_guide/expiration.html
+    expire_after=os.getenv('RDFPROXY_TTL', '604800'),  # 7 days
+)
+
+# ### Hug overrides ____________________________________________________________
 
 
 @hug.format.content_type('application/xml')
 def format_as_xml(data, request=None, response=None):
-    """Free form UTF-8 text"""
-    # @FIXME temporary, needs be fixed
+    """format_as_xml
+    @FIXME make Hug return XML formating instead of text
+    """
     return str(data).encode('utf8')
 
 
 @hug.format.content_type('text/turtle')
 def format_as_turtle(data, request=None, response=None):
+    """format_as_turtle custom Turtle output format for Hug
+    """
     return str(data).encode('utf8')
 
 
+# ### Tell Hug suffix can be used to infer output strategy _____________________
 suffix_output = hug.output_format.suffix({
     '.json': hug.output_format.json,
     '.xml': format_as_xml,
     '.ttl': hug.output_format.text,
-    '': hug.output_format.text,
+    '': hug.output_format.text,  # @FIXME use format_as_xml()
 })
 
+# ### Logic for API endpoints __________________________________________________
+# @NOTE: This section mostly:
+#        - Request+cache openstreetmap.org/api/0.6/ API calls and serve as it is
+#        - If user ask .ttl, uses osmrdf2022.py to generate
+# @BUG   While osmapi2rdfproxy.py is intented to only generate Turtle for
+#        discussed types of data, the actuall OpenStreetMap API have more
+#        endpoints than the ones here.
 
-@hug.get('/echo', versions=1)
-def echo(text):
-    return text
-
-
-# http://localhost:8000/changeset/1.json
 @hug.get('/changeset/{changeset_uid}', output=suffix_output)
 def api_changeset(changeset_uid):
-    # print(DE_FACTO_API_BASE + '/changeset/' + changeset_uid)
+    """api_changeset /api/0.6/changeset/ (no changes, just proxy + cache)
+
+    @example http://localhost:8000/changeset/1.json
+    """
     content = requests.get(
         DE_FACTO_API_BASE + '/changeset/' + changeset_uid)
 
