@@ -7,22 +7,27 @@
 #                 hug --port 8000 -f ./proxy/osmapi2rdfproxy.py
 #                 # curl http://localhost:8000/
 #
-#   DESCRIPTION:  ---
+#   DESCRIPTION:  This is a proof of concept for the "Request for Feedback:
+#                 OpenStreetMap RDF Schema 2022" which can be run on anyone's
+#                 local machine interested either test existing proposals
+#                 or customize for yours needs.
 #
 #       OPTIONS:  ---
 #
 #  REQUIREMENTS:  - python3
 #                   - hug (pip install hug -U)
 #                   - hug (pip install requests-cache)
+#                 - osmrdf2022.py (Python library)
 #          BUGS:  ---
 #         NOTES:  ---
 #       AUTHORS:  Emerson Rocha <rocha[at]ieee.org>
 # COLLABORATORS:  ---
 #       LICENSE:  Public Domain dedication or Zero-Clause BSD
 #                 SPDX-License-Identifier: Unlicense OR 0BSD
-#       VERSION:  v0.1.0
-#       CREATED:  2022-11-25 15:53 UTC v0.1.0 started
-#      REVISION:  ---
+#       VERSION:  v0.2.0
+#       CREATED:  2022-11-25 15:53:00Z v0.1.0 started
+#      REVISION:  2022-11-26 20:47:00Z v0.2.0 node, way, relation basic turtle,
+#                                      only attached tags (no <nd> <member> yet)
 # ==============================================================================
 
 from osmrdf2022 import (

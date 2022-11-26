@@ -17,12 +17,13 @@
 # COLLABORATORS:  ---
 #       LICENSE:  Public Domain dedication or Zero-Clause BSD
 #                 SPDX-License-Identifier: Unlicense OR 0BSD
-#       VERSION:  v0.1.0
-#       CREATED:  2022-11-25 19:22 UTC v1.0.0 started
-#      REVISION:  ---
+#       VERSION:  v0.2.0
+#       CREATED:  2022-11-25 19:22:00Z v0.1.0 started
+#      REVISION:  2022-11-26 20:47:00Z v0.2.0 node, way, relation basic turtle,
+#                                      only attached tags (no <nd> <member> yet)
 # ==============================================================================
 
-from dataclasses import dataclass
+from typing import List
 import xml.etree.ElementTree as XMLElementTree
 
 
@@ -80,14 +81,20 @@ class OSMApiv06Xml:
     def node(self):
 
         for child in self.xmlroot:
-            # print('>>>>> el', child.tag, child.attrib)
+            print('>>>>> el', child.tag, child.attrib)
+            print('>>>>> el tags', child.findall("tag"))
+            eltags = None
+            _eltags = child.findall("tag")
+            if _eltags:
+                eltags = []
+                for item in _eltags:
+                    eltags.append((item.attrib['k'], item.attrib['v']))
             # print('>>>>> el2', dict(child.attrib))
             # # @TODO restrict here to node, way, relation, ...
             # print('>>>>> el3', OSMElement(
             #     child.tag, dict(child.attrib)).__dict__)
-            return OSMElement(child.tag, dict(child.attrib))
+            return OSMElement(child.tag, dict(child.attrib), eltags)
             break
-        # pass
 
 
 class OSMElement:
@@ -97,6 +104,7 @@ class OSMElement:
     """
     _basegroup: str
     _tag: str
+    _el_osm_tags: List[tuple]
     id: int
     changeset: int
     timestamp: str  # maybe chage later
@@ -107,7 +115,7 @@ class OSMElement:
     lat: float
     lon: float
 
-    def __init__(self, tag: str, meta: dict):
+    def __init__(self, tag: str, meta: dict, eltags: List[tuple] = None):
         if not isinstance(meta, dict):
             meta = dict(meta)
 
@@ -126,6 +134,8 @@ class OSMElement:
         self._tag = tag
         self._basegroup = '{0}{1}'.format(
             OSM_ELEMENT_PREFIX[tag], str(self.id))
+
+        self._el_osm_tags = eltags
 
     def to_ttl(self) -> list:
         data = []
@@ -149,7 +159,16 @@ class OSMElement:
             data.append(
                 f'    osmm:version {self.version} ;')
 
-        data.append('    # TODO implement the tags')
+        # data.append('    # TODO implement the tags')
+
+        if self._el_osm_tags:
+            for key, value in self._el_osm_tags:
+
+                # @TODO deal with keys that may break turtle
+                data.append(
+                    f'    osmt:{key} "{value}" ;')
+            pass
+
         data.append('.')
         return data
 
