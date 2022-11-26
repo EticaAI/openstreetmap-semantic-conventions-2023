@@ -14,6 +14,10 @@
 - [reference/way-100.xml](reference/way-100.xml)
   - [proposal/way-100.ttl](proposal/way-100.ttl)
 
+**Public domain code**
+- [proxy/osmapi2rdfproxy.py](proxy/osmapi2rdfproxy.py): early proof of concept to generate the RFC data; not intented for production use, but for test viability. Is a proxy
+  - [proxy/osmrdf2022.py](proxy/osmrdf2022.py): logic of the proof of concept proxy
+
 ## Acknowledgments
 
 - Minh Nguyen ([wiki](https://wiki.openstreetmap.org/wiki/User:Minh_Nguyen))
