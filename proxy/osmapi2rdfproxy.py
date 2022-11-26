@@ -27,6 +27,7 @@
 
 from osmrdf2022 import (
     osmrdf_node_xml2ttl,
+    osmrdf_relation_xml2ttl,
     osmrdf_way_xml2ttl
 )
 import json
@@ -81,17 +82,6 @@ def api_changeset(changeset_uid):
     return result
 
 
-# http://localhost:8000/node/1.ttl
-# rdfpipe --input-format='ttl' --output-format=longturtle http://localhost:8000/node/2.ttl
-@hug.get('/node/{node_uid}.ttl', output=format_as_turtle)
-def api_node_ttl(node_uid):
-    content = requests.get(
-        DE_FACTO_API_BASE + '/node/' + node_uid + '.xml')
-
-    result = osmrdf_node_xml2ttl(content.text)
-    return result
-
-
 # http://localhost:8000/node/1.json
 @hug.get('/node/{node_uid}', output=suffix_output)
 def api_node(node_uid):
@@ -106,6 +96,17 @@ def api_node(node_uid):
     return result
 
 
+# http://localhost:8000/node/1.ttl
+# rdfpipe --input-format='ttl' --output-format=longturtle http://localhost:8000/node/2.ttl
+@hug.get('/node/{node_uid}.ttl', output=format_as_turtle)
+def api_node_ttl(node_uid):
+    content = requests.get(
+        DE_FACTO_API_BASE + '/node/' + node_uid + '.xml')
+
+    result = osmrdf_node_xml2ttl(content.text)
+    return result
+
+
 # http://localhost:8000/relation/10000.json
 @hug.get('/relation/{relation_uid}', output=suffix_output)
 def api_relation(relation_uid):
@@ -117,6 +118,18 @@ def api_relation(relation_uid):
         result = json.loads(content.text)
     else:
         result = content.text
+    return result
+
+# http://localhost:8000/relation/10000.ttl
+# rdfpipe --input-format='ttl' --output-format=longturtle http://localhost:8000/relation/10000.ttl
+
+
+@hug.get('/relation/{relation_uid}.ttl', output=format_as_turtle)
+def api_relation_ttl(relation_uid):
+    content = requests.get(
+        DE_FACTO_API_BASE + '/relation/' + relation_uid + '.xml')
+
+    result = osmrdf_relation_xml2ttl(content.text)
     return result
 
 # http://localhost:8000/way/100.json

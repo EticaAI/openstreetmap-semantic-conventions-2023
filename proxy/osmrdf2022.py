@@ -27,16 +27,21 @@ import xml.etree.ElementTree as XMLElementTree
 
 
 # See also: https://wiki.openstreetmap.org/wiki/Sophox#How_OSM_data_is_stored
+# See also https://wiki.openstreetmap.org/wiki/Elements
 RDF_TURTLE_PREFIXES = [
     'PREFIX geo: <http://www.opengis.net/ont/geosparql#>',
     'PREFIX osmnode: <https://www.openstreetmap.org/node/>',
+    'PREFIX osmrel: <https://www.openstreetmap.org/relation/>',
     'PREFIX osmway: <https://www.openstreetmap.org/way/>',
-    'PREFIX osmm: <https://example.org/todo/>',
+    'PREFIX osmm: <https://example.org/todo-meta/>',
+    'PREFIX osmt: <https://example.org/todo-tag/>',
     'PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>',
 ]
 
 OSM_ELEMENT_PREFIX = {
     'node': 'osmnode:',
+    'relation': 'osmrel:',
+    'tag': 'osmt:',
     'way': 'osmway:'
 }
 
@@ -71,24 +76,6 @@ class OSMApiv06Xml:
         self.xmlroot = root
         self.root_tag = root.tag
         self.root_attrib = root.attrib
-        # print(root)
-        # print(root.tag)
-        # print(root.attrib)
-        # print(type(root.attrib))
-        # print(type(root))
-
-        # for child in root:
-        #     print('>>>>> ', child.tag, child.attrib)
-
-        # print(root.findall("."))
-        # print(root.findall(".[0]"))
-
-        # child_1 = next(root)
-        # self.child_1_tag = child_1.tag
-        # self.child_1_attr: child_1.attrib
-
-        # print(self.child_1_tag, self.child_1_attr)
-        # pass
 
     def node(self):
 
@@ -184,11 +171,6 @@ def osmrdf_node_xml2ttl(data_xml: str):
     osmx = OSMApiv06Xml(data_xml)
     osmnode = osmx.node()
 
-    # print(osmnode)
-    # print(type(osmnode))
-    # print(osmnode.to_ttl())
-    # print(type(osmnode.to_ttl()))
-
     output = []
     output.extend(RDF_TURTLE_PREFIXES)
     output.append('')
@@ -199,6 +181,25 @@ def osmrdf_node_xml2ttl(data_xml: str):
     # DEBUG: next 2 lines will print the XML node, commented
     # comment = "# " + "\n# ".join(data_xml.split("\n"))
     # output.append(comment)
+
+    return "\n".join(output)
+
+
+def osmrdf_relation_xml2ttl(data_xml: str):
+
+    osmx = OSMApiv06Xml(data_xml)
+    osmnode = osmx.node()
+
+    output = []
+    output.extend(RDF_TURTLE_PREFIXES)
+    output.append('')
+
+    output.extend(osmnode.to_ttl())
+
+    output.append('')
+    # DEBUG: next 2 lines will print the XML node, commented
+    comment = "# " + "\n# ".join(data_xml.split("\n"))
+    output.append(comment)
 
     return "\n".join(output)
 
