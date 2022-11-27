@@ -1,0 +1,49 @@
+PREFIX osmm: <https://example.org/todo-meta/>
+PREFIX osmrel: <https://www.openstreetmap.org/relation/>
+PREFIX osmt: <https://example.org/todo-tag/>
+PREFIX osmway: <https://www.openstreetmap.org/way/>
+PREFIX osmx: <https://example.org/todo-xref/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+osmrel:10000
+    osmm:changeset 105419300 ;
+    osmm:timestamp "2021-05-27T10:47:23+00:00"^^xsd:dateTime ;
+    osmm:user "salgo60" ;
+    osmm:version 6 ;
+    osmt:name "Kyrksjön" ;
+    osmt:natural "water" ;
+    osmt:source%3Alake "Review by So9q using LM Topographic Map" ;
+    osmt:type "multipolygon" ;
+    osmt:water "lake" ;
+    osmt:wikidata "Q18133662" ;
+    osmx:hasmembers (
+            [
+                osmx:hasroleouter osmway:23641716
+            ]
+            [
+                osmx:hasroleinner osmway:223698907
+            ]
+            [
+                osmx:hasroleinner osmway:225434252
+            ]
+            [
+                osmx:hasroleinner osmway:223698903
+            ]
+            [
+                osmx:hasroleinner osmway:23729231
+            ]
+            [
+                osmx:hasroleinner osmway:223698904
+            ]
+            [
+                osmx:hasroleinner osmway:223698908
+            ]
+            [
+                osmx:hasroleinner osmway:225434253
+            ]
+            [
+                osmx:hasroleinner osmway:23729234
+            ]
+        ) ;
+.

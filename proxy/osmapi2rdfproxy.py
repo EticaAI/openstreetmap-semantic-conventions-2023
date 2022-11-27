@@ -137,7 +137,8 @@ def api_node_ttl(node_uid):
     result = osmrdf_node_xml2ttl(content.text)
     return result
 
-
+# @see https://wiki.openstreetmap.org/wiki/Relation
+# @see https://wiki.openstreetmap.org/wiki/Category:Relations
 # http://localhost:8000/relation/10000.json
 @hug.get('/relation/{relation_uid}', output=suffix_output)
 def api_relation(relation_uid):

@@ -48,8 +48,17 @@ OSM_ELEMENT_PREFIX = {
     'way': 'osmway:'
 }
 
+# Using Sophox
+OSM_ELEMENT_TYPE_LITERAL = {
+    'node': 'n',
+    'way': 'w',
+    'rel': 'r'
+}
+
 # Undocumented
-# - osmx:hasnd
+# - osmx:hasnodes
+# - osmx:hasmembers
+# - osmx:hasrole{CUSTOM}
 
 # @SEE blank nodes https://www.w3.org/TR/turtle/#h2_sec-examples
 
@@ -88,26 +97,43 @@ class OSMApiv06Xml:
     def node(self):
 
         for child in self.xmlroot:
-            print('>>>>> el', child.tag, child.attrib)
-            print('>>>>> el tags', child.findall("tag"))
+            # print('>>>>> el', child.tag, child.attrib)
+            # print('>>>>> el tags', child.findall("tag"))
             xml_tags = None
             _eltags = child.findall("tag")
             if _eltags:
                 xml_tags = []
                 for item in _eltags:
                     xml_tags.append((item.attrib['k'], item.attrib['v']))
-            print('>>>>> el nd', child.findall("nd"))
+            # print('>>>>> el nd', child.findall("nd"))
             xml_nds = None
             _elnds = child.findall("nd")
             if _elnds:
                 xml_nds = []
                 for item in _elnds:
                     xml_nds.append(int(item.attrib['ref']))
+
+            xml_members = None
+            _elmembers = child.findall("member")
+            if _elmembers:
+                xml_members = []
+                for item in _elmembers:
+                    # @FIXME this is incomplete
+                    _type = item.attrib['type']
+                    _ref = int(item.attrib['ref'])
+                    _role = item.attrib['role'] if 'role' in item.attrib else None
+                    xml_members.append((_type, _ref, _role))
             # print('>>>>> el2', dict(child.attrib))
             # # @TODO restrict here to node, way, relation, ...
             # print('>>>>> el3', OSMElement(
             #     child.tag, dict(child.attrib)).__dict__)
-            return OSMElement(child.tag, dict(child.attrib), xml_tags, xml_nds)
+            return OSMElement(
+                child.tag,
+                dict(child.attrib),
+                xml_tags,
+                xml_nds,
+                xml_members
+            )
             break
 
 
@@ -120,6 +146,7 @@ class OSMElement:
     _tag: str
     _el_osm_tags: List[tuple]
     _el_osm_nds: List[int]
+    _el_osm_members: List[tuple]
     id: int
     changeset: int
     timestamp: str  # maybe chage later
@@ -133,7 +160,8 @@ class OSMElement:
     def __init__(
         self, tag: str, meta: dict,
         xml_tags: List[tuple] = None,
-        xml_nds: List[tuple] = None,
+        xml_nds: List[int] = None,
+        xml_members: List[tuple] = None,
     ):
         if not isinstance(meta, dict):
             meta = dict(meta)
@@ -143,8 +171,9 @@ class OSMElement:
         self.version = int(meta['version']) if 'version' in meta else None
         self.changeset = int(
             meta['changeset']) if 'changeset' in meta else None
-        self.timestamp = meta['timestamp'] if hasattr(
-            meta, 'timestamp') else None
+
+        self.timestamp = meta['timestamp'] if 'timestamp' in meta else None
+
         self.user = meta['user'] if 'user' in meta else None
         self.userid = int(meta['userid']) if 'userid' in meta else None
         self.lat = float(meta['lat']) if 'lat' in meta else None
@@ -156,6 +185,7 @@ class OSMElement:
 
         self._el_osm_tags = xml_tags
         self._el_osm_nds = xml_nds
+        self._el_osm_members = xml_members
 
     def to_ttl(self) -> list:
         data = []
@@ -169,6 +199,9 @@ class OSMElement:
         if self.timestamp:
             data.append(
                 f'    osmm:timestamp "{self.timestamp}"^^xsd:dateTime ;')
+        if self._tag in OSM_ELEMENT_TYPE_LITERAL.keys():
+            data.append(
+                f'    osmm:type "{OSM_ELEMENT_TYPE_LITERAL[self._tag]}" ;')
         if self.user:
             data.append(
                 f'    osmm:user "{self.user}" ;')
@@ -184,18 +217,24 @@ class OSMElement:
         if self._el_osm_tags:
             for key, value in self._el_osm_tags:
 
-                # @TODO deal with keys that may break turtle
                 data.append(
                     f'    osmt:{osmrdf_tagkey_encode(key)} "{value}" ;')
 
         if self._el_osm_nds:
             _parts = []
             for ref in self._el_osm_nds:
-
-                # @TODO deal with keys that may break turtle
                 _parts.append(f'osmnode:{ref}')
             data.append(
-                f'    osmx:hasnd ({" ".join(_parts)}) ;')
+                f'    osmx:hasnodes ({" ".join(_parts)}) ;')
+
+        if self._el_osm_members:
+            _parts = []
+            for _type, _ref, _role in self._el_osm_members:
+                _prefix = OSM_ELEMENT_PREFIX[_type]
+
+                _parts.append(f'[osmx:hasrole{_role} {_prefix}{_ref}]')
+            data.append(
+                f'    osmx:hasmembers ({" ".join(_parts)}) ;')
 
         data.append('.')
         return data
