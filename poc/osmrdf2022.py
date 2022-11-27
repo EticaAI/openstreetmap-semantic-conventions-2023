@@ -11,6 +11,7 @@
 #       OPTIONS:  ---
 #
 #  REQUIREMENTS:  - python3
+#                   - lxml
 #          BUGS:  - No big XML dumps output format support (not yet)
 #                 - No support for PBF Format (...not yet)
 #         NOTES:  ---
@@ -27,6 +28,7 @@
 import sys
 from typing import List, Type
 import xml.etree.ElementTree as XMLElementTree
+from lxml import etree
 
 
 # See also: https://wiki.openstreetmap.org/wiki/Sophox#How_OSM_data_is_stored
@@ -426,3 +428,48 @@ def osmrdf_xmldump2_ttl(xml_file_path, xml_filter: OSMElementFilter = None):
 
         # if count > 10:
         #     break
+
+# reference: https://pranavk.me/python/parsing-xml-efficiently-with-python/
+def osmrdf_xmldump2_ttl_v2(xml_file_path, xml_filter: OSMElementFilter = None):
+    # context = etree.iterparse(xml_file_path, events=('end',), tag='node')
+    context = etree.iterparse(xml_file_path, events=('end',))
+
+    for event, elem in context:
+        if elem.tag != 'node':
+            continue
+        Id = elem.attrib['id']
+        lat = str(elem.attrib['lat'])
+        lng = str(elem.attrib['lon'])
+
+        for c in elem:
+            # # We don't want such tags to keep in our DB.
+            # if c.attrib['k'] == 'created_by' or c.attrib['k'] == 'source':
+            #     continue
+
+            # These are basically the tags inside the nodes having key and values
+            key = c.attrib['k']
+            val = c.attrib['v']
+            # You can do more filtering here if you want specific keys or values. Like if you want only 'atms' then filter the val with 'atm' using conditions.
+
+            # Store the information in file or db or wherever you wanna use it.
+            print(key, val)
+
+        elem.clear()
+        while elem.getprevious() is not None:
+            del elem.getparent()[0]
+
+# from lxml import etree
+
+# context = etree.iterparse(filename, events=('end',), tag='nodes')
+
+# for event, element in context:
+# 	<Do the stuff here you want to do with the element. This element has all the information about the content of 'node' tag and its child elements because in the context above I have ordered it to capture only 'end' events for me. So it captures the event when the parser hits the end of the node tag i.e </node> tag or <node/> if it has no content inside it.
+
+# 	element.clear()
+# 	#This line tells that you won't be accessing any child elements of the element now. So the parser can just throw them off.
+
+
+# 	#Now clearing the parent elements of the 'element'
+# 	while elem.getprevious() is not None:
+#     		del elem.getparent()[0]
+# 	# 'not None' is used here because if the element you are parsing is root itself, then it will raise an exception because there is no parent for it, so you might have to handle that exception too in that case.

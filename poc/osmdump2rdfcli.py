@@ -24,6 +24,7 @@ import argparse
 import sys
 from osmrdf2022 import (
     osmrdf_xmldump2_ttl,
+    osmrdf_xmldump2_ttl_v2,
     OSMElementFilter
 )
 
@@ -46,6 +47,8 @@ Download test data . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     curl --output tmp/STP.osm.bz2 \
 https://download.geofabrik.de/africa/sao-tome-and-principe-latest.osm.bz2
     bunzip2 tmp/STP.osm.bz2
+    curl --output tmp/BRA-north.osm.bz2 \
+https://download.geofabrik.de/south-america/brazil/norte-latest.osm.bz2
 
 
 Read from file on disk . . . . . . . . . . . . . . . . . . . . . . . . . . . .
@@ -55,6 +58,8 @@ Read from file on disk . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 Pipe from other commands . . . . . . . . . . . . . . . . . . . . . . . . . . .
     cat tmp/STP.osm | {PROGRAM_EXE}
+    bzcat tmp/BRA-north.osm.bz2 | {PROGRAM_EXE}
+    bzcat tmp/BRA-north.osm.bz2 | {PROGRAM_EXE} --filter-xml-tag='relation'
 
 ------------------------------------------------------------------------------
                             EXEMPLŌRUM GRATIĀ
@@ -145,9 +150,9 @@ class Cli:
             filter.set_filter_xml_tags_not(pyargs.xml_tags_not)
 
         if _stdin:
-            osmrdf_xmldump2_ttl(stdin, filter)
+            osmrdf_xmldump2_ttl_v2(stdin, filter)
         else:
-            osmrdf_xmldump2_ttl(_infile, filter)
+            osmrdf_xmldump2_ttl_v2(_infile, filter)
         # print('todo')
 
 
