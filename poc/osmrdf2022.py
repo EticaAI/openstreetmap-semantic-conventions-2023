@@ -173,7 +173,8 @@ class OSMElement:
 
         self.id = int(meta['id']) if 'id' in meta else None
 
-        self.version = int(meta['version']) if 'version' in meta else None
+        # self.version = float(meta['version']) if 'version' in meta else None
+        self.version = meta['version'] if 'version' in meta else None
         self.changeset = int(
             meta['changeset']) if 'changeset' in meta else None
 
@@ -353,6 +354,14 @@ def osmrdf_way_xml2ttl(data_xml: str):
 
 
 def osmrdf_xmldump2_ttl(xml_file_path, xml_filter: OSMElementFilter = None):
+    """osmrdf_xmldump2_ttl _summary_
+
+    @deprecated will be replaced later
+
+    Args:
+        xml_file_path (_type_): _description_
+        xml_filter (OSMElementFilter, optional): _description_. Defaults to None.
+    """
     # @TODO document-me
 
     from xml.etree import cElementTree as ET
@@ -429,47 +438,70 @@ def osmrdf_xmldump2_ttl(xml_file_path, xml_filter: OSMElementFilter = None):
         # if count > 10:
         #     break
 
-# reference: https://pranavk.me/python/parsing-xml-efficiently-with-python/
+
 def osmrdf_xmldump2_ttl_v2(xml_file_path, xml_filter: OSMElementFilter = None):
     # context = etree.iterparse(xml_file_path, events=('end',), tag='node')
+    # context = etree.iterparse(xml_file_path, events=('end',), tag=('way'))
+
+    print('\n'.join(RDF_TURTLE_PREFIXES))
+    print('')
+
+    # _tags = ('node', 'way', 'relation')
+    _tags = ('way', 'relation')
+
+    # context = etree.iterparse(xml_file_path, events=('end',), tag=_tags)
     context = etree.iterparse(xml_file_path, events=('end',))
 
-    for event, elem in context:
-        if elem.tag != 'node':
+    count = 0
+    xml_tags = []
+    xml_nds = []
+    xml_members = []
+    for _event, elem in context:
+        if elem.tag in ['osm', 'bounds', 'nd', 'member', 'tag']:
             continue
-        Id = elem.attrib['id']
-        lat = str(elem.attrib['lat'])
-        lng = str(elem.attrib['lon'])
 
-        for c in elem:
-            # # We don't want such tags to keep in our DB.
-            # if c.attrib['k'] == 'created_by' or c.attrib['k'] == 'source':
-            #     continue
+        _eltags = elem.findall("tag")
+        if _eltags:
+            for item in _eltags:
+                xml_tags.append((item.attrib['k'], item.attrib['v']))
+        _elnds = elem.findall("nd")
+        if _elnds:
+            xml_nds = []
+            for item in _elnds:
+                xml_nds.append(int(item.attrib['ref']))
+        _elmembers = elem.findall("member")
+        if _elmembers:
+            xml_members = []
+            for item in _elmembers:
+                # @FIXME this is incomplete
+                _type = item.attrib['type']
+                _ref = int(item.attrib['ref'])
+                _role = item.attrib['role'] if 'role' in item.attrib else None
+                xml_members.append((_type, _ref, _role))
 
-            # These are basically the tags inside the nodes having key and values
-            key = c.attrib['k']
-            val = c.attrib['v']
-            # You can do more filtering here if you want specific keys or values. Like if you want only 'atms' then filter the val with 'atm' using conditions.
-
-            # Store the information in file or db or wherever you wanna use it.
-            print(key, val)
+        el = OSMElement(
+            elem.tag,
+            dict(elem.attrib),
+            xml_tags=xml_tags,
+            xml_nds=xml_nds,
+            xml_members=xml_members,
+            xml_filter=xml_filter
+        )
+        xml_tags = []
+        xml_nds = []
+        xml_members = []
+        if el.can_output():
+            print('\n'.join(el.to_ttl()) + '\n')
+            count += 1
 
         elem.clear()
         while elem.getprevious() is not None:
             del elem.getparent()[0]
 
-# from lxml import etree
 
-# context = etree.iterparse(filename, events=('end',), tag='nodes')
-
-# for event, element in context:
-# 	<Do the stuff here you want to do with the element. This element has all the information about the content of 'node' tag and its child elements because in the context above I have ordered it to capture only 'end' events for me. So it captures the event when the parser hits the end of the node tag i.e </node> tag or <node/> if it has no content inside it.
-
-# 	element.clear()
-# 	#This line tells that you won't be accessing any child elements of the element now. So the parser can just throw them off.
-
-
-# 	#Now clearing the parent elements of the 'element'
-# 	while elem.getprevious() is not None:
-#     		del elem.getparent()[0]
-# 	# 'not None' is used here because if the element you are parsing is root itself, then it will raise an exception because there is no parent for it, so you might have to handle that exception too in that case.
+# @TODO after Protobuf, maybe try some alternative which could allow
+#       search specific parts. See:
+#       - https://wiki.openstreetmap.org/wiki/SQLite
+#       - https://wiki.openstreetmap.org/wiki/SpatiaLite
+#       - https://github.com/osmzoso/osm2sqlite
+#
