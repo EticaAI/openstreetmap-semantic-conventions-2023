@@ -1,6 +1,6 @@
 __pycache__
-
 proxy/osm2rdfproxy-old.py
-
 osmapi_cache.sqlite
 proxy/osmapi_cache.sqlite
+proxy/tmp/*
+!proxy/tmp/.gitkeep

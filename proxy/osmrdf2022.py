@@ -307,3 +307,54 @@ def osmrdf_way_xml2ttl(data_xml: str):
     # output.append(comment)
 
     return "\n".join(output)
+
+
+def osmrdf_xmldump2_ttl(xml_file_path):
+
+    from xml.etree import cElementTree as ET
+
+    all_records = []
+
+    print('\n'.join(RDF_TURTLE_PREFIXES))
+    print('')
+
+    count = 0
+    for event, elem in ET.iterparse(xml_file_path, events=("start", "end")):
+
+        # if elem not in ['node', 'way', 'relation']
+        if elem.tag in ['bounds', 'osm']:
+            continue
+
+        if elem.tag in ['nd', 'member', 'tag']:
+            # @FIXME way
+            continue
+
+        if event == 'start':
+            # print(elem, elem.attrib)
+            child = elem
+            xml_tags = None
+            _eltags = child.findall("tag")
+            if _eltags:
+                xml_tags = []
+                for item in _eltags:
+                    xml_tags.append((item.attrib['k'], item.attrib['v']))
+            # print('>>>>> el nd', child.findall("nd"))
+
+        if event == 'end':
+            # print(elem, elem.attrib)
+
+            child = elem
+
+            el = OSMElement(
+                child.tag,
+                dict(child.attrib),
+                # xml_tags,
+                # xml_nds,
+                # xml_members
+            )
+            print('\n'.join(el.to_ttl()))
+
+            count += 1
+
+        # if count > 10:
+        #     break
