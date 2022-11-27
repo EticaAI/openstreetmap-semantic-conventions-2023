@@ -24,7 +24,8 @@
 #                                      only attached tags (no <nd> <member> yet)
 # ==============================================================================
 
-from typing import List
+import sys
+from typing import List, Type
 import xml.etree.ElementTree as XMLElementTree
 
 
@@ -147,6 +148,7 @@ class OSMElement:
     _el_osm_tags: List[tuple]
     _el_osm_nds: List[int]
     _el_osm_members: List[tuple]
+    _xml_filter: Type['OSMElementFilter']
     id: int
     changeset: int
     timestamp: str  # maybe chage later
@@ -162,6 +164,7 @@ class OSMElement:
         xml_tags: List[tuple] = None,
         xml_nds: List[int] = None,
         xml_members: List[tuple] = None,
+        xml_filter: Type['OSMElementFilter'] = None,
     ):
         if not isinstance(meta, dict):
             meta = dict(meta)
@@ -188,6 +191,12 @@ class OSMElement:
         self._el_osm_tags = xml_tags
         self._el_osm_nds = xml_nds
         self._el_osm_members = xml_members
+        self._xml_filter = xml_filter
+
+    def can_output(self) -> bool:
+        if not self._xml_filter.can_tag(self._tag):
+            return False
+        return True
 
     def to_ttl(self) -> list:
         data = []
@@ -240,6 +249,37 @@ class OSMElement:
 
         data.append('.')
         return data
+
+
+class OSMElementFilter:
+    """Helper for OSMElement limit what to output
+
+    """
+
+    xml_tags: List = None
+    xml_tags_not: List = None
+
+    def __init__(self) -> None:
+        pass
+
+    def set_filter_xml_tags(self, tags: list):
+        self.xml_tags = tags
+
+        # print (self.__dict__)
+        # sys.exit()
+        return self
+
+    def can_tag(self, tag: str) -> bool:
+        # print (self.__dict__, not self.xml_tags and not self.xml_tags_not)
+        # print (self.xml_tags and tag in self.xml_tags)
+        # print (self.xml_tags_not and tag not in self.xml_tags_not)
+        # sys.exit()
+        if not self.xml_tags and not self.xml_tags_not:
+            return True
+        if (not self.xml_tags or tag in self.xml_tags) and \
+                (not self.xml_tags_not or tag not in self.xml_tags_not):
+            return True
+        return False
 
 
 def osmrdf_node_xml2ttl(data_xml: str):
@@ -309,7 +349,8 @@ def osmrdf_way_xml2ttl(data_xml: str):
     return "\n".join(output)
 
 
-def osmrdf_xmldump2_ttl(xml_file_path):
+def osmrdf_xmldump2_ttl(xml_file_path, xml_filter: OSMElementFilter = None):
+    # @TODO document-me
 
     from xml.etree import cElementTree as ET
 
@@ -351,10 +392,11 @@ def osmrdf_xmldump2_ttl(xml_file_path):
                 # xml_tags,
                 # xml_nds,
                 # xml_members
+                xml_filter=xml_filter
             )
-            print('\n'.join(el.to_ttl()))
-
-            count += 1
+            if el.can_output():
+                print('\n'.join(el.to_ttl()))
+                count += 1
 
         # if count > 10:
         #     break

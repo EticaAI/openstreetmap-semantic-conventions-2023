@@ -20,22 +20,141 @@
 #      REVISION:  ---
 # ==============================================================================
 
+import argparse
+import sys
 from osmrdf2022 import (
-    osmrdf_xmldump2_ttl
+    osmrdf_xmldump2_ttl,
+    OSMElementFilter
 )
-import json
-import os
-import requests
-import requests_cache
-import hug
 
-# https://download.geofabrik.de/africa/sao-tome-and-principe.html
+STDIN = sys.stdin.buffer
 
-# curl --output ./tmp/sao-tome-and-principe-latest.osm.bz2 https://download.geofabrik.de/africa/sao-tome-and-principe-latest.osm.bz2
-# bunzip2 ./tmp/sao-tome-and-principe-latest.osm.bz2
+NOMEN = 'osmdump2rdfcli'
+PROGRAM_EXE = __file__
+
+DESCRIPTION = f"""
+{PROGRAM_EXE} Proof of concept for OSM RDF 2022, CLI alternative \
+(intended to run on dumps) to the proxy version.
+"""
+
+__EPILOGUM__ = f"""
+------------------------------------------------------------------------------
+                            EXEMPLŌRUM GRATIĀ
+------------------------------------------------------------------------------
+
+Download test data . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    curl --output tmp/STP.osm.bz2 \
+https://download.geofabrik.de/africa/sao-tome-and-principe-latest.osm.bz2
+    bunzip2 tmp/STP.osm.bz2
 
 
-osmrdf_xmldump2_ttl('./tmp/sao-tome-and-principe-latest.osm')
+Read from file on disk . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    {PROGRAM_EXE} tmp/STP.osm
+
+Pipe from other commands . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    cat tmp/STP.osm | {PROGRAM_EXE}
+
+------------------------------------------------------------------------------
+                            EXEMPLŌRUM GRATIĀ
+------------------------------------------------------------------------------
+""".format(__file__)
+
+
+class Cli:
+
+    EXIT_OK = 0
+    EXIT_ERROR = 1
+    EXIT_SYNTAX = 2
+
+    venandum_insectum: bool = False  # noqa: E701
+
+    def __init__(self):
+        """
+        Constructs all the necessary attributes for the Cli object.
+        """
+
+    def make_args(self, hxl_output=True):
+        parser = argparse.ArgumentParser(
+            prog=NOMEN,
+            description=DESCRIPTION,
+            formatter_class=argparse.RawDescriptionHelpFormatter,
+            epilog=__EPILOGUM__
+        )
+
+        parser.add_argument(
+            'infile',
+            help='Input file',
+            # required=False,
+            nargs='?'
+        )
+
+        parser.add_argument(
+            '--real-infile-path',
+            help='(Quick workaround for edge cases) in case infile becomes'
+            'ambigous on shell scripting, use this to force real source path',
+            dest='real_infile',
+            nargs='?',
+            default=None,
+            required=False,
+        )
+
+        parser.add_argument(
+            '--filter-xml-tag',
+            help='Filter XML tags',
+            dest='xml_tags',
+            nargs='?',
+            type=lambda x: x.split(','),
+            default=None
+        )
+
+        parser.add_argument(
+            '--filter-xml-tag-not',
+            help='Filter XML tags (not)',
+            dest='xml_tags_not',
+            nargs='?',
+            type=lambda x: x.split(','),
+            default=None
+        )
+
+        return parser.parse_args()
+
+    def execute_cli(
+            self, pyargs, stdin=STDIN, stdout=sys.stdout,
+            stderr=sys.stderr):
+        """execute_cli"""
+
+        if pyargs.real_infile is not None:
+            _infile = pyargs.real_infile
+            _stdin = False
+        else:
+            if stdin.isatty():
+                _infile = pyargs.infile
+                _stdin = False
+            else:
+                _infile = None
+                _stdin = True
+
+        filter = OSMElementFilter()
+        if pyargs.xml_tags:
+            filter.set_filter_xml_tags(pyargs.xml_tags)
+
+        if _stdin:
+            osmrdf_xmldump2_ttl(stdin, filter)
+        else:
+            osmrdf_xmldump2_ttl(_infile, filter)
+        # print('todo')
+
+
+if __name__ == "__main__":
+
+    est_cli = Cli()
+    args = est_cli.make_args()
+    # print('  >>>>  args', args)
+    # raise ValueError(args)
+
+    est_cli.execute_cli(args)
+
+# osmrdf_xmldump2_ttl('./tmp/sao-tome-and-principe-latest.osm')
 
 
 # ./osmdump2rdfcli.py --help
