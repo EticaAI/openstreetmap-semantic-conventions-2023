@@ -37,6 +37,7 @@ RDF_TURTLE_PREFIXES = [
     'PREFIX osmway: <https://www.openstreetmap.org/way/>',
     'PREFIX osmm: <https://example.org/todo-meta/>',
     'PREFIX osmt: <https://example.org/todo-tag/>',
+    'PREFIX osmx: <https://example.org/todo-xref/>',
     'PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>',
 ]
 
@@ -46,6 +47,11 @@ OSM_ELEMENT_PREFIX = {
     'tag': 'osmt:',
     'way': 'osmway:'
 }
+
+# Undocumented
+# - osmx:hasnd
+
+# @SEE blank nodes https://www.w3.org/TR/turtle/#h2_sec-examples
 
 
 class OSMApiv06Xml:
@@ -84,17 +90,24 @@ class OSMApiv06Xml:
         for child in self.xmlroot:
             print('>>>>> el', child.tag, child.attrib)
             print('>>>>> el tags', child.findall("tag"))
-            eltags = None
+            xml_tags = None
             _eltags = child.findall("tag")
             if _eltags:
-                eltags = []
+                xml_tags = []
                 for item in _eltags:
-                    eltags.append((item.attrib['k'], item.attrib['v']))
+                    xml_tags.append((item.attrib['k'], item.attrib['v']))
+            print('>>>>> el nd', child.findall("nd"))
+            xml_nds = None
+            _elnds = child.findall("nd")
+            if _elnds:
+                xml_nds = []
+                for item in _elnds:
+                    xml_nds.append(int(item.attrib['ref']))
             # print('>>>>> el2', dict(child.attrib))
             # # @TODO restrict here to node, way, relation, ...
             # print('>>>>> el3', OSMElement(
             #     child.tag, dict(child.attrib)).__dict__)
-            return OSMElement(child.tag, dict(child.attrib), eltags)
+            return OSMElement(child.tag, dict(child.attrib), xml_tags, xml_nds)
             break
 
 
@@ -106,6 +119,7 @@ class OSMElement:
     _basegroup: str
     _tag: str
     _el_osm_tags: List[tuple]
+    _el_osm_nds: List[int]
     id: int
     changeset: int
     timestamp: str  # maybe chage later
@@ -116,7 +130,11 @@ class OSMElement:
     lat: float
     lon: float
 
-    def __init__(self, tag: str, meta: dict, eltags: List[tuple] = None):
+    def __init__(
+        self, tag: str, meta: dict,
+        xml_tags: List[tuple] = None,
+        xml_nds: List[tuple] = None,
+    ):
         if not isinstance(meta, dict):
             meta = dict(meta)
 
@@ -136,7 +154,8 @@ class OSMElement:
         self._basegroup = '{0}{1}'.format(
             OSM_ELEMENT_PREFIX[tag], str(self.id))
 
-        self._el_osm_tags = eltags
+        self._el_osm_tags = xml_tags
+        self._el_osm_nds = xml_nds
 
     def to_ttl(self) -> list:
         data = []
@@ -167,23 +186,19 @@ class OSMElement:
 
                 # @TODO deal with keys that may break turtle
                 data.append(
-                    f'    osmt:{key} "{value}" ;')
-            pass
+                    f'    osmt:{osmrdf_tagkey_encode(key)} "{value}" ;')
+
+        if self._el_osm_nds:
+            _parts = []
+            for ref in self._el_osm_nds:
+
+                # @TODO deal with keys that may break turtle
+                _parts.append(f'osmnode:{ref}')
+            data.append(
+                f'    osmx:hasnd ({" ".join(_parts)}) ;')
 
         data.append('.')
         return data
-
-
-# class OSMElementNode(OSMElement):
-#     def __init__(self, meta):
-#         super().__init__(meta)
-#         # super(OSMElement, self).__init__(meta)
-#         print('oooi', self)
-#         print('oooi', self.__dict__)
-#         print('oooi', hasattr(self.__dict__, 'id'))
-#         print('oooi', self.__dict__['id'])
-#         self._basegroup = '{0}{1}'.format(
-#             OSM_ELEMENT_PREFIX['node'], str(self.id))
 
 
 def osmrdf_node_xml2ttl(data_xml: str):
@@ -222,6 +237,11 @@ def osmrdf_relation_xml2ttl(data_xml: str):
     output.append(comment)
 
     return "\n".join(output)
+
+
+def osmrdf_tagkey_encode(raw_tag: str) -> str:
+    # @TODO improve-me
+    return raw_tag.replace(':', '%3A').replace(' ', '%20')
 
 
 def osmrdf_way_xml2ttl(data_xml: str):

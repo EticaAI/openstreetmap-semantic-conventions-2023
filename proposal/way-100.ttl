@@ -14,10 +14,8 @@ osmway:100
     osmt:foot 'use_sidepath';
     osmt:highway 'secondary';
     osmt:junction 'roundabout';
-    osmt:maxspeed 'roundabout';
     osmt:maxspeed '100';
     osmt:ref 'St 2069';
-    osmt:surface 'St 2069';
     osmt:surface 'asphalt';
     osmt:tmc 'DE:32282/32283';
     osmt:zone:traffic 'DE:rural';
