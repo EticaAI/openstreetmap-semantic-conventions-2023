@@ -15,8 +15,8 @@
   - [proposal/way-100.ttl](proposal/way-100.ttl)
 
 **Public domain code**
-- [proxy/osmapi2rdfproxy.py](proxy/osmapi2rdfproxy.py): early proof of concept to generate the RFC data; not intented for production use, but for test viability. Is a proxy
-  - [proxy/osmrdf2022.py](proxy/osmrdf2022.py): logic of the proof of concept proxy
+- [poc/osmapi2rdfproxy.py](poc/osmapi2rdfproxy.py): early proof of concept to generate the RFC data; not intented for production use, but for test viability. Is a proxy
+  - [poc/osmrdf2022.py](poc/osmrdf2022.py): logic of the proof of concept proxy
 
 ## Acknowledgments
 
