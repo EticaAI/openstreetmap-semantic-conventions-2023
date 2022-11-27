@@ -50,6 +50,8 @@ https://download.geofabrik.de/africa/sao-tome-and-principe-latest.osm.bz2
 
 Read from file on disk . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     {PROGRAM_EXE} tmp/STP.osm
+    {PROGRAM_EXE} tmp/STP.osm > tmp/STP.osm.ttl
+    {PROGRAM_EXE} --filter-xml-tag='way' tmp/STP.osm > tmp/STP~ways.osm.ttl
 
 Pipe from other commands . . . . . . . . . . . . . . . . . . . . . . . . . . .
     cat tmp/STP.osm | {PROGRAM_EXE}
@@ -135,8 +137,12 @@ class Cli:
                 _stdin = True
 
         filter = OSMElementFilter()
+
         if pyargs.xml_tags:
             filter.set_filter_xml_tags(pyargs.xml_tags)
+
+        if pyargs.xml_tags_not:
+            filter.set_filter_xml_tags_not(pyargs.xml_tags_not)
 
         if _stdin:
             osmrdf_xmldump2_ttl(stdin, filter)

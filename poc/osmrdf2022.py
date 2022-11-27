@@ -264,9 +264,10 @@ class OSMElementFilter:
 
     def set_filter_xml_tags(self, tags: list):
         self.xml_tags = tags
+        return self
 
-        # print (self.__dict__)
-        # sys.exit()
+    def set_filter_xml_tags_not(self, tags: list):
+        self.xml_tags_not = tags
         return self
 
     def can_tag(self, tag: str) -> bool:
@@ -360,42 +361,67 @@ def osmrdf_xmldump2_ttl(xml_file_path, xml_filter: OSMElementFilter = None):
     print('')
 
     count = 0
+    xml_tags = []
+    xml_nds = []
+    xml_members = []
     for event, elem in ET.iterparse(xml_file_path, events=("start", "end")):
 
         # if elem not in ['node', 'way', 'relation']
         if elem.tag in ['bounds', 'osm']:
             continue
 
-        if elem.tag in ['nd', 'member', 'tag']:
+        # if elem.tag in ['nd', 'member', 'tag']:
+        if elem.tag in ['nd', 'member']:
             # @FIXME way
             continue
 
         if event == 'start':
-            # print(elem, elem.attrib)
-            child = elem
-            xml_tags = None
-            _eltags = child.findall("tag")
+            _eltags = elem.findall("tag")
             if _eltags:
-                xml_tags = []
                 for item in _eltags:
                     xml_tags.append((item.attrib['k'], item.attrib['v']))
-            # print('>>>>> el nd', child.findall("nd"))
+
+            _elnds = elem.findall("nd")
+            if _elnds:
+                xml_nds = []
+                for item in _elnds:
+                    xml_nds.append(int(item.attrib['ref']))
+            # xml_members = None
+            _elmembers = elem.findall("member")
+            if _elmembers:
+                xml_members = []
+                for item in _elmembers:
+                    # @FIXME this is incomplete
+                    _type = item.attrib['type']
+                    _ref = int(item.attrib['ref'])
+                    _role = item.attrib['role'] if 'role' in item.attrib else None
+                    xml_members.append((_type, _ref, _role))
 
         if event == 'end':
+            if elem.tag == 'tag':
+                continue
+
             # print(elem, elem.attrib)
 
             child = elem
+
+            # if xml_tags:
+            #     print (xml_tags)
+            #     sys.exit()
 
             el = OSMElement(
                 child.tag,
                 dict(child.attrib),
-                # xml_tags,
-                # xml_nds,
-                # xml_members
+                xml_tags=xml_tags,
+                xml_nds=xml_nds,
+                xml_members=xml_members,
                 xml_filter=xml_filter
             )
+            xml_tags = []
+            xml_nds = []
+            xml_members = []
             if el.can_output():
-                print('\n'.join(el.to_ttl()))
+                print('\n'.join(el.to_ttl()) + '\n')
                 count += 1
 
         # if count > 10:
