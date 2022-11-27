@@ -175,7 +175,9 @@ class OSMElement:
         self.timestamp = meta['timestamp'] if 'timestamp' in meta else None
 
         self.user = meta['user'] if 'user' in meta else None
-        self.userid = int(meta['userid']) if 'userid' in meta else None
+
+        # uid = userid
+        self.userid = int(meta['uid']) if 'uid' in meta else None
         self.lat = float(meta['lat']) if 'lat' in meta else None
         self.lon = float(meta['lon']) if 'lon' in meta else None
 
