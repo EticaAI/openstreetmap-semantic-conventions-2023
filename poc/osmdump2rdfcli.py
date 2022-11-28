@@ -42,15 +42,6 @@ __EPILOGUM__ = f"""
 ------------------------------------------------------------------------------
                             EXEMPLŌRUM GRATIĀ
 ------------------------------------------------------------------------------
-
-Download test data . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-    curl --output tmp/STP.osm.bz2 \
-https://download.geofabrik.de/africa/sao-tome-and-principe-latest.osm.bz2
-    bunzip2 tmp/STP.osm.bz2
-    curl --output tmp/BRA-north.osm.bz2 \
-https://download.geofabrik.de/south-america/brazil/norte-latest.osm.bz2
-
-
 Read from file on disk . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     {PROGRAM_EXE} tmp/STP.osm
     {PROGRAM_EXE} tmp/STP.osm > tmp/STP.osm.ttl
@@ -61,11 +52,43 @@ Pipe from other commands . . . . . . . . . . . . . . . . . . . . . . . . . . .
     bzcat tmp/BRA-north.osm.bz2 | {PROGRAM_EXE}
     bzcat tmp/BRA-north.osm.bz2 | {PROGRAM_EXE} --filter-xml-tag='relation'
 
+Download external data examples ______________________________________________
+
+Geofabrik download + decompress  . . . . . . . . . . . . . . . . . . . . . . .
+    curl --output tmp/STP.osm.bz2 \
+https://download.geofabrik.de/africa/sao-tome-and-principe-latest.osm.bz2
+    bunzip2 tmp/STP.osm.bz2
+
+Geofabrik download (but not decompress)  . . . . . . . . . . . . . . . . . . .
+    curl --output tmp/BRA-north.osm.bz2 \
+https://download.geofabrik.de/south-america/brazil/norte-latest.osm.bz2
+
+Overpass download examples . . . . . . . . . . . . . . . . . . . . . . . . . .
+(See http://overpass-api.de/command_line.html)
+    curl --output tmp/target.osm --silent --globoff \
+"https://overpass-api.de/api/interpreter?data=node[name=\"Gielgen\"];out;"
+    curl --output tmp/speed-200.osm --silent --globoff \
+"https://overpass-api.de/api/interpreter?data=way[maxspeed=\"200\"];out;"
+
+
 ------------------------------------------------------------------------------
                             EXEMPLŌRUM GRATIĀ
 ------------------------------------------------------------------------------
 """.format(__file__)
 
+## https://overpass-turbo.eu/s/1ohl
+# way({{bbox}})[highway=residential]
+#   [maxspeed](if:t["maxspeed"]>120);
+# out geom;
+
+# @see also https://gis.stackexchange.com/questions/127315/filtering-overpass-api-by-country
+
+## https://overpass-turbo.eu/s/1ohm
+# area["ISO3166-1:alpha3"="BRA"]->.boundaryarea;
+# (
+# way(area.boundaryarea)[maxspeed](if:t["maxspeed"]>120);
+# );
+# out meta;
 
 class Cli:
 
