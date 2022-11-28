@@ -1,0 +1,25 @@
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX osmnode: <https://www.openstreetmap.org/node/>
+PREFIX osmrel: <https://www.openstreetmap.org/relation/>
+PREFIX osmway: <https://www.openstreetmap.org/way/>
+PREFIX osmm: <https://example.org/todo-meta/>
+PREFIX osmt: <https://example.org/todo-tag/>
+PREFIX osmx: <https://example.org/todo-xref/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX ex: <https://example.org/>
+
+osmway:220660292
+    a ex:Teste1 ;  # added
+    # osmm:changeset 78620290 ;
+    # osmm:timestamp "2019-12-19T06:47:25Z"^^xsd:dateTime ;
+    # osmm:type "w" ;
+    # osmm:user "user name" ;
+    # osmm:userid 12345 ;
+    # osmm:version 4 ;
+    # osmt:highway "residential" ;
+    osmt:maxspeed "200" ;
+    # osmt:maxspeed "200"^^xsd:integer ;
+    # osmt:name "Rua 13 de Maio" ;
+    # osmt:surface "asphalt" ;
+    # osmx:hasnodes (osmnode:2446403937 osmnode:7068843199 osmnode:7068843192 osmnode:7068843198 osmnode:7068843197 osmnode:7068843196 osmnode:7068843195 osmnode:7068843194 osmnode:7068843193 osmnode:2297510915 osmnode:2297510842) ;
+.

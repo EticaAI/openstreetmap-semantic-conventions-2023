@@ -1,0 +1,39 @@
+PREFIX osmm: <https://example.org/todo-meta/>
+PREFIX osmnode: <https://www.openstreetmap.org/node/>
+PREFIX osmt: <https://example.org/todo-tag/>
+PREFIX osmway: <https://www.openstreetmap.org/way/>
+PREFIX osmx: <https://example.org/todo-xref/>
+PREFIX osmvsh: <https://example.org/todo-validation-shacl/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX ex: <https://example.org/>
+
+osmvsh:BR_highway_residential_speed
+    a sh:NodeShape ;
+    sh:targetClass ex:Teste1 ;    # Applies to all persons
+    sh:property [                 # _:b1
+        sh:path ex:maxspeed ;           # constrains the values of ex:ssn
+        # sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^\\d{3}-\\d{2}-\\d{4}$" ;
+        # sh:lessThan "120"^^xsd:int ;
+        #sh:lessThan "120"^^xsd:integer ;
+        # sh:in ( "120"^^xsd:integer "200"^^xsd:integer "200" ) ;
+    ] ;
+    # sh:property [                 # _:b1
+    #     sh:path ex:ssn ;           # constrains the values of ex:ssn
+    #     sh:maxCount 1 ;
+    #     sh:datatype xsd:string ;
+    #     sh:pattern "^\\d{3}-\\d{2}-\\d{4}$" ;
+    # ] ;
+    # sh:property [                 # _:b2
+    #     sh:path ex:worksFor ;
+    #     sh:class ex:Company ;
+    #     sh:nodeKind sh:IRI ;
+    # ] ;
+    # sh:closed false ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+.
