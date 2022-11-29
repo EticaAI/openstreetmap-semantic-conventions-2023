@@ -1,0 +1,16 @@
+PREFIX osmm: <https://example.org/todo-meta/>
+PREFIX osmnode: <https://www.openstreetmap.org/node/>
+PREFIX osmt: <https://example.org/todo-tag/>
+PREFIX osmway: <https://www.openstreetmap.org/way/>
+PREFIX osmx: <https://example.org/todo-xref/>
+PREFIX osmvsh: <https://example.org/todo-validation-shacl/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX ex: <https://example.org/>
+
+osmvsh:XZ_tags_wikidata
+    a sh:NodeShape ;
+    # @TODO
+.

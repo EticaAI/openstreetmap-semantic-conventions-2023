@@ -17,7 +17,9 @@ osmway:220660292
     # osmm:userid 12345 ;
     # osmm:version 4 ;
     # osmt:highway "residential" ;
+    # osmt:maxspeed "200"^^xsd:string ;
     osmt:maxspeed "200" ;
+    # osmt:maxspeed "200"^^xsd:string ;
     # osmt:maxspeed "200"^^xsd:integer ;
     # osmt:name "Rua 13 de Maio" ;
     # osmt:surface "asphalt" ;

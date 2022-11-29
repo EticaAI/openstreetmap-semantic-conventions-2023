@@ -15,12 +15,17 @@ osmvsh:BR_highway_residential_speed
     sh:targetClass ex:Teste1 ;    # Applies to all persons
     sh:property [                 # _:b1
         sh:path ex:maxspeed ;           # constrains the values of ex:ssn
-        # sh:maxCount 1 ;
+        sh:maxCount 1 ;
         sh:datatype xsd:string ;
-        sh:pattern "^\\d{3}-\\d{2}-\\d{4}$" ;
+        # sh:pattern "^\\d{3}-\\d{2}-\\d{4}$" ;
+        # sh:pattern "^2" ;
         # sh:lessThan "120"^^xsd:int ;
         #sh:lessThan "120"^^xsd:integer ;
         # sh:in ( "120"^^xsd:integer "200"^^xsd:integer "200" ) ;
+        # sh:message "Velocidade máxima com erro"@pt ;
+        # sh:resultMessage "Velocidade máxima com erro"@pt ;
+        sh:message "Values are literals with German language tag." ;
+        sh:severity sh:Warning ;
     ] ;
     # sh:property [                 # _:b1
     #     sh:path ex:ssn ;           # constrains the values of ex:ssn
