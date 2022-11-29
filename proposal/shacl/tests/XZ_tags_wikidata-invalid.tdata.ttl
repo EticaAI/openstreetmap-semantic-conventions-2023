@@ -1,0 +1,16 @@
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX osmnode: <https://www.openstreetmap.org/node/>
+PREFIX osmrel: <https://www.openstreetmap.org/relation/>
+PREFIX osmway: <https://www.openstreetmap.org/way/>
+PREFIX osmm: <https://example.org/todo-meta/>
+PREFIX osmt: <https://example.org/todo-tag/>
+PREFIX osmx: <https://example.org/todo-xref/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX ex: <https://example.org/>
+
+# https://www.openstreetmap.org/api/0.6/node/9628914461
+osmway:220660292
+    a ex:OSMWay ;
+    osmt:brand:wikidata "Q701338" ;
+    osmt:not:brand:wikidata "Q701338" ;
+.

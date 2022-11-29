@@ -12,9 +12,9 @@ PREFIX ex: <https://example.org/>
 
 osmvsh:BR_highway_residential_speed
     a sh:NodeShape ;
-    sh:targetClass ex:Teste1 ;    # Applies to all persons
-    sh:property [                 # _:b1
-        sh:path ex:maxspeed ;           # constrains the values of ex:ssn
+    sh:targetClass ex:Teste1 ;
+    sh:property [
+        sh:path ex:maxspeed ;
         sh:maxCount 1 ;
         sh:datatype xsd:string ;
         # sh:pattern "^\\d{3}-\\d{2}-\\d{4}$" ;

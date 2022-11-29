@@ -10,7 +10,14 @@ PREFIX sh: <http://www.w3.org/ns/shacl#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX ex: <https://example.org/>
 
+# "wikipedia/wikidata type tag that is incorrect according to not:* tag" via @matkoniecz
 osmvsh:XZ_tags_wikidata
     a sh:NodeShape ;
-    # @TODO
+    sh:targetClass ex:OSMNode, ex:OSMWay,  ex:OSMRelation ;
+	sh:property [
+		sh:path osmt:brand:wikidata ;
+		sh:disjoint osmt:not:brand:wikidata ;
+        sh:message "Impossible to be, and not to be, at the same time something"@en ;
+        sh:message "Impossível ser, e não ser, ao mesmo tempo algo"@pt ;
+	]
 .
