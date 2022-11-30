@@ -297,13 +297,15 @@ class OSMElementTagger:
     rules: list = None
 
     def __init__(self, rules=None) -> None:
-        if rules:
-            self.rules = self.parse_rules(rules)
+        # if rules:
+        # self.rules =
+        self.parse_rules(rules)
 
     def parse_rules(self, rules_tsv: str):
         parts = rules_tsv.splitlines()
+        # print('todooo')
         rules = []
-        for line in parts:
+        for index, line in enumerate(parts):
             line = line.split("\t")
             # print(line)
             _op = line[0]
@@ -317,36 +319,60 @@ class OSMElementTagger:
             if _xml_attrs[0] == '*':
                 _xml_attrs = None
             rules.append({
+                'i': index,
                 'op': _op,
                 'xt': _xml_tag,
                 'xa': _xml_attrs,
                 'xack': _xml_c_attr_key,
                 'xacv': _xml_c_attr_value,
             })
-        # print(rules_tsv, parts)
+        # print('test667', rules)
         if rules:
             self.rules = rules
+
+        # print(rules_tsv, self.rules)
         # sys.exit()
 
     def retag(self, element: str, de_facto_tags: List[tuple] = None):
         new_tags = de_facto_tags
         if self.rules:
+            new_tags_temp = []
+            left_rules = list(range(0, len(self.rules)))
+            # print(left_rules, len(self.rules))
             for rule in self.rules:
-                if rule.xt is not None and element not in rule.xt:
+                if rule['xt'] is not None and element not in rule['xt']:
+                    left_rules.remove(rule['i'])
                     continue
                 # TODO implement attribute check
                 # new_tags_temp = new_tags
                 new_tags_temp = []
                 for tag_key, tag_value in new_tags:
-                    if rule.op == '-':
-                        if tag_key in rule.xack:
+                    if rule['op'] == '-':
+                        if tag_key in rule['xack']:
+                            left_rules.remove(rule['i'])
                             continue
-                    if rule.op == '+':
-                        if tag_key in rule.xack:
-                            tag_value = rule.xacv
-                            continue
+                    if rule['op'] == '+':
+                        if tag_key in rule['xack']:
+                            tag_value = rule['xacv']
+                            left_rules.remove(rule['i'])
+                        else:
+                            pass
+                            # continue
                     new_tags_temp.append((tag_key, tag_value))
-
+            new_tags = new_tags_temp
+            if len(left_rules) > 0:
+                for rule_index in left_rules:
+                    if self.rules[rule_index]['op'] == '+':
+                        # print('TODO add ', self.rules[rule_index])
+                        new_tags.append(
+                            (self.rules[rule_index]['xack'], self.rules[rule_index]['xacv']))
+                        # pass
+                    # raise SyntaxError(self.rules[rule_index]['op'])
+                pass
+        # if element == 'relation':
+        #     print('todo', element, de_facto_tags,
+        #           self.rules, new_tags_temp, left_rules)
+            # sys.exit()
         return new_tags
 
 
@@ -390,7 +416,8 @@ def osmrdf_relation_xml2ttl(data_xml: str):
 
 def osmrdf_tagkey_encode(raw_tag: str) -> str:
     # @TODO improve-me
-    return raw_tag.replace(':', '%3A').replace(' ', '%20')
+    # return raw_tag.replace(':', '%3A').replace(' ', '%20')
+    return raw_tag.replace(' ', '%20')
 
 
 def osmrdf_way_xml2ttl(data_xml: str):
@@ -532,7 +559,7 @@ def osmrdf_xmldump2_ttl_v2(xml_file_path, xml_filter: OSMElementFilter = None):
         if _eltags:
             for item in _eltags:
                 xml_tags.append((item.attrib['k'], item.attrib['v']))
-        xml_tags = retagger.retag(xml_tags)
+        xml_tags = retagger.retag(elem.tag, xml_tags)
         _elnds = elem.findall("nd")
         if _elnds:
             xml_nds = []

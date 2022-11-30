@@ -52,6 +52,9 @@ Pipe from other commands . . . . . . . . . . . . . . . . . . . . . . . . . . .
     bzcat tmp/BRA-north.osm.bz2 | {PROGRAM_EXE}
     bzcat tmp/BRA-north.osm.bz2 | {PROGRAM_EXE} --filter-xml-tag='relation'
 
+Re-tag (without full inference) . . . . . . . . . . . . . . . . . . . . . . .
+    {PROGRAM_EXE} --retagger-file=tmp/tagger.rdfstxt.tsv tmp/STP.osm 
+
 Download external data examples ______________________________________________
 
 Geofabrik download + decompress  . . . . . . . . . . . . . . . . . . . . . . .
@@ -70,25 +73,32 @@ Overpass download examples . . . . . . . . . . . . . . . . . . . . . . . . . .
     curl --output tmp/speed-200.osm --silent --globoff \
 "https://overpass-api.de/api/interpreter?data=way[maxspeed=\"200\"];out;"
 
+Other ________________________________________________________________________
+
+Create not-so-smart-inference (hardcoded auto tagger) . . . . . . . . . . . . .
+    echo "-<TAB>*<TAB>*<TAB>created_by=*<NEWLINE>\
++<TAB><way>|<relation><TAB>*<TAB>ISO3166-1:alpha3=BRA<TAB>" \
+> tmp/tagger.rdfstxt.tsv
 
 ------------------------------------------------------------------------------
                             EXEMPLŌRUM GRATIĀ
 ------------------------------------------------------------------------------
 """.format(__file__)
 
-## https://overpass-turbo.eu/s/1ohl
+# https://overpass-turbo.eu/s/1ohl
 # way({{bbox}})[highway=residential]
 #   [maxspeed](if:t["maxspeed"]>120);
 # out geom;
 
 # @see also https://gis.stackexchange.com/questions/127315/filtering-overpass-api-by-country
 
-## https://overpass-turbo.eu/s/1ohm
+# https://overpass-turbo.eu/s/1ohm
 # area["ISO3166-1:alpha3"="BRA"]->.boundaryarea;
 # (
 # way(area.boundaryarea)[maxspeed](if:t["maxspeed"]>120);
 # );
 # out meta;
+
 
 class Cli:
 
@@ -123,6 +133,16 @@ class Cli:
             help='(Quick workaround for edge cases) in case infile becomes'
             'ambigous on shell scripting, use this to force real source path',
             dest='real_infile',
+            nargs='?',
+            default=None,
+            required=False,
+        )
+
+        parser.add_argument(
+            '--retagger-file',
+            help='(Poors man\'s inference) sPath to a TSV file to apply OSM '
+            'Tags before output RDF',
+            dest='retagger',
             nargs='?',
             default=None,
             required=False,
