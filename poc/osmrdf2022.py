@@ -291,7 +291,7 @@ class OSMElementTagger:
 
     @example
 +	<way>	*	is_in=BRA
--	<node>|<way>|<relation>	*	created_by
+-	<node>|<way>|<relation>	*	created_by=*
 +	<way>|<relation>	*	shacl:lessThanOrEquals:maxspeed=120
     """
     rules: list = None

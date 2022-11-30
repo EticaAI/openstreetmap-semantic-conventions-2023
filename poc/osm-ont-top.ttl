@@ -1,0 +1,69 @@
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX osmnode: <https://www.openstreetmap.org/node/>
+PREFIX osmrel: <https://www.openstreetmap.org/relation/>
+PREFIX osmway: <https://www.openstreetmap.org/way/>
+PREFIX osmm: <https://example.org/todo-meta/>
+PREFIX osmt: <https://example.org/todo-tag/>
+PREFIX osmx: <https://example.org/todo-xref/>
+PREFIX osmrto: <https://w3id.org/openstreetmap/terms#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+
+# @see https://opengeospatial.github.io/ogc-geosparql/geosparql11/spec.html
+
+# From https://github.com/openplannerteam/routable-tiles-ontology/blob/master/ontology.ttl
+osmrto:Element
+    a
+        rdfs:Class ,
+        owl:Class ;
+    rdfs:label "Element"@en ;
+    rdfs:comment "Elements are the basic components of OpenStreetMap's conceptual data model of the physical world."@en ;
+    rdfs:isDefinedBy osmrto: ;
+    owl:unionOf (
+            osmrto:Node
+            osmrto:Way
+            osmrto:Relation
+        ) ;
+    prov:wasInfluencedBy <https://wiki.openstreetmap.org/wiki/Elements> ;
+.
+
+osmrto:Node
+    a
+        rdfs:Class ,
+        owl:Class ;
+    rdfs:label "Node"@en ;
+    rdfs:comment "A node is one of the core elements in the OpenStreetMap data model. It consists of a single point in space defined by its latitude, longitude and node id."@en ;
+    rdfs:isDefinedBy osmrto: ;
+    rdfs:subClassOf geo:Point ;
+    owl:disjointWith
+        osmrto:Relation ,
+        osmrto:Way ;
+    prov:wasInfluencedBy <https://wiki.openstreetmap.org/wiki/Node> ;
+.
+
+osmrto:Relation
+    a
+        rdfs:Class ,
+        owl:Class ;
+    rdfs:label "Relation"@en ;
+    rdfs:comment "A relation consists of one or more tags and also an ordered list of one or more nodes, ways and/or relations as members. It is used to define logical or geographic relationships between other elements."@en ;
+    rdfs:isDefinedBy osmrto: ;
+    owl:disjointWith
+        osmrto:Node ,
+        osmrto:Way ;
+    prov:wasInfluencedBy <https://wiki.openstreetmap.org/wiki/Relation> ;
+.
+
+osmrto:Way
+    a
+        rdfs:Class ,
+        owl:Class ;
+    rdfs:label "Way"@en ;
+    rdfs:comment "A way is an ordered list of nodes which normally also has at least one tag."@en ;
+    rdfs:isDefinedBy osmrto: ;
+    owl:disjointWith
+        osmrto:Node ,
+        osmrto:Relation ;
+.
