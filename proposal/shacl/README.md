@@ -7,6 +7,13 @@ shacl validate --shapes XZ_tags_wikidata.shacl.ttl --data tests/XZ_tags_wikidata
 shacl validate --shapes XZ_tags_wikidata.shacl.ttl --data tests/XZ_tags_wikidata-valid.tdata.ttl
 ```
 
+
+```bash
+cd ../../
+shacl validate --shapes proposal/shacl/BR_highways.shacl.ttl --data poc/tmp/STP~test.osm.ttl
+shacl validate --shapes proposal/shacl/XZ_tags_wikidata.shacl.ttl --data poc/tmp/STP~test.osm.ttl
+```
+
 <!--
 - Max speed
 

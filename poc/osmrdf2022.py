@@ -286,6 +286,70 @@ class OSMElementFilter:
         return False
 
 
+class OSMElementTagger:
+    """Poor man's tagger
+
+    @example
++	<way>	*	is_in=BRA
+-	<node>|<way>|<relation>	*	created_by
++	<way>|<relation>	*	shacl:lessThanOrEquals:maxspeed=120
+    """
+    rules: list = None
+
+    def __init__(self, rules=None) -> None:
+        if rules:
+            self.rules = self.parse_rules(rules)
+
+    def parse_rules(self, rules_tsv: str):
+        parts = rules_tsv.splitlines()
+        rules = []
+        for line in parts:
+            line = line.split("\t")
+            # print(line)
+            _op = line[0]
+            _xml_tag = line[1].replace('<', '').replace('>', '').split('|')
+            _xml_attrs = line[2]
+            # print(line[3])
+            _xml_c_attr_key, _xml_c_attr_value = line[3].split('=')
+            # _xml_c_attr_key, _xml_c_attr_value = ['', '']
+            if _xml_tag[0] == '*':
+                _xml_tag = None
+            if _xml_attrs[0] == '*':
+                _xml_attrs = None
+            rules.append({
+                'op': _op,
+                'xt': _xml_tag,
+                'xa': _xml_attrs,
+                'xack': _xml_c_attr_key,
+                'xacv': _xml_c_attr_value,
+            })
+        # print(rules_tsv, parts)
+        if rules:
+            self.rules = rules
+        # sys.exit()
+
+    def retag(self, element: str, de_facto_tags: List[tuple] = None):
+        new_tags = de_facto_tags
+        if self.rules:
+            for rule in self.rules:
+                if rule.xt is not None and element not in rule.xt:
+                    continue
+                # TODO implement attribute check
+                # new_tags_temp = new_tags
+                new_tags_temp = []
+                for tag_key, tag_value in new_tags:
+                    if rule.op == '-':
+                        if tag_key in rule.xack:
+                            continue
+                    if rule.op == '+':
+                        if tag_key in rule.xack:
+                            tag_value = rule.xacv
+                            continue
+                    new_tags_temp.append((tag_key, tag_value))
+
+        return new_tags
+
+
 def osmrdf_node_xml2ttl(data_xml: str):
 
     osmx = OSMApiv06Xml(data_xml)
@@ -448,6 +512,10 @@ def osmrdf_xmldump2_ttl_v2(xml_file_path, xml_filter: OSMElementFilter = None):
 
     # _tags = ('node', 'way', 'relation')
     _tags = ('way', 'relation')
+    _rules = """+	<way>	*	is_in=BRA
+-	<node>|<way>|<relation>	*	created_by=*
++	<way>|<relation>	*	shacl:lessThanOrEquals:maxspeed=120"""
+    retagger = OSMElementTagger(_rules)
 
     # context = etree.iterparse(xml_file_path, events=('end',), tag=_tags)
     context = etree.iterparse(xml_file_path, events=('end',))
@@ -464,6 +532,7 @@ def osmrdf_xmldump2_ttl_v2(xml_file_path, xml_filter: OSMElementFilter = None):
         if _eltags:
             for item in _eltags:
                 xml_tags.append((item.attrib['k'], item.attrib['v']))
+        xml_tags = retagger.retag(xml_tags)
         _elnds = elem.findall("nd")
         if _elnds:
             xml_nds = []
