@@ -1,0 +1,7 @@
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?desc WHERE {
+  ?y skos:prefLabel "tag"@en;
+    schema:description ?desc.
+}

@@ -1,0 +1,7 @@
+# @see https://jena.apache.org/documentation/geosparql/index.html
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+
+SELECT ?obj
+WHERE{
+    ?subj geo:sfContains ?obj
+} ORDER by ?obj

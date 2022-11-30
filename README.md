@@ -18,6 +18,20 @@
 - [poc/osmapi2rdfproxy.py](poc/osmapi2rdfproxy.py): early proof of concept to generate the RFC data; not intented for production use, but for test viability. Is a proxy
   - [poc/osmrdf2022.py](poc/osmrdf2022.py): logic of the proof of concept proxy
 
+
+<!--
+
+./poc/osmdump2rdfcli.py reference/zzz-region-1.xml
+./poc/osmdump2rdfcli.py reference/zzz-region-1.xml > poc/tmp/zzz-region-1.ttl
+riot --validate poc/tmp/zzz-region-1.ttl
+
+arq --query=proposal/query/owl-classes.rq --data=poc/tmp/zzz-region-1.ttl
+arq --query=proposal/query/by-name.rq --data=poc/tmp/zzz-region-1.ttl
+arq --query=proposal/query/geosparq-example.rq --data=poc/tmp/zzz-region-1.ttl
+
+-->
+
+
 ## Acknowledgments
 
 - Minh Nguyen ([wiki](https://wiki.openstreetmap.org/wiki/User:Minh_Nguyen))
