@@ -41,6 +41,7 @@ RDF_TURTLE_PREFIXES = [
     'PREFIX osmm: <https://example.org/todo-meta/>',
     'PREFIX osmt: <https://example.org/todo-tag/>',
     'PREFIX osmx: <https://example.org/todo-xref/>',
+    'PREFIX wikidata: <http://www.wikidata.org/entity/>',
     'PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>',
 ]
 
@@ -151,6 +152,7 @@ class OSMElement:
     _el_osm_nds: List[int]
     _el_osm_members: List[tuple]
     _xml_filter: Type['OSMElementFilter']
+    _tagcaster: Type['OSMElementTagValueCast']
     id: int
     changeset: int
     timestamp: str  # maybe chage later
@@ -167,6 +169,7 @@ class OSMElement:
         xml_nds: List[int] = None,
         xml_members: List[tuple] = None,
         xml_filter: Type['OSMElementFilter'] = None,
+        tagcaster: Type['OSMElementTagValueCast'] = None,
     ):
         if not isinstance(meta, dict):
             meta = dict(meta)
@@ -195,6 +198,7 @@ class OSMElement:
         self._el_osm_nds = xml_nds
         self._el_osm_members = xml_members
         self._xml_filter = xml_filter
+        self._tagcaster = tagcaster
 
     def can_output(self) -> bool:
         if not self._xml_filter.can_tag(self._tag):
@@ -230,9 +234,13 @@ class OSMElement:
 
         if self._el_osm_tags:
             for key, value in self._el_osm_tags:
+                _escp_key = osmrdf_tagkey_encode(key)
 
                 data.append(
-                    f'    osmt:{osmrdf_tagkey_encode(key)} "{value}" ;')
+                    f'    osmt:{_escp_key} "{value}" ;')
+
+                if self._tagcaster.can_cast(_escp_key):
+                    data.append(self._tagcaster.to_ttl(_escp_key, value))
 
         if self._el_osm_nds:
             _parts = []
@@ -256,7 +264,6 @@ class OSMElement:
 
 class OSMElementFilter:
     """Helper for OSMElement limit what to output
-
     """
 
     xml_tags: List = None
@@ -274,10 +281,6 @@ class OSMElementFilter:
         return self
 
     def can_tag(self, tag: str) -> bool:
-        # print (self.__dict__, not self.xml_tags and not self.xml_tags_not)
-        # print (self.xml_tags and tag in self.xml_tags)
-        # print (self.xml_tags_not and tag not in self.xml_tags_not)
-        # sys.exit()
         if not self.xml_tags and not self.xml_tags_not:
             return True
         if (not self.xml_tags or tag in self.xml_tags) and \
@@ -287,7 +290,7 @@ class OSMElementFilter:
 
 
 class OSMElementTagger:
-    """Poor man's tagger
+    """Poor man's tagger (no external inference required)
 
     @example
 +	<way>	*	is_in=BRA
@@ -383,6 +386,31 @@ class OSMElementTagger:
         #           self.rules, new_tags_temp, left_rules)
             # sys.exit()
         return new_tags
+
+
+class OSMElementTagValueCast:
+    """Coerse value of vanilla OpenStreetMap tags
+    """
+    rules: list = None
+
+    def __init__(self, rules=None) -> None:
+        # if rules:
+        # self.rules =
+        if rules:
+            self.parse_rules(rules)
+
+    def parse_rules(self, rules_tsv: str):
+        parts = rules_tsv.splitlines()
+        # @TODO make it
+
+    def can_cast(self, tagkey: str) -> bool:
+        if tagkey in ['wikidata']:
+            return True
+        return False
+
+    def to_ttl(self, tagkey: str, tagvalue: str) -> str:
+        # return f'    osmx:{tagkey} "{tagvalue}" ;'
+        return f'    osmx:{tagkey} wikidata:{tagvalue} ;'
 
 
 def osmrdf_node_xml2ttl(data_xml: str):
@@ -555,6 +583,7 @@ def osmrdf_xmldump2_ttl_v2(
 +	<way>|<relation>	*	shacl:lessThanOrEquals:maxspeed=120"""
     # retagger = OSMElementTagger(_rules)
     retagger = OSMElementTagger(retagger)
+    tagcaster = OSMElementTagValueCast(None)
 
     # context = etree.iterparse(xml_file_path, events=('end',), tag=_tags)
     context = etree.iterparse(xml_file_path, events=('end',))
@@ -564,7 +593,8 @@ def osmrdf_xmldump2_ttl_v2(
     xml_nds = []
     xml_members = []
     for _event, elem in context:
-        if elem.tag in ['osm', 'bounds', 'nd', 'member', 'tag']:
+        # if elem.tag in ['osm', 'bounds', 'nd', 'member', 'tag']:
+        if elem.tag in ['osm', 'bounds', 'nd', 'member', 'tag', 'tagi']:
             continue
 
         _eltags = elem.findall("tag")
@@ -572,6 +602,14 @@ def osmrdf_xmldump2_ttl_v2(
             for item in _eltags:
                 xml_tags.append((item.attrib['k'], item.attrib['v']))
         xml_tags = retagger.retag(elem.tag, xml_tags)
+
+        # "Implicit" tag "<tagi />"
+        _elimplicittags = elem.findall("tagi")
+        if _elimplicittags:
+            for item in _elimplicittags:
+                xml_tags.append((item.attrib['k'], item.attrib['v']))
+        xml_tags = retagger.retag(elem.tag, xml_tags)
+
         _elnds = elem.findall("nd")
         if _elnds:
             xml_nds = []
@@ -593,7 +631,8 @@ def osmrdf_xmldump2_ttl_v2(
             xml_tags=xml_tags,
             xml_nds=xml_nds,
             xml_members=xml_members,
-            xml_filter=xml_filter
+            xml_filter=xml_filter,
+            tagcaster=tagcaster,
         )
         xml_tags = []
         xml_nds = []

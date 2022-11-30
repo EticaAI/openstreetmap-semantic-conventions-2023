@@ -4,6 +4,10 @@
     Manual example.
     ./poc/osmdump2rdfcli.py reference/zzz-region-1.xml
   -->
+
+  <!--
+    Node
+  -->
   <node id="1" visible="true" version="33" changeset="124176968" timestamp="2022-07-28T09:47:39Z" user="owene" uid="29598" lat="42.7957187" lon="13.5690032">
     <tag k="communication:microwave" v="yes" />
     <tag k="communication:radio" v="fm" />
@@ -17,6 +21,28 @@
   <node id="2" visible="true" version="1" changeset="1" timestamp="2023-01-01T00:00:00Z" user="example user" uid="1" lat="-20.0000000" lon="40.0000000"/>
   <node id="3" visible="true" version="1" changeset="1" timestamp="2023-01-01T00:00:00Z" user="example user" uid="1" lat="-20.0010000" lon="40.0010000"/>
   <node id="4" visible="true" version="1" changeset="1" timestamp="2023-01-01T00:00:00Z" user="example user" uid="1" lat="-20.0020000" lon="40.0020000"/>
+
+  <node id="5" visible="true" version="1" changeset="1" timestamp="2023-01-01T00:00:00Z" user="example user" uid="1" lat="-29.8425284" lon="-53.7680577">
+    <tag k="is_in:country" v="Brasil"/>
+    <tag k="is_in:country_code" v="BR"/>
+    <tag k="name" v="Rio Grande do Sul"/>
+    <tag k="name:abbreviation" v="RS"/>
+    <tag k="note" v="Estudos apontaram ser este o centro geográfico do RS (-53.767225,-29.8518). Motivo ao qual Santa Maria é conhecida como coração do Rio Grande"/>
+    <!-- https://www.openstreetmap.org/node/504800252 -->
+    <tag k="place" v="state"/>
+    <tag k="ref" v="RS"/>
+    <tag k="state_code" v="RS"/>
+  </node>
+
+  <node id="6" visible="true" version="1" changeset="1" timestamp="2023-01-01T00:00:00Z" user="example user" uid="1" lat="-21.0002179" lon="-61.0006565">
+    <tag k="place" v="continent"/>
+    <tag k="name" v="South America"/>
+    <tag k="wikidata" v="Q18"/>
+  </node>
+
+  <!--
+    Way
+  -->
 
   <way id="100" visible="true" version="16" changeset="115876760" timestamp="2022-01-07T13:12:29Z" user="XXXVII" uid="13801736">
     <nd ref="2" />
@@ -33,7 +59,12 @@
     <tag k="zone:traffic" v="DE:rural" />
   </way>
 
+  <!--
+    Relation
+  -->
+
   <relation id="1" visible="true" version="1" changeset="1" timestamp="2023-01-01T00:00:00Z" user="example user" uid="1">
+    <member type="relation" ref="2" role="subarea"/>
     <tag k="type" v="boundary" />
     <tag k="boundary" v="administrative" />
     <tag k="admin_level" v="2" />
@@ -44,15 +75,20 @@
     <tag k="note" v="See https://www.openstreetmap.org/relation/59470" />
     <tag k="wikidata" v="Q155" />
   </relation>
+
   <relation id="2" visible="true" version="1" changeset="1" timestamp="2023-01-01T00:00:00Z" user="example user" uid="1">
+    <member type="relation" ref="3" role="subarea"/>
     <tag k="type" v="boundary" />
     <tag k="boundary" v="administrative" />
     <tag k="admin_level" v="2" />
     <tag k="name" v="Região Sul" />
     <tag k="note" v="See https://www.openstreetmap.org/relation/2844750" />
     <tag k="wikidata" v="Q1060042" />
+    <tagi k="is_in:continent:relation" v="1" />
   </relation>
+
   <relation id="3" visible="true" version="1" changeset="1" timestamp="2023-01-01T00:00:00Z" user="example user" uid="1">
+    <member type="node" ref="4" role="admin_centre"/>
     <tag k="type" v="boundary" />
     <tag k="boundary" v="administrative" />
     <tag k="admin_level" v="4" />
@@ -61,23 +97,16 @@
     <tag k="name" v="Rio Grande do Sul" />
     <tag k="note" v="See https://www.openstreetmap.org/relation/242620" />
     <tag k="wikidata" v="Q40030" />
+    <tagi k="is_in:continent:relation" v="2" />
   </relation>
+
   <relation id="4" visible="true" version="1" changeset="1" timestamp="2023-01-01T00:00:00Z" user="example user" uid="1">
     <tag k="type" v="boundary" />
     <tag k="boundary" v="administrative" />
     <!-- <tag k="admin_level" v="5" /> ???? -->
-    <tag k="IBGE:GEOCODIGO" v="43" />
     <tag k="name" v="Porto Alegre" />
     <tag k="note" v="See https://www.openstreetmap.org/node/313557783" />
     <tag k="wikidata" v="Q40269" />
-  </relation>
-  <relation id="10000" visible="true" version="6" changeset="105419300" timestamp="2021-05-27T10:47:23Z" user="salgo60" uid="305854">
-    <member type="way" ref="100" role="outer" />
-    <tag k="name" v="Example" />
-    <tag k="natural" v="water" />
-    <tag k="source:lake" v="Review by So9q using LM Topographic Map" />
-    <tag k="type" v="multipolygon" />
-    <tag k="water" v="lake" />
-    <tag k="wikidata" v="Q18133662" />
+    <tagi k="is_in:continent:relation" v="3" />
   </relation>
 </osm>

@@ -80,6 +80,11 @@ Create not-so-smart-inference (hardcoded auto tagger) . . . . . . . . . . . . .
 +<TAB><way>|<relation><TAB>*<TAB>ISO3166-1:alpha3=BRA<TAB>" \
 > tmp/tagger.rdfstxt.tsv
 
+Mapping  . . . . . . . . . . . . . . . . . . . . . . . .
+    echo "-<TAB>*<TAB>*<TAB>created_by=*<NEWLINE>\
++<TAB><way>|<relation><TAB>*<TAB>ISO3166-1:alpha3=BRA<TAB>" \
+> tmp/tagger.rdfstxt.tsv
+
 ------------------------------------------------------------------------------
                             EXEMPLŌRUM GRATIĀ
 ------------------------------------------------------------------------------

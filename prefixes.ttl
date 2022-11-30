@@ -9,6 +9,7 @@ PREFIX osmx: <https://example.org/todo-xref/>
 PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX schema: <https://schema.org/>
 PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX wikidata: <http://www.wikidata.org/entity/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
 # @see https://opengeospatial.github.io/ogc-geosparql/geosparql11/spec.html#_e_0_overview

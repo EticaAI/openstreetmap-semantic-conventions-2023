@@ -28,6 +28,7 @@ riot --validate poc/tmp/zzz-region-1.ttl
 arq --query=proposal/query/owl-classes.rq --data=poc/tmp/zzz-region-1.ttl
 arq --query=proposal/query/by-name.rq --data=poc/tmp/zzz-region-1.ttl
 arq --query=proposal/query/geosparq-example.rq --data=poc/tmp/zzz-region-1.ttl
+arq --query=proposal/query/is-admin.rq --data=poc/tmp/zzz-region-1.ttl
 
 -->
 

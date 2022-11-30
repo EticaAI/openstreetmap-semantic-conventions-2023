@@ -1,0 +1,4 @@
+#source	#target	#preprocess	#split	#format
+wikidata	wikidata	_	_	_
+not:wikidata	not:wikidata	_	_	_
+osmt:maxspeed	osmtx:maxspeed	_	_	int

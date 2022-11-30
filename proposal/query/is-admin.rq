@@ -1,0 +1,13 @@
+PREFIX osmrel: <https://www.openstreetmap.org/relation/>
+PREFIX osmt: <https://example.org/todo-tag/>
+PREFIX osmm: <https://example.org/todo-meta/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?item ?user ?admin_level
+WHERE {
+  ?item osmt:type "boundary" .
+  OPTIONAL { ?item osmm:user ?user }
+  OPTIONAL { ?item osmt:admin_level ?admin_level }
+}
+LIMIT 25
