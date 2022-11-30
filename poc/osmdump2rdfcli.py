@@ -142,7 +142,7 @@ class Cli:
             '--retagger-file',
             help='(Poors man\'s inference) sPath to a TSV file to apply OSM '
             'Tags before output RDF',
-            dest='retagger',
+            dest='retagger_file',
             nargs='?',
             default=None,
             required=False,
@@ -192,10 +192,16 @@ class Cli:
         if pyargs.xml_tags_not:
             filter.set_filter_xml_tags_not(pyargs.xml_tags_not)
 
+        retagger = None
+        if pyargs.retagger_file:
+            _file = open(pyargs.retagger_file,mode='r')
+            retagger = _file.read()
+            _file.close()
+
         if _stdin:
             osmrdf_xmldump2_ttl_v2(stdin, filter)
         else:
-            osmrdf_xmldump2_ttl_v2(_infile, filter)
+            osmrdf_xmldump2_ttl_v2(_infile, filter, retagger)
         # print('todo')
 
 

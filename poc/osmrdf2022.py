@@ -299,36 +299,44 @@ class OSMElementTagger:
     def __init__(self, rules=None) -> None:
         # if rules:
         # self.rules =
-        self.parse_rules(rules)
+        if rules:
+            self.parse_rules(rules)
 
     def parse_rules(self, rules_tsv: str):
         parts = rules_tsv.splitlines()
         # print('todooo')
-        rules = []
-        for index, line in enumerate(parts):
-            line = line.split("\t")
-            # print(line)
-            _op = line[0]
-            _xml_tag = line[1].replace('<', '').replace('>', '').split('|')
-            _xml_attrs = line[2]
-            # print(line[3])
-            _xml_c_attr_key, _xml_c_attr_value = line[3].split('=')
-            # _xml_c_attr_key, _xml_c_attr_value = ['', '']
-            if _xml_tag[0] == '*':
-                _xml_tag = None
-            if _xml_attrs[0] == '*':
-                _xml_attrs = None
-            rules.append({
-                'i': index,
-                'op': _op,
-                'xt': _xml_tag,
-                'xa': _xml_attrs,
-                'xack': _xml_c_attr_key,
-                'xacv': _xml_c_attr_value,
-            })
-        # print('test667', rules)
-        if rules:
-            self.rules = rules
+        try:
+            rules = []
+            for index, line in enumerate(parts):
+                line = line.split("\t")
+                # print(line)
+                _op = line[0]
+                _xml_tag = line[1].replace('<', '').replace('>', '').split('|')
+                _xml_attrs = line[2]
+                # print(line[3])
+                _xml_c_attr_key, _xml_c_attr_value = line[3].split('=')
+                # _xml_c_attr_key, _xml_c_attr_value = ['', '']
+                if _xml_tag[0] == '*':
+                    _xml_tag = None
+                if _xml_attrs[0] == '*':
+                    _xml_attrs = None
+                rules.append({
+                    'i': index,
+                    'op': _op,
+                    'xt': _xml_tag,
+                    'xa': _xml_attrs,
+                    'xack': _xml_c_attr_key,
+                    'xacv': _xml_c_attr_value,
+                })
+            if rules:
+                self.rules = rules
+        except Exception as err:
+            print(f"ERROR OSMElementTagger: {err}")
+            print('--- start of file ---')
+            print(rules_tsv)
+            print('--- end of file ---')
+            sys.exit()
+            pass
 
         # print(rules_tsv, self.rules)
         # sys.exit()
@@ -355,6 +363,7 @@ class OSMElementTagger:
                         if tag_key in rule['xack']:
                             tag_value = rule['xacv']
                             left_rules.remove(rule['i'])
+                            break
                         else:
                             pass
                             # continue
@@ -530,7 +539,9 @@ def osmrdf_xmldump2_ttl(xml_file_path, xml_filter: OSMElementFilter = None):
         #     break
 
 
-def osmrdf_xmldump2_ttl_v2(xml_file_path, xml_filter: OSMElementFilter = None):
+def osmrdf_xmldump2_ttl_v2(
+        xml_file_path,
+        xml_filter: OSMElementFilter = None, retagger: str = None):
     # context = etree.iterparse(xml_file_path, events=('end',), tag='node')
     # context = etree.iterparse(xml_file_path, events=('end',), tag=('way'))
 
@@ -542,7 +553,8 @@ def osmrdf_xmldump2_ttl_v2(xml_file_path, xml_filter: OSMElementFilter = None):
     _rules = """+	<way>	*	is_in=BRA
 -	<node>|<way>|<relation>	*	created_by=*
 +	<way>|<relation>	*	shacl:lessThanOrEquals:maxspeed=120"""
-    retagger = OSMElementTagger(_rules)
+    # retagger = OSMElementTagger(_rules)
+    retagger = OSMElementTagger(retagger)
 
     # context = etree.iterparse(xml_file_path, events=('end',), tag=_tags)
     context = etree.iterparse(xml_file_path, events=('end',))
