@@ -1,0 +1,179 @@
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX osmnode: <https://www.openstreetmap.org/node/>
+PREFIX osmrel: <https://www.openstreetmap.org/relation/>
+PREFIX osmway: <https://www.openstreetmap.org/way/>
+PREFIX osmm: <https://example.org/todo-meta/>
+PREFIX osmt: <https://example.org/todo-tag/>
+PREFIX osmx: <https://example.org/todo-xref/>
+PREFIX wikidata: <http://www.wikidata.org/entity/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+osmnode:1
+    osmm:changeset 124176968 ;
+    osmm:loc "Point(42.7957187 13.5690032)"^^geo:wktLiteral ;
+    osmm:timestamp "2022-07-28T09:47:39Z"^^xsd:dateTime ;
+    osmm:type "n" ;
+    osmm:user "owene" ;
+    osmm:userid 29598 ;
+    osmm:version 33 ;
+    osmt:communication:microwave "yes" ;
+    osmt:communication:radio "fm" ;
+    osmt:description "Radio Subasio" ;
+    osmt:frequency "105.5 MHz" ;
+    osmt:man_made "mast" ;
+    osmt:name "Monte Piselli - San Giacomo" ;
+    osmt:tower:construction "lattice" ;
+    osmt:tower:type "communication" ;
+.
+
+osmnode:2
+    osmm:changeset 1 ;
+    osmm:loc "Point(-20.0 40.0)"^^geo:wktLiteral ;
+    osmm:timestamp "2023-01-01T00:00:00Z"^^xsd:dateTime ;
+    osmm:type "n" ;
+    osmm:user "example user" ;
+    osmm:userid 1 ;
+    osmm:version 1 ;
+.
+
+osmnode:3
+    osmm:changeset 1 ;
+    osmm:loc "Point(-20.001 40.001)"^^geo:wktLiteral ;
+    osmm:timestamp "2023-01-01T00:00:00Z"^^xsd:dateTime ;
+    osmm:type "n" ;
+    osmm:user "example user" ;
+    osmm:userid 1 ;
+    osmm:version 1 ;
+.
+
+osmnode:4
+    osmm:changeset 1 ;
+    osmm:loc "Point(-20.002 40.002)"^^geo:wktLiteral ;
+    osmm:timestamp "2023-01-01T00:00:00Z"^^xsd:dateTime ;
+    osmm:type "n" ;
+    osmm:user "example user" ;
+    osmm:userid 1 ;
+    osmm:version 1 ;
+.
+
+osmnode:5
+    osmm:changeset 1 ;
+    osmm:loc "Point(-29.8425284 -53.7680577)"^^geo:wktLiteral ;
+    osmm:timestamp "2023-01-01T00:00:00Z"^^xsd:dateTime ;
+    osmm:type "n" ;
+    osmm:user "example user" ;
+    osmm:userid 1 ;
+    osmm:version 1 ;
+    osmt:is_in:country "Brasil" ;
+    osmt:is_in:country_code "BR" ;
+    osmt:name "Rio Grande do Sul" ;
+    osmt:name:abbreviation "RS" ;
+    osmt:note "Estudos apontaram ser este o centro geográfico do RS (-53.767225,-29.8518). Motivo ao qual Santa Maria é conhecida como coração do Rio Grande" ;
+    osmt:place "state" ;
+    osmt:ref "RS" ;
+    osmt:state_code "RS" ;
+.
+
+osmnode:6
+    osmm:changeset 1 ;
+    osmm:loc "Point(-21.0002179 -61.0006565)"^^geo:wktLiteral ;
+    osmm:timestamp "2023-01-01T00:00:00Z"^^xsd:dateTime ;
+    osmm:type "n" ;
+    osmm:user "example user" ;
+    osmm:userid 1 ;
+    osmm:version 1 ;
+    osmt:place "continent" ;
+    osmt:name "South America" ;
+    osmt:wikidata "Q18" ;
+    osmx:wikidata wikidata:Q18 ;
+.
+
+osmway:100
+    osmm:changeset 115876760 ;
+    osmm:timestamp "2022-01-07T13:12:29Z"^^xsd:dateTime ;
+    osmm:type "w" ;
+    osmm:user "XXXVII" ;
+    osmm:userid 13801736 ;
+    osmm:version 16 ;
+    osmt:bicycle "use_sidepath" ;
+    osmt:foot "use_sidepath" ;
+    osmt:highway "secondary" ;
+    osmt:junction "roundabout" ;
+    osmt:maxspeed "100" ;
+    osmt:ref "St 2069" ;
+    osmt:surface "asphalt" ;
+    osmt:tmc "DE:32282/32283" ;
+    osmt:zone:traffic "DE:rural" ;
+    osmx:hasnodes (osmnode:2 osmnode:3 osmnode:3) ;
+.
+
+osmrel:1
+    osmm:changeset 1 ;
+    osmm:timestamp "2023-01-01T00:00:00Z"^^xsd:dateTime ;
+    osmm:user "example user" ;
+    osmm:userid 1 ;
+    osmm:version 1 ;
+    osmt:type "boundary" ;
+    osmt:boundary "administrative" ;
+    osmt:admin_level "2" ;
+    osmt:ISO3166-1:alpha3 "BRA" ;
+    osmt:is_in:continent "South America" ;
+    osmt:name "Brasil" ;
+    osmt:int_name "Brazil" ;
+    osmt:note "See https://www.openstreetmap.org/relation/59470" ;
+    osmt:wikidata "Q155" ;
+    osmx:wikidata wikidata:Q155 ;
+    osmx:hasmembers ([osmx:hasrolesubarea osmrel:2]) ;
+.
+
+osmrel:2
+    osmm:changeset 1 ;
+    osmm:timestamp "2023-01-01T00:00:00Z"^^xsd:dateTime ;
+    osmm:user "example user" ;
+    osmm:userid 1 ;
+    osmm:version 1 ;
+    osmt:type "boundary" ;
+    osmt:boundary "administrative" ;
+    osmt:admin_level "2" ;
+    osmt:name "Região Sul" ;
+    osmt:note "See https://www.openstreetmap.org/relation/2844750" ;
+    osmt:wikidata "Q1060042" ;
+    osmx:wikidata wikidata:Q1060042 ;
+    osmt:is_in:continent:relation "1" ;
+    osmx:hasmembers ([osmx:hasrolesubarea osmrel:3]) ;
+.
+
+osmrel:3
+    osmm:changeset 1 ;
+    osmm:timestamp "2023-01-01T00:00:00Z"^^xsd:dateTime ;
+    osmm:user "example user" ;
+    osmm:userid 1 ;
+    osmm:version 1 ;
+    osmt:type "boundary" ;
+    osmt:boundary "administrative" ;
+    osmt:admin_level "4" ;
+    osmt:IBGE:GEOCODIGO "43" ;
+    osmt:ISO3166-2 "BR-RS" ;
+    osmt:name "Rio Grande do Sul" ;
+    osmt:note "See https://www.openstreetmap.org/relation/242620" ;
+    osmt:wikidata "Q40030" ;
+    osmx:wikidata wikidata:Q40030 ;
+    osmt:is_in:continent:relation "2" ;
+    osmx:hasmembers ([osmx:hasroleadmin_centre osmnode:4]) ;
+.
+
+osmrel:4
+    osmm:changeset 1 ;
+    osmm:timestamp "2023-01-01T00:00:00Z"^^xsd:dateTime ;
+    osmm:user "example user" ;
+    osmm:userid 1 ;
+    osmm:version 1 ;
+    osmt:type "boundary" ;
+    osmt:boundary "administrative" ;
+    osmt:name "Porto Alegre" ;
+    osmt:note "See https://www.openstreetmap.org/node/313557783" ;
+    osmt:wikidata "Q40269" ;
+    osmx:wikidata wikidata:Q40269 ;
+    osmt:is_in:continent:relation "3" ;
+.
+

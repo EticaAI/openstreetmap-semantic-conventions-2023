@@ -23,8 +23,13 @@
 
 ./poc/osmdump2rdfcli.py reference/zzz-region-1.xml
 ./poc/osmdump2rdfcli.py reference/zzz-region-1.xml > poc/tmp/zzz-region-1.ttl
+./poc/osmdump2rdfcli.py reference/zzz-region-1.xml > reference/zzz-region-1.ttl
 riot --validate poc/tmp/zzz-region-1.ttl
 
+# Turtle to JSON-LD
+rdfpipe --output-format=json-ld proposal/zzz-region-1.ttl
+
+# Queries example
 arq --query=proposal/query/owl-classes.rq --data=poc/tmp/zzz-region-1.ttl
 arq --query=proposal/query/by-name.rq --data=poc/tmp/zzz-region-1.ttl
 arq --query=proposal/query/geosparq-example.rq --data=poc/tmp/zzz-region-1.ttl
@@ -39,7 +44,6 @@ curl --output poc/tmp/geosparql_test.rdf https://raw.githubusercontent.com/apach
 rdfpipe poc/tmp/geosparql_test.rdf > poc/tmp/geosparql_test.rdf.ttl
 
 /opt/apache-jena-fuseki/fuseki-server --file poc/tmp/geosparql_test.rdf /geotest
-
 
 arq --query=proposal/query/geosparq-example.rq --data=poc/tmp/geosparql_test.rdf
 -->
