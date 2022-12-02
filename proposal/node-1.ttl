@@ -15,12 +15,12 @@ osmnode:1
     osmm:user "owene" ;
     osmm:userid 29598 ;
     osmm:version 33 ;
-    osmt:communication%3Amicrowave "yes" ;
-    osmt:communication%3Aradio "fm" ;
+    osmt:communication:microwave "yes" ;
+    osmt:communication:radio "fm" ;
     osmt:description "Radio Subasio" ;
     osmt:frequency "105.5 MHz" ;
     osmt:man_made "mast" ;
     osmt:name "Monte Piselli - San Giacomo" ;
-    osmt:tower%3Aconstruction "lattice" ;
-    osmt:tower%3Atype "communication" ;
+    osmt:tower:construction "lattice" ;
+    osmt:tower:type "communication" ;
 .

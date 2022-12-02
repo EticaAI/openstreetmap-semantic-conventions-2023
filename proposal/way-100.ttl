@@ -20,7 +20,7 @@ osmway:100
     osmt:ref "St 2069" ;
     osmt:surface "asphalt" ;
     osmt:tmc "DE:32282/32283" ;
-    osmt:zone%3Atraffic "DE:rural" ;
+    osmt:zone:traffic "DE:rural" ;
     osmx:hasnodes (
             osmnode:260904
             osmnode:456386831

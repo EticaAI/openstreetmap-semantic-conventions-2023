@@ -5,31 +5,45 @@ This is a draft. Examples to format this document
 - https://github.com/w3c?q=rdf
   - https://w3c.github.io/rdf-star/cg-spec/2021-07-01.html
   - https://github.com/w3c/rdf-star/blob/main/cg-spec/2021-07-01-src.html
+- https://w3c.github.io/json-ld-syntax/
 -->
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8" />
   <!-- <title>Replace me with a real title</title> -->
-  <title>RDF Conventions for OpenStreetMap 2023</title>
+  <title>Semantic Conventions for OpenStreetMap 2023</title>
   <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer></script>
   <script class="remove">
     // All config options at https://respec.org/docs/
     var respecConfig = {
       // specStatus: "ED",
-      specStatus: "CG-DRAFT",
-      editors: [{ name: "Your Name", url: "https://your-site.com" }],
+      // specStatus: "CG-DRAFT",
+      // specStatus: "WD",
+      canonicalURI: "https://fititnt.github.io/openstreetmap-semantic-conventions-2023/",
+      specStatus: 'unofficial',
+      editors: [
+        { name: "Emerson Rocha", url: "https://github.com/fititnt/" },
+        { name: "(Open to new editors!)", url: "https://example.org/" }
+      ],
       // github: "some-org/mySpec",
-      github: "fititnt/openstreetmap-rdf-schema-rfc",
-      shortName: "osm-rdf-2023",
-      xref: "web-platform",
+      github: "fititnt/openstreetmap-semantic-conventions-2023",
+      // shortName: "osm-rdf-2023",
+      // xref: "web-platform",
       // group: "my-working-group",
       // We're not really from W3C, but using this for now
-      group: "geosemweb",  // Not really, 
-      group: "geosemweb-external",  // Not really, 
+      // group: "geosemweb",  // Not really, 
+      // group: "geosemweb-external",  // Not really, 
+      license: 'cc0',
+      // additionalCopyrightHolders: "Copyright%20©Internet Engineering Task Force",
+      // noRecTrack: true,
     };
+  </script>
+  <script>
+    function escapeExample(utils, content, url) {
+      return content.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
   </script>
 </head>
 
@@ -49,47 +63,28 @@ This is a draft. Examples to format this document
     <section>
       <h3>A section</h3>
       <p>Some text.</p>
-      <section class="informative">
-        <h3>Prefixes</h3>
-        <p>Sub-section text.</p>
-        <pre class="turtle">
-PREFIX geo: <http://www.opengis.net/ont/geosparql#>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-PREFIX osmnode: <https://www.openstreetmap.org/node/>
-PREFIX osmrel: <https://www.openstreetmap.org/relation/>
-PREFIX osmway: <https://www.openstreetmap.org/way/>
-PREFIX osmm: <https://example.org/todo-meta/>
-PREFIX osmt: <https://example.org/todo-tag/>
-PREFIX osmsh: <https://www.openstreetmap.org/validation/shacl/>
-PREFIX osmw: <https://wiki.openstreetmap.org/wiki/>
-PREFIX osmx: <https://example.org/todo-xref/>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX schema: <https://schema.org/>
-PREFIX time: <http://www.w3.org/2006/time#>
-PREFIX wikidata: <http://www.wikidata.org/entity/>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+      <!-- <pre class="example" data-content-type="text/turtle"
+        data-result-for="The same set of statements serialized in JSON-LD" data-to-rdf
+        title="A set of statements serialized in Turtle" data-oninclude="escapeExample" data-include="prefixes.ttl">
+      </pre> -->
+      <section class="conformance">
+        <h3>RDF prefixes dedicated to OpenStreetMap use</h3>
+        <!-- <p>Sub-section text.</p> -->
+        <pre class="example" data-content-type="text/turtle" data-oninclude="escapeExample" data-include="prefixes-min.ttl">
         </pre>
-        <pre data-transform="updateExample"
-        data-content-type="application/sparql-query"
-        class="nohighlight example"
-   >
-     <!--
-     SELECT * WHERE {
-         ?s ?p ?o {| :p/:q ?oo |}.
-     }
-     -->
-   </pre>
+
+      </section>
+      <section class="informative">
+        <h3>RDF prefixes commonly used</h3>
+        <p>Sub-section text.</p>
+        <pre class="example" data-content-type="text/turtle" data-oninclude="escapeExample" data-include="prefixes.ttl">
+        </pre>
+        <!-- <pre class="example" data-content-type="text/turtle"
+          data-result-for="The same set of statements serialized in JSON-LD" data-to-rdf
+          title="A set of statements serialized in Turtle" data-oninclude="escapeExample" data-include="prefixes.ttl">
+        </pre> -->
       </section>
     </section>
-    <!-- <section>
-      <h2>A section</h2>
-      <p>Some text.</p>
-      <section class="informative">
-        <h3>I'm a sub-section</h3>
-        <p>Sub-section text.</p>
-      </section>
-    </section> -->
   </section>
   <section>
     <h2>A section</h2>
@@ -100,13 +95,43 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
         function someJavaScript(){}
         </pre>
     </aside>
-    <section>
+    <!-- <section>
       <h3>I'm a sub-section</h3>
       <p class="issue" data-number="121">
-        <!-- Issue can automatically be populated from GitHub -->
+        Issue can automatically be populated from GitHub
       </p>
-    </section>
+    </section> -->
   </section>
+
+  <section>
+    <h2>Examples XML to RDF</h2>
+
+    <section>
+      <h3>Node</h3>
+      <pre class="example" title="A Node in OSM v0.6 XML" data-content-type="xml" data-oninclude="escapeExample" data-include="reference/node-1.xml">
+      </pre>
+      <pre class="example" title="A Node in OSM v0.6  in Turtle" data-content-type="text/turtle" data-oninclude="escapeExample" data-include="proposal/node-1.ttl">
+      </pre>
+    </section>
+
+    <section>
+      <h3>Way</h3>
+      <pre class="example" title="A Way in OSM v0.6 XML" data-content-type="xml" data-oninclude="escapeExample" data-include="reference/way-100.xml">
+      </pre>
+      <pre class="example" title="A Way in OSM v0.6 in Turtle" data-content-type="text/turtle" data-oninclude="escapeExample" data-include="proposal/way-100.ttl">
+      </pre>
+    </section>
+
+    <section>
+      <h3>Relation</h3>
+      <pre class="example" title="A Relation in OSM v0.6 XML" data-content-type="xml" data-oninclude="escapeExample" data-include="reference/relation-10000.xml">
+      </pre>
+      <pre class="example" title="A Relation in OSM v0.6 in Turtle" data-content-type="text/turtle" data-oninclude="escapeExample" data-include="proposal/relation-10000.ttl">
+      </pre>
+    </section>
+
+  </section>
+
   <section data-dfn-for="Foo">
     <h2>Start your spec!</h2>
     <pre class="idl">

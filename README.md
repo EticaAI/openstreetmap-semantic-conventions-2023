@@ -1,4 +1,4 @@
-## [EARLY DRAFT] Request for Feedback: OpenStreetMap RDF Schema 2023
+## [EARLY DRAFT] Request for Feedback: Semantic Conventions for OpenStreetMap 2023
 [early draft][proof of concept] RDF/OWL samples from/to other OpenStreetMap data formats. See https://www.openstreetmap.org/user/fititnt/diary/400329
 
 ## Reference vs RFC

@@ -13,7 +13,7 @@ osmrel:10000
     osmm:version 6 ;
     osmt:name "Kyrksjön" ;
     osmt:natural "water" ;
-    osmt:source%3Alake "Review by So9q using LM Topographic Map" ;
+    osmt:source:lake "Review by So9q using LM Topographic Map" ;
     osmt:type "multipolygon" ;
     osmt:water "lake" ;
     osmt:wikidata "Q18133662" ;
