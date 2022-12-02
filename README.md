@@ -30,6 +30,18 @@ arq --query=proposal/query/by-name.rq --data=poc/tmp/zzz-region-1.ttl
 arq --query=proposal/query/geosparq-example.rq --data=poc/tmp/zzz-region-1.ttl
 arq --query=proposal/query/is-admin.rq --data=poc/tmp/zzz-region-1.ttl
 
+# @see https://jena.apache.org/documentation/fuseki2/fuseki-quick-start.html
+/opt/apache-jena-fuseki/fuseki-server --file poc/tmp/zzz-region-1.ttl /osm
+# http://localhost:3030/#/
+
+curl --output poc/tmp/geosparql_test.rdf https://raw.githubusercontent.com/apache/jena/main/jena-fuseki2/jena-fuseki-geosparql/geosparql_test.rdf
+
+rdfpipe poc/tmp/geosparql_test.rdf > poc/tmp/geosparql_test.rdf.ttl
+
+/opt/apache-jena-fuseki/fuseki-server --file poc/tmp/geosparql_test.rdf /geotest
+
+
+arq --query=proposal/query/geosparq-example.rq --data=poc/tmp/geosparql_test.rdf
 -->
 
 

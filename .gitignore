@@ -5,3 +5,6 @@ poc/osmapi_cache.sqlite
 poc/tmp/*
 !poc/tmp/.gitkeep
 poc/osm2sqlite.py
+
+# fuseki-server
+run/
