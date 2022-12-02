@@ -47,6 +47,13 @@ import requests
 import requests_cache
 import hug
 
+# @TODO Some way to generate metadata from Tags
+#       Taginfo?
+#       - https://taginfo.openstreetmap.org/taginfo/apidoc
+#       maybe parse infoboxes directly. Example:
+#       wiki.openstreetmap.org/w/index.php?action=raw&title=Tag:highway%3Dbusway
+#       or https://github.com/earwig/mwparserfromhell
+
 # user configuration ________________________________________________________
 
 # TIP: enviroment variable DE_FACTO_API_BASE="" can be customized!

@@ -9,6 +9,8 @@ PREFIX osmrel: <https://www.openstreetmap.org/relation/>
 PREFIX osmway: <https://www.openstreetmap.org/way/>
 PREFIX osmm: <https://example.org/todo-meta/>
 PREFIX osmt: <https://example.org/todo-tag/>
+PREFIX osmsh: <https://www.openstreetmap.org/validation/shacl/>
+PREFIX osmw: <https://wiki.openstreetmap.org/wiki/>
 PREFIX osmx: <https://example.org/todo-xref/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
@@ -39,12 +41,13 @@ osma:Element
         owl:Class ;
     rdfs:label "Element"@en ;
     rdfs:isDefinedBy osma: ;
+    owl:disjointWith osma:Collection ;
     owl:unionOf (
             osma:Node
             osma:Way
             osma:Relation
         ) ;
-    # prov:wasInfluencedBy <https://wiki.openstreetmap.org/wiki/Elements> ;
+    rdfs:seeAlso <osmw:Elements> ;
 .
 
 osma:Node
@@ -55,9 +58,10 @@ osma:Node
     rdfs:isDefinedBy osma: ;
     rdfs:subClassOf geo:Point ;
     owl:disjointWith
+        osma:Collection ,
         osma:Relation ,
         osma:Way ;
-    rdfs:seeAlso <https://wiki.openstreetmap.org/wiki/Node> ;
+    rdfs:seeAlso <osmw:Node> ;
 .
 
 osma:Relation
@@ -67,9 +71,10 @@ osma:Relation
     rdfs:label "Relation"@en ;
     rdfs:isDefinedBy osma: ;
     owl:disjointWith
+        osma:Collection ,
         osma:Node ,
         osma:Way ;
-    rdfs:seeAlso <https://wiki.openstreetmap.org/wiki/Relation> ;
+    rdfs:seeAlso <osmw:Relation> ;
 .
 
 osma:Way
@@ -79,6 +84,25 @@ osma:Way
     rdfs:label "Way"@en ;
     rdfs:isDefinedBy osma: ;
     owl:disjointWith
+        osma:Collection ,
         osma:Node ,
         osma:Relation ;
 .
+
+osma:Collection
+    a
+        rdfs:Class ,
+        owl:Class ;
+    rdfs:label "Collection"@en ;
+    rdfs:isDefinedBy osma: ;
+    owl:disjointWith
+        osma:Collection ,
+        osma:Node ,
+        osma:Relation ;
+    rdfs:seeAlso <osmw:Relation:collection>,
+        <osmw:Relations_are_not_categories> ;
+.
+
+
+# infer --rdfs poc/osm-onto2023.ttl proposal/shacl/XZ_tags_wikidata.shacl.ttl
+# infer --rdfs poc/osm-onto2023.ttl proposal/shacl/XZ_tags_wikidata.shacl.ttl | rdfpipe -

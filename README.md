@@ -49,6 +49,8 @@ arq --query=proposal/query/geosparq-example.rq --data=poc/tmp/geosparql_test.rdf
 
 curl --output poc/tmp/geosparql_vocab_all.rdf http://schemas.opengis.net/geosparql/1.0/geosparql_vocab_all.rdf
 
+
+# @TODO make tests with https://dbpedia.org/sparql
 -->
 
 
