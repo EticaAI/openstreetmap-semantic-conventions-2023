@@ -1,0 +1,135 @@
+<!--
+This is a draft. Examples to format this document
+- See https://github.com/w3c/respec
+  - https://github.com/w3c/respec/wiki/ReSpec-Editor's-Guide
+- https://github.com/w3c?q=rdf
+  - https://w3c.github.io/rdf-star/cg-spec/2021-07-01.html
+  - https://github.com/w3c/rdf-star/blob/main/cg-spec/2021-07-01-src.html
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <!-- <title>Replace me with a real title</title> -->
+  <title>RDF Conventions for OpenStreetMap 2023</title>
+  <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer></script>
+  <script class="remove">
+    // All config options at https://respec.org/docs/
+    var respecConfig = {
+      // specStatus: "ED",
+      specStatus: "CG-DRAFT",
+      editors: [{ name: "Your Name", url: "https://your-site.com" }],
+      // github: "some-org/mySpec",
+      github: "fititnt/openstreetmap-rdf-schema-rfc",
+      shortName: "osm-rdf-2023",
+      xref: "web-platform",
+      // group: "my-working-group",
+      // We're not really from W3C, but using this for now
+      group: "geosemweb",  // Not really, 
+      group: "geosemweb-external",  // Not really, 
+    };
+  </script>
+</head>
+
+<body>
+  <section id="abstract">
+    <p>This is required.</p>
+  </section>
+  <section id="sotd">
+    <p>This is required.</p>
+  </section>
+  <section class="informative">
+    <h2>Introduction</h2>
+    <p>Some informative introductory text.</p>
+    <aside class="note" title="A useful note">
+      <p>I'm a note!</p>
+    </aside>
+    <section>
+      <h3>A section</h3>
+      <p>Some text.</p>
+      <section class="informative">
+        <h3>Prefixes</h3>
+        <p>Sub-section text.</p>
+        <pre class="turtle">
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX osmnode: <https://www.openstreetmap.org/node/>
+PREFIX osmrel: <https://www.openstreetmap.org/relation/>
+PREFIX osmway: <https://www.openstreetmap.org/way/>
+PREFIX osmm: <https://example.org/todo-meta/>
+PREFIX osmt: <https://example.org/todo-tag/>
+PREFIX osmsh: <https://www.openstreetmap.org/validation/shacl/>
+PREFIX osmw: <https://wiki.openstreetmap.org/wiki/>
+PREFIX osmx: <https://example.org/todo-xref/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <https://schema.org/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX wikidata: <http://www.wikidata.org/entity/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+        </pre>
+        <pre data-transform="updateExample"
+        data-content-type="application/sparql-query"
+        class="nohighlight example"
+   >
+     <!--
+     SELECT * WHERE {
+         ?s ?p ?o {| :p/:q ?oo |}.
+     }
+     -->
+   </pre>
+      </section>
+    </section>
+    <!-- <section>
+      <h2>A section</h2>
+      <p>Some text.</p>
+      <section class="informative">
+        <h3>I'm a sub-section</h3>
+        <p>Sub-section text.</p>
+      </section>
+    </section> -->
+  </section>
+  <section>
+    <h2>A section</h2>
+    <aside class="example">
+      <p>This is an example.</p>
+      <pre class="js">
+        // Automatic syntax highlighting
+        function someJavaScript(){}
+        </pre>
+    </aside>
+    <section>
+      <h3>I'm a sub-section</h3>
+      <p class="issue" data-number="121">
+        <!-- Issue can automatically be populated from GitHub -->
+      </p>
+    </section>
+  </section>
+  <section data-dfn-for="Foo">
+    <h2>Start your spec!</h2>
+    <pre class="idl">
+        [Exposed=Window]
+        interface Foo {
+        attribute DOMString bar;
+        undefined doTheFoo();
+        };
+      </pre>
+    <p>The <dfn>Foo</dfn> interface represents a {{Foo}}.</p>
+    <p>
+      The <dfn>doTheFoo()</dfn> method does the foo. Call it by running
+      {{Foo/doTheFoo()}}.
+    </p>
+    <ol class="algorithm">
+      <li>A |variable:DOMString| can be declared like this.</li>
+    </ol>
+  </section>
+  <section id="conformance">
+    <p>
+      This is required for specifications that contain normative material.
+    </p>
+  </section>
+</body>
+
+</html>
