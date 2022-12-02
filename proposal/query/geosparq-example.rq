@@ -2,6 +2,6 @@
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 
 SELECT ?subject ?object
-WHERE{
+WHERE {
     ?subject geo:sfContains ?object
 } ORDER by ?object

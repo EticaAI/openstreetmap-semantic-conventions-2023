@@ -1,0 +1,84 @@
+# https://en.wikipedia.org/wiki/Upper_ontology
+
+# ../prefixes.ttl
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX osma: <https://www.openstreetmap.org/ontology/osm2023/>
+PREFIX osmnode: <https://www.openstreetmap.org/node/>
+PREFIX osmrel: <https://www.openstreetmap.org/relation/>
+PREFIX osmway: <https://www.openstreetmap.org/way/>
+PREFIX osmm: <https://example.org/todo-meta/>
+PREFIX osmt: <https://example.org/todo-tag/>
+PREFIX osmx: <https://example.org/todo-xref/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <https://schema.org/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX wikidata: <http://www.wikidata.org/entity/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+# @see https://jena.apache.org/documentation/geosparql/index.html
+# @see https://github.com/BFO-ontology/BFO-2020
+# @see https://opengeospatial.github.io/ogc-geosparql/geosparql11/spec.html
+
+# <https://www.openstreetmap.org/ontology/osm2023/> a owl:Ontology ;
+osma: a owl:Ontology ;
+    rdfs:comment "Yet Another Ontology for OpenStreetMap 2023"@en ;
+    rdfs:seeAlso <http://www.opengis.net/def/function/ogc-geosparql/1.0>,
+        <http://www.opengis.net/def/rule/ogc-geosparql/1.0>,
+        <http://www.opengis.net/doc/IS/geosparql/1.0> ;
+    # owl:imports
+    #     <http://www.opengis.net/ont/gml>,
+    #     <http://www.opengis.net/ont/sf>,
+    #     <http://www.w3.org/2004/02/skos/core> ;
+    owl:versionInfo "OSM2023 1.0"^^xsd:string .
+
+osma:Element
+    a
+        rdfs:Class ,
+        owl:Class ;
+    rdfs:label "Element"@en ;
+    rdfs:isDefinedBy osma: ;
+    owl:unionOf (
+            osma:Node
+            osma:Way
+            osma:Relation
+        ) ;
+    # prov:wasInfluencedBy <https://wiki.openstreetmap.org/wiki/Elements> ;
+.
+
+osma:Node
+    a
+        rdfs:Class ,
+        owl:Class ;
+    rdfs:label "Node"@en ;
+    rdfs:isDefinedBy osma: ;
+    rdfs:subClassOf geo:Point ;
+    owl:disjointWith
+        osma:Relation ,
+        osma:Way ;
+    rdfs:seeAlso <https://wiki.openstreetmap.org/wiki/Node> ;
+.
+
+osma:Relation
+    a
+        rdfs:Class ,
+        owl:Class ;
+    rdfs:label "Relation"@en ;
+    rdfs:isDefinedBy osma: ;
+    owl:disjointWith
+        osma:Node ,
+        osma:Way ;
+    rdfs:seeAlso <https://wiki.openstreetmap.org/wiki/Relation> ;
+.
+
+osma:Way
+    a
+        rdfs:Class ,
+        owl:Class ;
+    rdfs:label "Way"@en ;
+    rdfs:isDefinedBy osma: ;
+    owl:disjointWith
+        osma:Node ,
+        osma:Relation ;
+.
