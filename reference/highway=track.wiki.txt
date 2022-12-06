@@ -1,0 +1,21 @@
+{{ValueDescription
+|key = highway
+|value = track
+|image = File:Frühlingslandschft Aaretal Schweiz.jpg
+|description = A minor land-access road like a farm or forest track.
+|osmcarto-rendering=File:Mapnik-tracktype-not-set.png
+|osmcarto-rendering-size=125px
+|onNode = no
+|onWay = yes
+|onArea = no
+|onRelation = no
+|combination=
+* {{Key|name}}
+* {{Key|tracktype}}
+* {{Key|surface}}
+* {{Key|smoothness}}
+* {{Key|access}}
+* {{Key|ref}}
+* {{Key|width}}
+|status=De facto
+}}

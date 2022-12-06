@@ -23,11 +23,18 @@ This is a draft. Examples to format this document
       // specStatus: "CG-DRAFT",
       // specStatus: "WD",
       // canonicalURI: "https://fititnt.github.io/openstreetmap-semantic-conventions-2023/",
-      latestVersion: "https://fititnt.github.io/openstreetmap-semantic-conventions-2023/",
+      latestVersion: "https://eticaai.github.io/openstreetmap-semantic-conventions-2023/",
       specStatus: 'unofficial',
       // noRecTrack: true,
+      authors: [
+        {
+          name: "OpenStreetMap contributors",
+          company: "OpenStreetMap",
+          companyURL: "https://www.openstreetmap.org/copyright",
+        },
+      ],
       editors: [
-        { 
+        {
           name: "Emerson Rocha",
           company: "EticaAI",
           url: "https://github.com/fititnt/"
@@ -87,26 +94,19 @@ This is a draft. Examples to format this document
   <section id="abstract">
     <h2>Abstract</h2>
     <p>
-      This document contains reference examples of types files with their schemas known to be used for exchanging data with developers of tools around the ecosystem of OpenStreetMap with their conterpairt with one or more encodings of Semantic Web standards.
-      Instead of explaining each kind of format, the intent here is to be a very superficial, example-oriented, quick reference between each format. Readers are recommended to look for the [[[#references]]].
+      This document contains reference examples of types files with their schemas known to be used for exchanging data
+      with developers of tools around the ecosystem of OpenStreetMap with their conterpairt with one or more encodings
+      of Semantic Web standards.
+    </p>
+    <p>
+      Instead of explaining each kind of format, the intent here is to be a very superficial, example-oriented, quick
+      reference between each format. Readers are recommended to look for the [[[#references]]].
     </p>
     <!-- <p>This is required.</p> -->
     <p class="ednote" title="Document is an early draft">
       Use <a href="https://respec.org/docs/">https://respec.org/docs/</a> as reference for markup.
     </p>
-
-    <section class="conformance">
-      <h2>Related specifications</h2>
-      <p>
-
-      </p>
-      <ul>
-        <li>[[[OSMSchemav06]]]</li>
-        <li>[[[OSMLevel0]]]</li>
-        <li>[[[Turtle]]]</li>
-        <li>[[[sparql11-query]]]</li>
-      </ul>
-    </section>
+  </section>
 
   </section>
   <section id="sotd">
@@ -114,43 +114,15 @@ This is a draft. Examples to format this document
       OpenStreetMap™ is a trademark of the OpenStreetMap Foundation,
       and is used with their permission.
       This project is not endorsed by or affiliated with the OpenStreetMap Foundation.
+      <em>(More about <a href="https://wiki.osmfoundation.org/wiki/Trademark_Policy">OSMF Trademark Policy</a>)</em>
     </p>
   </section>
 
   <section class="informative">
     <h2>Introduction</h2>
-    <p>Some informative introductory text.</p>
-    <aside class="note" title="A useful note">
-      <p>I'm a note!</p>
-    </aside>
-    <section>
-      <h3>A section</h3>
-      <p>Some text.</p>
-      <!-- <pre class="example" data-content-type="text/turtle"
-        data-result-for="The same set of statements serialized in JSON-LD" data-to-rdf
-        title="A set of statements serialized in Turtle" data-oninclude="escapeExample" data-include="prefixes.ttl">
-      </pre> -->
-      <section class="conformance">
-        <h3>RDF prefixes dedicated to OpenStreetMap use</h3>
-        <pre class="example" data-content-type="text/turtle" data-oninclude="escapeExample"
-          data-include="prefixes-min.ttl">
-        </pre>
-
-      </section>
-      <section class="informative">
-        <h3>RDF prefixes commonly used</h3>
-        <p>Sub-section text.</p>
-        <pre class="example" data-content-type="text/turtle" data-oninclude="escapeExample" data-include="prefixes.ttl">
-        </pre>
-      </section>
-    </section>
-    <section>
-      <h3>How to read this document</h3>
-      <p>Example of XML file</p>
-      <p>Example of Turtle</p>
-      <p>Example of Simple triples</p>
-      <p>Example Wiki markup</p>
-    </section>
+    <p class="ednote" title="Missing introduction">
+      Is necessary to add introduction which already is not a copy from the abstract.
+    </p>
   </section>
 
   <section class="informative">
@@ -170,9 +142,62 @@ This is a draft. Examples to format this document
       <dd>🍏s are great in a pie!.</dd>
     </dl>
     -->
+    <section class="conformance">
+      <h3>Related specifications</h3>
+      <p class="ednote" title="drafted initial list">
+        At this moment, this section is mostly a list to make <a href="https://respec.org/docs/">respecs</a> show
+        references at the bottom of the page.
+        Some may be removed, and others added.
+      </p>
+      <ul>
+        <li>[[[OSMSchemav06]]]</li>
+        <li>[[[OSMLevel0]]]</li>
+        <li>[[[rdf11-concepts]]]</li>
+        <li>[[[Turtle]]]</li>
+        <li>[[[sparql11-query]]]</li>
+        <li>[[[owl-time]]]</li>
+        <li>[[[json-ld11]]]</li>
+        <li>[[[owl2-syntax]]]</li>
+      </ul>
+      <!--
 
+        See also https://www.w3.org/TR/?tag=data
+      -->
+
+    </section>
   </section>
- 
+
+  <section class="conformance">
+    <h2>Namespaces</h2>
+    <!--
+    <p>
+      (TODO link to <a href="https://www.w3.org/TR/rdf-syntax-grammar/#section-Namespace">https://www.w3.org/TR/rdf-syntax-grammar/#section-Namespace</a>)
+    </p>
+    -->
+    <p>
+      For more information about this section, see <em>RDF Vocabularies and Namespace IRIs</em> in [[[rdf11-concepts]]].
+    </p>
+    <p class="ednote" title="The namespaces for OpenStreetMap are a draft">
+      While this section already uses RFC2119 keywords, the actual suggestions are an early draft and open to testing
+      and discussion.
+    </p>
+    <section class="conformance">
+      <h3>Namespaces dedicated to OpenStreetMap use</h3>
+      <p>
+        Is RECOMMENDED to use the following conventions for namespace IRIs.
+
+      </p>
+      <pre class="example" data-content-type="text/turtle" data-oninclude="escapeExample"
+        data-include="prefixes-min.ttl">
+      </pre>
+    </section>
+    <section class="informative">
+      <h3>Common namespaces</h3>
+      <p>The examples in this document may omit the prefixes. The list below provides their equivalence.</p>
+      <pre class="example" data-content-type="text/turtle" data-oninclude="escapeExample" data-include="prefixes.ttl">
+      </pre>
+    </section>
+  </section>
 
   <section>
     <h2>Data Primitives</h2>
@@ -211,6 +236,28 @@ This is a draft. Examples to format this document
       </pre>
     </section>
 
+    <section>
+      <h3>Tag</h3>
+      <p>
+        Please see examples above where XML encoding has <code>&lt;tag k="" v="" /&gt;</code> and RDF/Turtle uses
+        <code>osmt:</code> prefix.
+      </p>
+    </section>
+
+  </section>
+
+  <section>
+    <h2>Tag metadata</h2>
+    <section>
+      <h3>Infobox Tag</h3>
+      <pre class="example" title="Tag:highway=track" data-content-type="txt" data-oninclude="escapeExample"
+      data-include="reference/highway=track.wiki.txt">
+    </pre>
+    </section>
+
+    <!-- <pre class="example" title="A Relation in OSM v0.6 in Turtle" data-content-type="text/turtle"
+      data-oninclude="escapeExample escapeExamplePREFIX" data-include="proposal/relation-10000.ttl">
+    </pre> -->
   </section>
 
   <section>
@@ -222,6 +269,11 @@ This is a draft. Examples to format this document
 
     <section>
       <h3>Changeset</h3>
+      <ul>
+        <li>See <a
+            href="https://wiki.openstreetmap.org/wiki/Changeset">https://wiki.openstreetmap.org/wiki/Changeset</a>
+        </li>
+      </ul>
     </section>
 
     <section>
@@ -232,11 +284,6 @@ This is a draft. Examples to format this document
 
   <section>
     <h2>@TODO better group here</h2>
-    <ul>
-      <li>See <a href="https://wiki.openstreetmap.org/wiki/Changeset">https://wiki.openstreetmap.org/wiki/Changeset</a>
-      </li>
-    </ul>
-
     <section>
       <h3>Preset</h3>
       <p>See <a href="https://wiki.openstreetmap.org/wiki/Preset">https://wiki.openstreetmap.org/wiki/Preset</a>.</p>
@@ -279,7 +326,7 @@ This is a draft. Examples to format this document
     </section>
 
   </section>
-
+  <!--
   <section data-dfn-for="Foo">
     <h2>Start your spec!</h2>
     <pre class="idl">
@@ -298,6 +345,7 @@ This is a draft. Examples to format this document
       <li>A |variable:DOMString| can be declared like this.</li>
     </ol>
   </section>
+  -->
   <section id="conformance">
     <p>
       This is required for specifications that contain normative material.

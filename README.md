@@ -1,7 +1,7 @@
 # [Request for Feedback] Semantic Conventions for OpenStreetMap™ 2023
 **[Request for Feedback] Semantic Conventions for OpenStreetMap™ 2023. Mappings from common file formats to RDF, and other considerations**
 
-> This initial draft was based on discussions from [Emerson Rocha 400329 Diary](https://www.openstreetmap.org/user/fititnt/diary/40032).
+> This initial draft was based on discussions from [Emerson Rocha 400329 Diary](https://www.openstreetmap.org/user/fititnt/diary/400329).
 
 ## The conventions
 
