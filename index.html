@@ -27,12 +27,19 @@ This is a draft. Examples to format this document
       specStatus: 'unofficial',
       // noRecTrack: true,
       editors: [
-        { name: "Emerson Rocha", url: "https://github.com/fititnt/" },
-        { name: "(Open to new editors!)", url: "https://example.org/" }
+        { 
+          name: "Emerson Rocha",
+          company: "EticaAI",
+          url: "https://github.com/fititnt/"
+        },
+        {
+          name: "(Open to new editors!)",
+          url: "https://github.com/EticaAI/openstreetmap-semantic-conventions-2023#become-an-editor"
+        }
       ],
       // github: "some-org/mySpec",
-      github: "fititnt/openstreetmap-semantic-conventions-2023",
-      shortName: "osm-rdf-23",
+      github: "eticaai/openstreetmap-semantic-conventions-2023",
+      shortName: "osm-sc-23",
       // xref: "web-platform",
       // group: "my-working-group",
       // We're not really from W3C, but using this for now
@@ -54,6 +61,12 @@ This is a draft. Examples to format this document
           // status: "RSCND",
           publisher: "OSM",
         },
+        OSMLevel0: {
+          title: "OsmChange",
+          href: "https://wiki.openstreetmap.org/wiki/OsmChange",
+          // status: "RSCND",
+          publisher: "Unknow",
+        },
       },
     };
   </script>
@@ -72,6 +85,11 @@ This is a draft. Examples to format this document
   <h2 id="subtitle">Mappings from common file formats to RDF, and other considerations</h2>
 
   <section id="abstract">
+    <h2>Abstract</h2>
+    <p>
+      This document contains reference examples of types files with their schemas known to be used for exchanging data with developers of tools around the ecosystem of OpenStreetMap with their conterpairt with one or more encodings of Semantic Web standards.
+      Instead of explaining each kind of format, the intent here is to be a very superficial, example-oriented, quick reference between each format. Readers are recommended to look for the [[[#references]]].
+    </p>
     <!-- <p>This is required.</p> -->
     <p class="ednote" title="Document is an early draft">
       Use <a href="https://respec.org/docs/">https://respec.org/docs/</a> as reference for markup.
@@ -86,6 +104,7 @@ This is a draft. Examples to format this document
         <li>[[[OSMSchemav06]]]</li>
         <li>[[[OSMLevel0]]]</li>
         <li>[[[Turtle]]]</li>
+        <li>[[[sparql11-query]]]</li>
       </ul>
     </section>
 

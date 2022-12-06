@@ -1,6 +1,27 @@
-## [EARLY DRAFT] Request for Feedback: Semantic Conventions for OpenStreetMap 2023
-[early draft][proof of concept] RDF/OWL samples from/to other OpenStreetMap data formats. See https://www.openstreetmap.org/user/fititnt/diary/400329
+# [Request for Feedback] Semantic Conventions for OpenStreetMap™ 2023
+**[Request for Feedback] Semantic Conventions for OpenStreetMap™ 2023. Mappings from common file formats to RDF, and other considerations**
 
+> This initial draft was based on discussions from [Emerson Rocha 400329 Diary](https://www.openstreetmap.org/user/fititnt/diary/40032).
+
+## The conventions
+
+Please visit <https://eticaai.github.io/openstreetmap-semantic-conventions-2023/> for the lastest editor draft.
+
+The structure for the directory is:
+- [reference/](reference/): reference files
+- [proposal/](proposal/): Proposal files in RDF with  [Turtle serialization](https://www.w3.org/TR/turtle/).
+  - [proposal/shacl](proposal/shacl/): proof of convept of [Shapes Constraint Language (SHACL)](https://www.w3.org/TR/shacl/) usable with the proposed RDF encoding.
+  - [proposal/query](proposal/query/): proof of convept of [SPARQL 1.1 Query Language](https://www.w3.org/TR/sparql11-query/) usable with the proposed RDF encoding.
+- [poc/](poc/): public domain scripts to convert between the formats
+
+## Become an editor
+
+1. The hard requeriment is know the basics of <https://respec.org/docs/> to edit the [index.html](index.html) file without help.
+2. Either solid experience with OpenStreetMap (preferable tagging **or** with files used to exchange data) **or** solid experience with [Semantic Web](https://www.w3.org/standards/semanticweb/) (does **not** need to be both) is expected.
+3. Be open to receive feedback from suggestions. Being an editor does not mean being an author.
+4. Get in contact and ask.
+
+<!--
 ## Reference vs RFC
 
 - [reference/changeset-1.xml](reference/changeset-1.xml)
@@ -17,7 +38,7 @@
 **Public domain code**
 - [poc/osmapi2rdfproxy.py](poc/osmapi2rdfproxy.py): early proof of concept to generate the RFC data; not intented for production use, but for test viability. Is a proxy
   - [poc/osmrdf2022.py](poc/osmrdf2022.py): logic of the proof of concept proxy
-
+-->
 
 <!--
 
@@ -71,3 +92,7 @@ TODO see https://wiki.osmfoundation.org/wiki/Trademark_Policy
 
 OpenStreetMap™ is a trademark of the OpenStreetMap Foundation, and is used with their permission.
 This project is not endorsed by or affiliated with the OpenStreetMap Foundation.
+
+## License
+
+Public domain
