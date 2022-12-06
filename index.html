@@ -75,6 +75,12 @@ This is a draft. Examples to format this document
           publisher: "Unknow",
         },
       },
+      lint: {
+        "check-punctuation": true,
+        "local-refs-exist": true,
+        "no-headingless-sections": true,
+        "no-http-props": true,
+      },
     };
   </script>
   <script>
@@ -85,6 +91,14 @@ This is a draft. Examples to format this document
       return content.replace(/PREFIX(.*)/g, "");
     }
   </script>
+  <style>
+    .todo-issue {
+      border-color: #e05252;
+      background: #fbe9e9;
+      color: black;
+      overflow: auto;
+    }
+  </style>
 </head>
 
 <body>
@@ -229,8 +243,8 @@ This is a draft. Examples to format this document
         data-oninclude="escapeExample" data-include="reference/way-100.xml">
       </pre>
 
-      <pre class="example" title="The reference Way in Level0" data-content-type="txt"
-        data-oninclude="" data-include="reference/way-100.level0.txt">
+      <pre class="example" title="The reference Way in Level0" data-content-type="txt" data-oninclude=""
+        data-include="reference/way-100.level0.txt">
       </pre>
 
       <pre class="example" title="The reference Way in RDF/Turtle" data-content-type="text/turtle"
@@ -245,8 +259,8 @@ This is a draft. Examples to format this document
         data-oninclude="escapeExample" data-include="reference/relation-10000.xml">
       </pre>
 
-      <pre class="example" title="The reference Relation in Level0" data-content-type="txt"
-        data-oninclude="" data-include="reference/relation-10000.level0.txt">
+      <pre class="example" title="The reference Relation in Level0" data-content-type="txt" data-oninclude=""
+        data-include="reference/relation-10000.level0.txt">
       </pre>
 
       <pre class="example" title="The reference Relation in RDF/Turtle" data-content-type="text/turtle"
@@ -268,6 +282,9 @@ This is a draft. Examples to format this document
     <h2>Tag metadata</h2>
     <section>
       <h3>Wiki Infobox Tag</h3>
+      <div class="issue" data-number="1">
+        How to encode Wiki infoboxes for tags in RDF/Turtle?
+      </div>
       <pre class="example" title="Tag:highway=track" data-content-type="txt" data-oninclude="escapeExample"
         data-include="reference/highway=track.wiki.txt">
     </pre>
@@ -280,10 +297,9 @@ This is a draft. Examples to format this document
 
   <section>
     <h2>Data change</h2>
-    <ul>
-      <li>See <a href="https://wiki.openstreetmap.org/wiki/Changeset">https://wiki.openstreetmap.org/wiki/Changeset</a>
-      </li>
-    </ul>
+    <p>
+      This section contains examples able to make changes on data or explain past changes from [[[#data-primitives]]].
+    </p>
 
     <section>
       <h3>Changeset</h3>
@@ -292,6 +308,20 @@ This is a draft. Examples to format this document
             href="https://wiki.openstreetmap.org/wiki/Changeset">https://wiki.openstreetmap.org/wiki/Changeset</a>
         </li>
       </ul>
+
+      <pre class="example" title="A Changeset in OpenStreetMap v0.6 XML (canonical) reference" data-content-type="xml"
+        data-oninclude="escapeExample" data-include="reference/changeset-1.xml">
+      </pre>
+
+      <div class="issue" data-number="2">
+        How to represent changesets in RDF/Turtle?
+        <ul>
+          <li><a href="https://www.w3.org/TR/sparql11-update/">https://www.w3.org/TR/sparql11-update/</a></li>
+          <li><a href="https://www.w3.org/2009/12/rdf-ws/papers/ws07">https://www.w3.org/2009/12/rdf-ws/papers/ws07</a></li>
+          <li><a href="https://www.w3.org/DesignIssues/Diff.html">https://www.w3.org/DesignIssues/Diff.html</a></li>
+        </ul>
+      </div>
+
     </section>
 
     <section>
