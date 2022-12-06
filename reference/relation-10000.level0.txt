@@ -1,0 +1,17 @@
+relation 10000
+  name = Kyrksjön
+  natural = water
+  source:lake = Review by So9q using LM Topographic Map
+  type = multipolygon
+  water = lake
+  wikidata = Q18133662
+  wy 23641716 outer
+  wy 223698907 inner
+  wy 225434252 inner
+  wy 223698903 inner
+  wy 23729231 inner
+  wy 223698904 inner
+  wy 223698908 inner
+  wy 225434253 inner
+  wy 23729234 inner
+

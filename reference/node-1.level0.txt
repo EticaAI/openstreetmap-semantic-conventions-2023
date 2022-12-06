@@ -1,0 +1,10 @@
+node 1: 42.7957187, 13.5690032
+  communication:microwave = yes
+  communication:radio = fm
+  description = Radio Subasio
+  frequency = 105.5 MHz
+  man_made = mast
+  name = Monte Piselli - San Giacomo
+  tower:construction = lattice
+  tower:type = communication
+

@@ -1,0 +1,31 @@
+way 100
+  bicycle = use_sidepath
+  foot = use_sidepath
+  highway = secondary
+  junction = roundabout
+  maxspeed = 100
+  ref = St 2069
+  surface = asphalt
+  tmc = DE:32282/32283
+  zone:traffic = DE:rural
+  nd 260904
+  nd 456386831
+  nd 260897
+  nd 456386832
+  nd 260898
+  nd 456386833
+  nd 185986175
+  nd 456386834
+  nd 260899
+  nd 456386835
+  nd 260900
+  nd 456386836
+  nd 260901
+  nd 456386837
+  nd 260902
+  nd 456386838
+  nd 1807516891
+  nd 260903
+  nd 456386839
+  nd 260904
+
