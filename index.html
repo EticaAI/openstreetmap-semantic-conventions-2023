@@ -1,6 +1,7 @@
 <!--
 This is a draft. Examples to format this document
 - See https://github.com/w3c/respec
+  - https://respec.org/docs/
   - https://github.com/w3c/respec/wiki/ReSpec-Editor's-Guide
 - https://github.com/w3c?q=rdf
   - https://w3c.github.io/rdf-star/cg-spec/2021-07-01.html
@@ -11,9 +12,9 @@ This is a draft. Examples to format this document
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <!-- <title>Replace me with a real title</title> -->
-  <title>Semantic Conventions for OpenStreetMap 2023</title>
+  <title>Semantic Conventions for OpenStreetMap™ 2023</title>
   <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer></script>
   <script class="remove">
     // All config options at https://respec.org/docs/
@@ -21,15 +22,17 @@ This is a draft. Examples to format this document
       // specStatus: "ED",
       // specStatus: "CG-DRAFT",
       // specStatus: "WD",
-      canonicalURI: "https://fititnt.github.io/openstreetmap-semantic-conventions-2023/",
+      // canonicalURI: "https://fititnt.github.io/openstreetmap-semantic-conventions-2023/",
+      latestVersion: "https://fititnt.github.io/openstreetmap-semantic-conventions-2023/",
       specStatus: 'unofficial',
+      // noRecTrack: true,
       editors: [
         { name: "Emerson Rocha", url: "https://github.com/fititnt/" },
         { name: "(Open to new editors!)", url: "https://example.org/" }
       ],
       // github: "some-org/mySpec",
       github: "fititnt/openstreetmap-semantic-conventions-2023",
-      // shortName: "osm-rdf-2023",
+      shortName: "osm-rdf-23",
       // xref: "web-platform",
       // group: "my-working-group",
       // We're not really from W3C, but using this for now
@@ -37,23 +40,64 @@ This is a draft. Examples to format this document
       // group: "geosemweb-external",  // Not really, 
       license: 'cc0',
       // additionalCopyrightHolders: "Copyright%20©Internet Engineering Task Force",
-      // noRecTrack: true,
+      doJsonLd: true,
+      localBiblio: {
+        OSMSchemav06: {
+          title: "OpenStreetMap v0.6 XML Schema",
+          href: "https://wiki.openstreetmap.org/wiki/OSM_XML",
+          // status: "RSCND",
+          publisher: "OSM",
+        },
+        OSMLevel0: {
+          title: "Level0 Schema",
+          href: "https://wiki.openstreetmap.org/wiki/Level0",
+          // status: "RSCND",
+          publisher: "OSM",
+        },
+      },
     };
   </script>
   <script>
     function escapeExample(utils, content, url) {
       return content.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     }
+    function escapeExamplePREFIX(utils, content, url) {
+      return content.replace(/PREFIX(.*)/g, "");
+    }
   </script>
 </head>
 
 <body>
+  <h1 id="title">Semantic Conventions for OpenStreetMap™ 2023</h1>
+  <h2 id="subtitle">Mappings from common file formats to RDF, and other considerations</h2>
+
   <section id="abstract">
-    <p>This is required.</p>
+    <!-- <p>This is required.</p> -->
+    <p class="ednote" title="Document is an early draft">
+      Use <a href="https://respec.org/docs/">https://respec.org/docs/</a> as reference for markup.
+    </p>
+
+    <section class="conformance">
+      <h2>Related specifications</h2>
+      <p>
+
+      </p>
+      <ul>
+        <li>[[[OSMSchemav06]]]</li>
+        <li>[[[OSMLevel0]]]</li>
+        <li>[[[Turtle]]]</li>
+      </ul>
+    </section>
+
   </section>
   <section id="sotd">
-    <p>This is required.</p>
+    <p>
+      OpenStreetMap™ is a trademark of the OpenStreetMap Foundation,
+      and is used with their permission.
+      This project is not endorsed by or affiliated with the OpenStreetMap Foundation.
+    </p>
   </section>
+
   <section class="informative">
     <h2>Introduction</h2>
     <p>Some informative introductory text.</p>
@@ -69,8 +113,8 @@ This is a draft. Examples to format this document
       </pre> -->
       <section class="conformance">
         <h3>RDF prefixes dedicated to OpenStreetMap use</h3>
-        <!-- <p>Sub-section text.</p> -->
-        <pre class="example" data-content-type="text/turtle" data-oninclude="escapeExample" data-include="prefixes-min.ttl">
+        <pre class="example" data-content-type="text/turtle" data-oninclude="escapeExample"
+          data-include="prefixes-min.ttl">
         </pre>
 
       </section>
@@ -79,55 +123,140 @@ This is a draft. Examples to format this document
         <p>Sub-section text.</p>
         <pre class="example" data-content-type="text/turtle" data-oninclude="escapeExample" data-include="prefixes.ttl">
         </pre>
-        <!-- <pre class="example" data-content-type="text/turtle"
-          data-result-for="The same set of statements serialized in JSON-LD" data-to-rdf
-          title="A set of statements serialized in Turtle" data-oninclude="escapeExample" data-include="prefixes.ttl">
-        </pre> -->
       </section>
     </section>
-  </section>
-  <section>
-    <h2>A section</h2>
-    <aside class="example">
-      <p>This is an example.</p>
-      <pre class="js">
-        // Automatic syntax highlighting
-        function someJavaScript(){}
-        </pre>
-    </aside>
-    <!-- <section>
-      <h3>I'm a sub-section</h3>
-      <p class="issue" data-number="121">
-        Issue can automatically be populated from GitHub
-      </p>
-    </section> -->
+    <section>
+      <h3>How to read this document</h3>
+      <p>Example of XML file</p>
+      <p>Example of Turtle</p>
+      <p>Example of Simple triples</p>
+      <p>Example Wiki markup</p>
+    </section>
   </section>
 
-  <section>
-    <h2>Examples XML to RDF</h2>
+  <section class="informative">
+    <h2>Terminology</h2>
+    <!--
+      <dfn data-abbr="PoS">point of sale</dfn> 
 
+    <dl data-sort>
+      <dt>Bananas</dt>
+      <dd>Are the best!</dd>
+    
+      <dt>Zebra</dt>
+      <dd>Are quite stripy.</dd>
+    
+      <dt>Apples</dt>
+      <dd>🍎s are delicious.</dd>
+      <dd>🍏s are great in a pie!.</dd>
+    </dl>
+    -->
+
+  </section>
+ 
+
+  <section>
+    <h2>Data Primitives</h2>
+    <ul>
+      <li>See <a
+          href="https://wiki.openstreetmap.org/wiki/Talk:Elements">https://wiki.openstreetmap.org/wiki/Talk:Elements</a>
+      </li>
+    </ul>
     <section>
       <h3>Node</h3>
-      <pre class="example" title="A Node in OSM v0.6 XML" data-content-type="xml" data-oninclude="escapeExample" data-include="reference/node-1.xml">
+      <pre class="example" title="A Node in OSM v0.6 XML" data-content-type="xml" data-oninclude="escapeExample"
+        data-include="reference/node-1.xml">
       </pre>
-      <pre class="example" title="A Node in OSM v0.6  in Turtle" data-content-type="text/turtle" data-oninclude="escapeExample" data-include="proposal/node-1.ttl">
+      <pre class="example" title="A Node in OSM v0.6  in Turtle" data-content-type="text/turtle"
+        data-oninclude="escapeExample escapeExamplePREFIX" data-include="proposal/node-1.ttl">
       </pre>
     </section>
 
     <section>
       <h3>Way</h3>
-      <pre class="example" title="A Way in OSM v0.6 XML" data-content-type="xml" data-oninclude="escapeExample" data-include="reference/way-100.xml">
+      <pre class="example" title="A Way in OSM v0.6 XML" data-content-type="xml" data-oninclude="escapeExample"
+        data-include="reference/way-100.xml">
       </pre>
-      <pre class="example" title="A Way in OSM v0.6 in Turtle" data-content-type="text/turtle" data-oninclude="escapeExample" data-include="proposal/way-100.ttl">
+      <pre class="example" title="A Way in OSM v0.6 in Turtle" data-content-type="text/turtle"
+        data-oninclude="escapeExample escapeExamplePREFIX" data-include="proposal/way-100.ttl">
       </pre>
     </section>
 
     <section>
       <h3>Relation</h3>
-      <pre class="example" title="A Relation in OSM v0.6 XML" data-content-type="xml" data-oninclude="escapeExample" data-include="reference/relation-10000.xml">
+      <pre class="example" title="A Relation in OSM v0.6 XML" data-content-type="xml" data-oninclude="escapeExample"
+        data-include="reference/relation-10000.xml">
       </pre>
-      <pre class="example" title="A Relation in OSM v0.6 in Turtle" data-content-type="text/turtle" data-oninclude="escapeExample" data-include="proposal/relation-10000.ttl">
+      <pre class="example" title="A Relation in OSM v0.6 in Turtle" data-content-type="text/turtle"
+        data-oninclude="escapeExample escapeExamplePREFIX" data-include="proposal/relation-10000.ttl">
       </pre>
+    </section>
+
+  </section>
+
+  <section>
+    <h2>Data change</h2>
+    <ul>
+      <li>See <a href="https://wiki.openstreetmap.org/wiki/Changeset">https://wiki.openstreetmap.org/wiki/Changeset</a>
+      </li>
+    </ul>
+
+    <section>
+      <h3>Changeset</h3>
+    </section>
+
+    <section>
+      <h3>History</h3>
+    </section>
+
+  </section>
+
+  <section>
+    <h2>@TODO better group here</h2>
+    <ul>
+      <li>See <a href="https://wiki.openstreetmap.org/wiki/Changeset">https://wiki.openstreetmap.org/wiki/Changeset</a>
+      </li>
+    </ul>
+
+    <section>
+      <h3>Preset</h3>
+      <p>See <a href="https://wiki.openstreetmap.org/wiki/Preset">https://wiki.openstreetmap.org/wiki/Preset</a>.</p>
+    </section>
+
+    <section>
+      <h3>Role</h3>
+      <p>See <a
+          href="https://wiki.openstreetmap.org/wiki/Relation#Roles">https://wiki.openstreetmap.org/wiki/Relation#Roles</a>.
+      </p>
+    </section>
+
+    <section>
+      <h3>History</h3>
+    </section>
+
+  </section>
+
+  <section>
+    <h2>Data Primitives to wiki "Semantic elements"</h2>
+    <ul>
+      <li>See <a
+          href="https://wiki.openstreetmap.org/wiki/Semantic_elements">https://wiki.openstreetmap.org/wiki/Semantic_elements</a>
+      </li>
+    </ul>
+    <section>
+      <h3>Point</h3>
+    </section>
+
+    <section>
+      <h3>Linear features</h3>
+    </section>
+
+    <section>
+      <h3>Areas</h3>
+    </section>
+
+    <section>
+      <h3>Relational</h3>
     </section>
 
   </section>
@@ -154,6 +283,9 @@ This is a draft. Examples to format this document
     <p>
       This is required for specifications that contain normative material.
     </p>
+  </section>
+  <section id="index" class="appendix">
+    <!-- All the terms will magically appear here -->
   </section>
 </body>
 

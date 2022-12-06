@@ -21,6 +21,8 @@ osmway:100
     osmt:surface "asphalt" ;
     osmt:tmc "DE:32282/32283" ;
     osmt:zone:traffic "DE:rural" ;
+    # Note: Sophox uses osmm:has (but not sure how is the semantics)
+    # https://www.w3.org/TR/turtle/#h3_collections
     osmx:hasnodes (
             osmnode:260904
             osmnode:456386831
