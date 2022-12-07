@@ -1,0 +1,8 @@
+/* from https://josm.openstreetmap.de/browser/josm/trunk/resources/data/validator/highway.mapcss */
+
+way[highway=yes],
+way[highway=road] {
+  throwWarning: tr("Unspecific highway type");
+  assertMatch: "way highway=road";
+  assertNoMatch: "way highway=residential";
+}
