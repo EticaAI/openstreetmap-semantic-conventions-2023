@@ -70,11 +70,15 @@ arq --query=proposal/query/geosparq-example.rq --data=poc/tmp/geosparql_test.rdf
 
 curl --output poc/tmp/geosparql_vocab_all.rdf http://schemas.opengis.net/geosparql/1.0/geosparql_vocab_all.rdf
 
+curl --output poc/tmp/tagfinder_thesaurus.rdf http://tagfinder.herokuapp.com/tagfinder_thesaurus.rdf
+rdfpipe --output-format=longturtle poc/tmp/tagfinder_thesaurus.rdf > poc/tmp/tagfinder_thesaurus.rdf.ttl
 
 # @TODO make tests with https://dbpedia.org/sparql
 # @TODO maybe use as example (because of implies)
 #  - https://wiki.openstreetmap.org/wiki/Item:Q4980
 #  - https://wiki.openstreetmap.org/wiki/Tag:highway%3Dmotorway
+
+/opt/Protege-5.5.0/run.sh
 -->
 
 
@@ -87,6 +91,8 @@ curl --output poc/tmp/geosparql_vocab_all.rdf http://schemas.opengis.net/geospar
   - https://wiki.openstreetmap.org/wiki/Sophox#How_OSM_data_is_stored
 - (names?)
   - [LinkedGeoData](https://wiki.openstreetmap.org/wiki/LinkedGeoData)
+- (names?)
+  - <http://tagfinder.herokuapp.com/tagfinder_thesaurus.rdf>
 
 ## Disclaimers
 <!--

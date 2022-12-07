@@ -37,7 +37,7 @@ This is a draft. Examples to format this document
         {
           name: "Emerson Rocha",
           company: "EticaAI",
-          url: "https://github.com/fititnt/"
+          url: "https://orcid.org/0000-0002-9022-8054"
         },
         {
           name: "(Open to new editors!)",
@@ -333,15 +333,19 @@ This is a draft. Examples to format this document
     <h2>Presets</h2>
     <p>See <a href="https://wiki.openstreetmap.org/wiki/Preset">https://wiki.openstreetmap.org/wiki/Preset</a>.</p>
 
+    <p class="ednote" title="name-suggestion-index presets">
+      name-suggestion-index also releases their data as Presets? Humm. See
+      <a href="https://github.com/osmlab/name-suggestion-index/tree/main/dist/presets">https://github.com/osmlab/name-suggestion-index/tree/main/dist/presets</a>.
+    </p>
     <!--
       - About unifying presets
         - https://github.com/osmlab/editor-presets/issues/1
         - https://github.com/osmlab/osm-planning/issues/27#issuecomment-1018930029
         - https://github.com/openstreetmap/id-tagging-schema/issues/646
     -->
-
     <section>
       <h3>iD style presets</h3>
+
       <ul>
         <li>
           <a href="https://wiki.openstreetmap.org/wiki/Preset#iD">
@@ -353,12 +357,18 @@ This is a draft. Examples to format this document
             https://github.com/openstreetmap/id-tagging-schema/
           </a>
         </li>
+        <li>
+          <a href="https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/presets/nsi-id-presets.json">
+            https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/presets/nsi-id-presets.json
+          </a>
+        </li>
       </ul>
     </section>
     <section>
       <h3>JOSM style presets</h3>
       <div class="issue" data-number="3">
-        Opinions are welcome.
+        Opinions are welcome.<br>
+        What about https://wiki.openstreetmap.org/wiki/Name_Suggestion_Index ?
       </div>
       <ul>
         <li>
@@ -383,6 +393,9 @@ This is a draft. Examples to format this document
       <pre class="example" title="A JSOM Preset (canonical) reference, preset-josm-gas" data-content-type="xml"
         data-oninclude="escapeExample" data-include="reference/preset/preset-josm-gas.xml">
       </pre>
+      <pre class="example" title="A NSI+JSOM Preset (canonical) reference, preset-nsi-josm" data-content-type="xml"
+        data-oninclude="escapeExample" data-include="reference/preset/preset-nsi-josm.xml">
+      </pre>
     </section>
     <section>
       <h3>OsmAnd style presets</h3>
@@ -403,6 +416,44 @@ This is a draft. Examples to format this document
       Trivia: Merkaartor have XSD https://github.com/openstreetmap/merkaartor/tree/master/Templates/
 
     -->
+  </section>
+
+  <section>
+    <h2>name-suggestion-index</h2>
+    <!--
+    <div class="issue" data-number="1">
+      How to encode Wiki infoboxes for tags in RDF/Turtle?
+    </div>
+    -->
+    <ul>
+      <li>
+        <a href="https://nsi.guide/">
+          https://nsi.guide/
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/osmlab/name-suggestion-index">
+          https://github.com/osmlab/name-suggestion-index
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/osmlab/name-suggestion-index/tree/main/schema">
+          https://github.com/osmlab/name-suggestion-index/tree/main/schema
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/osmlab/name-suggestion-index/tree/main/dist">
+          https://github.com/osmlab/name-suggestion-index/tree/main/dist
+        </a>
+      </li>
+    </ul>
+
+    <section>
+      <h3>nsi.json</h3>
+      <pre class="example" title="nsi.json (reference)" data-content-type="json" data-oninclude=""
+        data-include="reference/name-suggestion-index/nsi.json">
+    </pre>
+    </section>
   </section>
 
   <!--

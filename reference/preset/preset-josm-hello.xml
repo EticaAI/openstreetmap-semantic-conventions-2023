@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0">
+  <!-- Example from https://josm.openstreetmap.de/wiki/TaggingPresets -->
   <item name="Oneway highway" type="way">
     <label text="Inserting a unidirectional highway" />
 

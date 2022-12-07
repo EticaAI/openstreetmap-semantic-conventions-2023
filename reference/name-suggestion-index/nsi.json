@@ -1,0 +1,15 @@
+{
+  "_meta": {
+    "version": "6.0.20221205",
+    "generated": "2022-12-05T06:14:45.085Z",
+    "url": "https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/nsi.json",
+    "hash": "582e26798e1ac1c37efef8294a7520d2"
+  },
+  "nsi": {
+    "brands/amenity/animal_boarding": {
+      "properties": {"path": "brands/amenity/animal_boarding", "exclude": {"generic": ["^(animal boarding|kandang ayam)$"]}},
+      "items": [{"displayName": "Dogtopia", "id": "dogtopia-03770a", "locationSet": {"include": ["ca", "us"]}, "tags": {"amenity": "animal_boarding", "animal_boarding": "dog", "brand": "Dogtopia", "brand:wikidata": "Q112037444", "name": "Dogtopia"}}, {"displayName": "PetsHotel", "id": "petshotel-03770a", "locationSet": {"include": ["ca", "us"]}, "tags": {"amenity": "animal_boarding", "animal_boarding": "dog;cat", "brand": "PetsHotel", "brand:wikidata": "Q67141961", "name": "PetsHotel"}}, {"displayName": "PetSuites", "id": "petsuites-a2c409", "locationSet": {"include": ["us"]}, "tags": {"amenity": "animal_boarding", "animal_boarding": "dog;cat", "brand": "PetSuites", "brand:wikidata": "Q112037454", "name": "PetSuites"}}],
+      "templates": []
+    }
+  }
+}
