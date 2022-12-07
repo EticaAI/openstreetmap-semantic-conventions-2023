@@ -1,0 +1,61 @@
+{
+  "_meta": {
+    "version": "6.0.20221205",
+    "generated": "2022-12-05T06:14:46.202Z",
+    "url": "https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/presets/nsi-id-presets.json",
+    "hash": "8bed5489ff39ee4dbd38ce0955e70d9e"
+  },
+  "presets": {
+    "amenity/animal_boarding/dogtopia-03770a": {
+      "name": "Dogtopia",
+      "locationSet": {"include": ["ca", "us"]},
+      "icon": "maki-veterinary",
+      "geometry": ["point", "area"],
+      "matchScore": 2,
+      "imageURL": "https://graph.facebook.com/Dogtopia/picture?type=large",
+      "terms": ["dogtopia"],
+      "tags": {"amenity": "animal_boarding", "brand:wikidata": "Q112037444"},
+      "addTags": {
+        "amenity": "animal_boarding",
+        "animal_boarding": "dog",
+        "brand": "Dogtopia",
+        "brand:wikidata": "Q112037444",
+        "name": "Dogtopia"
+      }
+    },
+    "amenity/animal_boarding/petshotel-03770a": {
+      "name": "PetsHotel",
+      "locationSet": {"include": ["ca", "us"]},
+      "icon": "maki-veterinary",
+      "geometry": ["point", "area"],
+      "matchScore": 2,
+      "imageURL": "https://graph.facebook.com/PetSmart/picture?type=large",
+      "terms": ["petshotel"],
+      "tags": {"amenity": "animal_boarding", "brand:wikidata": "Q67141961"},
+      "addTags": {
+        "amenity": "animal_boarding",
+        "animal_boarding": "dog;cat",
+        "brand": "PetsHotel",
+        "brand:wikidata": "Q67141961",
+        "name": "PetsHotel"
+      }
+    },
+    "amenity/animal_boarding/petsuites-a2c409": {
+      "name": "PetSuites",
+      "locationSet": {"include": ["us"]},
+      "icon": "maki-veterinary",
+      "geometry": ["point", "area"],
+      "matchScore": 2,
+      "imageURL": "https://graph.facebook.com/petsuitesstayandplay/picture?type=large",
+      "terms": ["petsuites"],
+      "tags": {"amenity": "animal_boarding", "brand:wikidata": "Q112037454"},
+      "addTags": {
+        "amenity": "animal_boarding",
+        "animal_boarding": "dog;cat",
+        "brand": "PetSuites",
+        "brand:wikidata": "Q112037454",
+        "name": "PetSuites"
+      }
+    }
+  }
+}

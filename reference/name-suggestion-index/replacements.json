@@ -1,0 +1,18 @@
+{
+  "_meta": {
+    "version": "6.0.20221205",
+    "generated": "2022-12-05T06:14:41.645Z",
+    "url": "https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/replacements.json",
+    "hash": "9250009717da869c05a5c2fa206f103f"
+  },
+  "replacements": {
+    "Q97365372": {
+      "note": "Proman - Wikidata redirect",
+      "wikidata": "Q24189171"
+    },
+    "Q18720442": {
+      "note": "But - Wikidata redirect",
+      "wikidata": "Q2877537"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "_meta": {
+    "version": "6.0.20221205",
+    "generated": "2022-12-05T06:14:41.698Z",
+    "url": "https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/warnings.json",
+    "hash": "f626f07ad2dbbda8fb1d609ab8836aaf"
+  },
+  "warnings": [
+    {
+      "qid": "Q647092",
+      "msg": "Banca Intesa might possibly be replaced by Q1343118"
+    },
+    {
+      "qid": "Q113528897",
+      "msg": "⚠️  Entity for \"Matcha Cafe Maiko\" was deleted."
+    },
+    {
+      "qid": "Q110278626",
+      "msg": "Entity for \"Q110278626\" missing English label."
+    }
+  ]
+}

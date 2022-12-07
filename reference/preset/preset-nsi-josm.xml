@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0" author="Name Suggestion Index" shortdescription="Name Suggestion Index" description="Canonical common brand names for OpenStreetMap" link="https://github.com/github:osmlab/name-suggestion-index" version="6.0.20221205">
   <!-- From https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/presets/nsi-josm-presets.xml -->
+  <!-- Trivia: compare with preset-nsi-id (have more information about applicable area -->
   <group name="Name Suggestion Index">
     <group name="brands">
       <group name="amenity">
@@ -11,6 +12,20 @@
             <key key="brand" value="Dogtopia" />
             <key key="brand:wikidata" value="Q112037444" />
             <key key="name" value="Dogtopia" />
+          </item>
+          <item name="PetsHotel" type="node,closedway,multipolygon">
+            <key key="amenity" value="animal_boarding" />
+            <key key="animal_boarding" value="dog;cat" />
+            <key key="brand" value="PetsHotel" />
+            <key key="brand:wikidata" value="Q67141961" />
+            <key key="name" value="PetsHotel" />
+          </item>
+          <item name="PetSuites" type="node,closedway,multipolygon">
+            <key key="amenity" value="animal_boarding" />
+            <key key="animal_boarding" value="dog;cat" />
+            <key key="brand" value="PetSuites" />
+            <key key="brand:wikidata" value="Q112037454" />
+            <key key="name" value="PetSuites" />
           </item>
         </group>
       </group>
