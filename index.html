@@ -332,6 +332,14 @@ This is a draft. Examples to format this document
   <section>
     <h2>Presets</h2>
     <p>See <a href="https://wiki.openstreetmap.org/wiki/Preset">https://wiki.openstreetmap.org/wiki/Preset</a>.</p>
+
+    <!--
+      - About unifying presets
+        - https://github.com/osmlab/editor-presets/issues/1
+        - https://github.com/osmlab/osm-planning/issues/27#issuecomment-1018930029
+        - https://github.com/openstreetmap/id-tagging-schema/issues/646
+    -->
+
     <section>
       <h3>iD style presets</h3>
       <ul>
@@ -349,9 +357,32 @@ This is a draft. Examples to format this document
     </section>
     <section>
       <h3>JOSM style presets</h3>
-      <p>See <a
-          href="https://wiki.openstreetmap.org/wiki/Customising_JOSM_Presets">https://wiki.openstreetmap.org/wiki/Customising_JOSM_Presets</a>.
-      </p>
+      <div class="issue" data-number="3">
+        Opinions are welcome.
+      </div>
+      <ul>
+        <li>
+          <a href="https://josm.openstreetmap.de/wiki/TaggingPresets">
+            https://josm.openstreetmap.de/wiki/TaggingPresets
+          </a>
+        </li>
+        <li>
+          <a href="https://wiki.openstreetmap.org/wiki/Customising_JOSM_Presets">
+            https://wiki.openstreetmap.org/wiki/Customising_JOSM_Presets
+          </a>
+        </li>
+        <li>
+          <a href="http://josm.openstreetmap.de/tagging-preset-1.0">
+            http://josm.openstreetmap.de/tagging-preset-1.0
+          </a>
+        </li>
+      </ul>
+      <pre class="example" title="A JSOM Preset (canonical) reference, preset-josm-hello" data-content-type="xml"
+        data-oninclude="escapeExample" data-include="reference/preset/preset-josm-hello.xml">
+      </pre>
+      <pre class="example" title="A JSOM Preset (canonical) reference, preset-josm-gas" data-content-type="xml"
+        data-oninclude="escapeExample" data-include="reference/preset/preset-josm-gas.xml">
+      </pre>
     </section>
     <section>
       <h3>OsmAnd style presets</h3>

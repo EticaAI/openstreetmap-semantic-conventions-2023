@@ -1,0 +1,6 @@
+# @see https://wiki.openstreetmap.org/wiki/Empty_relations
+# @see overpass equivalent https://overpass-turbo.eu/s/1hot
+
+# About discussion of automating this:
+# - https://lists.openstreetmap.org/pipermail/talk/2021-April/086462.html
+#   - (idea about detect clusters) https://lists.openstreetmap.org/pipermail/talk/2021-April/086476.html

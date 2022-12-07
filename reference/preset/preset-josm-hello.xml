@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0">
+  <item name="Oneway highway" type="way">
+    <label text="Inserting a unidirectional highway" />
+
+    <combo key="highway" text="Type" values="trunk,motorway" />
+    <text key="name" text="Name (e.g. Angel Road)" />
+    <text key="ref" text="Ref (e.g. A406)" />
+
+    <!-- This is a oneway preset, so make oneway default -->
+    <check key="oneway" text="Oneway" default="on" />
+
+    <!-- Always setting asphalt surface -->
+    <key key="surface" value="asphalt" />
+  </item>
+</presets>

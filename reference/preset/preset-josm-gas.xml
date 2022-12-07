@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0">
+  <!-- Example from https://wiki.openstreetmap.org/wiki/Customising_JOSM_Presets -->
+  <item name="Petrol / Gas Station">
+    <link href="https://wiki.openstreetmap.org/wiki/DE:Tag:amenity=fuel" />
+    <label text="Tankstelle" />
+    <key key="amenity" value="fuel" />
+    <combo key="name" text="Name" values="Shell,BP,Esso,Murco" default="" />
+    <combo key="brand" text="Brand" values="Shell,BP,Esso,Murco" default="" />
+    <check key="fuel:diesel" text="Diesel" />
+    <check key="fuel:octane_91" text="Petrol 91 octane " />
+    <check key="fuel:octane_95" text="Petrol 95 octane" />
+    <check key="fuel:octane_98" text="Petrol 98 octane" />
+    <check key="fuel:biogas" text="Biogas" />
+    <check key="fuel:lpg" text="LPG" />
+    <check key="fuel:hydrogen" text="Wasserstoff" />
+    <check key="fuel:electricity" text="Charger for electric cars" />
+    <optional>
+      <text key="opening hours" text="Opening Hours" default="" />
+      <link href="https://wiki.openstreetmap.org/wiki/Key:opening_hours?uselang=en" />
+      <check key="payment:maestro_card" text="Master-Card" default="off" />
+      <check key="payment:banknotes" text="Cash" default="off" />
+    </optional>
+  </item>
+</presets>
