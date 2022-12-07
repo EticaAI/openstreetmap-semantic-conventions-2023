@@ -72,6 +72,9 @@ curl --output poc/tmp/geosparql_vocab_all.rdf http://schemas.opengis.net/geospar
 
 
 # @TODO make tests with https://dbpedia.org/sparql
+# @TODO maybe use as example (because of implies)
+#  - https://wiki.openstreetmap.org/wiki/Item:Q4980
+#  - https://wiki.openstreetmap.org/wiki/Tag:highway%3Dmotorway
 -->
 
 
