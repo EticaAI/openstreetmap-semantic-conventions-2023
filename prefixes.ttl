@@ -9,6 +9,7 @@ PREFIX osmsh: <https://www.openstreetmap.org/validation/shacl/>
 PREFIX osmw: <https://wiki.openstreetmap.org/wiki/>
 PREFIX osmx: <https://example.org/todo-xref/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
 PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX schema: <https://schema.org/>
 PREFIX time: <http://www.w3.org/2006/time#>

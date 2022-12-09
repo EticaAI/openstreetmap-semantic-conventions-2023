@@ -12,6 +12,7 @@ shacl validate --shapes XZ_tags_wikidata.shacl.ttl --data tests/XZ_tags_wikidata
 cd ../../
 shacl validate --shapes proposal/shacl/BR_highways.shacl.ttl --data poc/tmp/STP~test.osm.ttl
 shacl validate --shapes proposal/shacl/XZ_tags_wikidata.shacl.ttl --data poc/tmp/STP~test.osm.ttl
+shacl validate --shapes proposal/shacl/XZ_relation_empty.shacl.ttl --data proposal/shacl/tests/XZ_relation_empty.tdata.ttl
 ```
 
 <!--

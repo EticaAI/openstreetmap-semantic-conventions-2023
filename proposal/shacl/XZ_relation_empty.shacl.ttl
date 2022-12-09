@@ -1,0 +1,25 @@
+# @see https://wiki.openstreetmap.org/wiki/Empty_relations
+# @see overpass equivalent https://overpass-turbo.eu/s/1hot
+
+# About discussion of automating this:
+# - https://lists.openstreetmap.org/pipermail/talk/2021-April/086462.html
+#   - (idea about detect clusters) https://lists.openstreetmap.org/pipermail/talk/2021-April/086476.html
+
+PREFIX osma: <https://example.org/todo-onto-toplevel/>
+PREFIX osmsh: <https://www.openstreetmap.org/validation/shacl/>
+PREFIX osmx: <https://example.org/todo-xref/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+
+osmsh:XZ_relation_empty
+    a sh:NodeShape ;
+    sh:targetClass osma:Relation  ;
+    sh:property [
+        sh:path osmx:hasmembers;
+        sh:minCount 1 ;
+        sh:message "Empty relation" ;
+        # sh:severity sh:Warning ;
+    ] ;
+    # sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+.

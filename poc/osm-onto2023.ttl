@@ -3,7 +3,8 @@
 # ../prefixes.ttl
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
-PREFIX osma: <https://www.openstreetmap.org/ontology/osm2023/>
+# PREFIX osma: <https://www.openstreetmap.org/ontology/osm2023/>
+PREFIX osma: <https://example.org/todo-onto-toplevel/>
 PREFIX osmnode: <https://www.openstreetmap.org/node/>
 PREFIX osmrel: <https://www.openstreetmap.org/relation/>
 PREFIX osmway: <https://www.openstreetmap.org/way/>
