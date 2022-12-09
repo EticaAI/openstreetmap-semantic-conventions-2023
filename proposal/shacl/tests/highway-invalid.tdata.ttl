@@ -19,7 +19,7 @@ osmway:1
 .
 
 osmway:2
-    a ex:OSMWay ; # inferred
+    a osmw:Way ; # inferred
     osmt:highway "yes" ;
     osmx:hasnodes (
             osmnode:2
@@ -27,3 +27,4 @@ osmway:2
 .
 
 # shacl validate --shapes proposal/shacl/highway.shacl.ttl --data proposal/shacl/tests/highway-invalid.tdata.ttl
+# shacl validate --shapes proposal/shacl/highway.shacl.ttl --data proposal/zzz-region-1.ttl
