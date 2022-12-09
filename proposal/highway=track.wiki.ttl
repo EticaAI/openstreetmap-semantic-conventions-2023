@@ -1,0 +1,20 @@
+PREFIX osmm: <https://example.org/todo-meta/>
+PREFIX osmt: <https://example.org/todo-tag/>
+PREFIX osmw: <https://wiki.openstreetmap.org/wiki/>
+PREFIX ex: <https://example.org/>
+
+# @FIXME decide ex:_ prefix for something better
+
+<https://wiki.openstreetmap.org/wiki/Tag:highway=track>
+#  osmm:highway=track
+    a osmw:Tag ;
+    ex:_key "highway" ;
+    ex:_value "track" ;
+    ex:_description "A minor land-access road like a farm or forest track."@en ;
+    # @TODO osmcarto-rendering=File:Mapnik-tracktype-not-set.png
+    # @TODO osmcarto-rendering-size=125px
+    ex:_onNode "no" ;
+    ex:_onWay "yes" ;
+    ex:_onArea "no" ;
+    ex:_onRelation "no" ;
+.
