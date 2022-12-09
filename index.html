@@ -74,6 +74,16 @@ This is a draft. Examples to format this document
           // status: "RSCND",
           publisher: "Unknow",
         },
+        OSMDataModel2022Topf: {
+          title: "Evolution of the OSM Data Model (2022)",
+          date: "2022",
+          href: "https://media.jochentopf.com/media/2022-08-15-study-evolution-of-the-osm-data-model.pdf",
+          // status: "RSCND",
+          authors: [
+            "Jochen Topf"
+          ],
+          //publisher: "Jochen Topf",
+        },
       },
       lint: {
         "check-punctuation": true,
@@ -89,6 +99,9 @@ This is a draft. Examples to format this document
     }
     function escapeExamplePREFIX(utils, content, url) {
       return content.replace(/PREFIX(.*)/g, "");
+    }
+    function escapeExampleCommentsLineStart(utils, content, url) {
+      return content.replace(/^# (.*)/g, "");
     }
   </script>
   <style>
@@ -108,18 +121,19 @@ This is a draft. Examples to format this document
   <section id="abstract">
     <h2>Abstract</h2>
     <p>
-      This document contains reference examples of types files with their schemas known to be used for exchanging data
-      with developers of tools around the ecosystem of OpenStreetMap with their conterpairt with one or more encodings
-      of Semantic Web standards.
+      This document contains reference examples of types files with their schemas known to be used for exchanging data with developers of tools around the ecosystem of OpenStreetMap with potential conventions to their counterpart with one or more encodings of Semantic Web standards.
+      <strong>However, it is assumed that the average target audience will not read standards</strong> (or, if they do, not need more than superficial knowledge), <strong>but are still interested in a simpler approach to make tooling interoperable.</strong>
     </p>
-    <p>
+    <!--
+      <p>
       Instead of explaining each kind of format, the intent here is to be a very superficial, example-oriented, quick
       reference between each format. Readers are recommended to look for the [[[#references]]].
     </p>
+  -->
     <!-- <p>This is required.</p> -->
-    <p class="ednote" title="Document is an early draft">
+    <!-- <p class="ednote" title="Document is an early draft">
       Use <a href="https://respec.org/docs/">https://respec.org/docs/</a> as reference for markup.
-    </p>
+    </p> -->
   </section>
 
   </section>
@@ -134,8 +148,19 @@ This is a draft. Examples to format this document
 
   <section class="informative">
     <h2>Introduction</h2>
+    <!--
     <p class="ednote" title="Missing introduction">
       Is necessary to add introduction which already is not a copy from the abstract.
+    </p>
+    -->
+    <p>
+      The OpenStreetMap ecosystem has several ways to exchange data,
+      including machine-readable documentation and validation.
+      Instead of explaining each kind of format, the intent here is to be a very superficial, example-oriented, quick reference between each format.
+      Readers interested in more details are recommended to look for the [[[#references]]].
+      However, the idea here is to be a quick start for developers who just want to get things working,
+      while also having a general overview good enough to consistently encode so many file formats that without such superficiality,
+      never would be possible.
     </p>
   </section>
 
@@ -166,15 +191,16 @@ This is a draft. Examples to format this document
       <ul>
         <li>[[[OSMSchemav06]]]</li>
         <li>[[[OSMLevel0]]]</li>
+        <li>[[[OSMDataModel2022Topf]]]</li>
         <li>[[[rdf11-concepts]]]</li>
         <li>[[[Turtle]]]</li>
         <li>[[[sparql11-query]]]</li>
         <li>[[[owl-time]]]</li>
         <li>[[[json-ld11]]]</li>
         <li>[[[owl2-syntax]]]</li>
+        <li>[[[shacl]]]</li>
       </ul>
       <!--
-
         See also https://www.w3.org/TR/?tag=data
       -->
 
@@ -507,7 +533,7 @@ This is a draft. Examples to format this document
   -->
 
   <section>
-    <h2>Data Primitives to wiki "Semantic elements"</h2>
+    <h2>Semantic elements</h2>
     <ul>
       <li>See <a
           href="https://wiki.openstreetmap.org/wiki/Semantic_elements">https://wiki.openstreetmap.org/wiki/Semantic_elements</a>
@@ -533,8 +559,9 @@ This is a draft. Examples to format this document
 
   <section>
     <h2>Quality Assurance</h2>
-    <p>
-      Draft.
+    <p class="ednote" title="Quality Assurance is a draft">
+      The idea of Quality Assurance is for files not already covered by more specific topics, but still dedicated to
+      checking for potential errors.
     </p>
     <!--
       https://josm.openstreetmap.de/browser/josm/trunk/src/org/openstreetmap/josm/data/validation/tests
@@ -549,10 +576,33 @@ This is a draft. Examples to format this document
       - https://shacl.org/playground/
       - https://shacl-playground.zazuko.com/
     -->
-    <pre class="example" title="highway.mapcss (reference)" data-content-type="css" data-oninclude=""
-    data-include="reference/qa/highway.mapcss">
-  </pre>
 
+    <section>
+      <h3>JSOM data validator (mapcss)</h3>
+      <pre class="example" title="highway.mapcss (reference)" data-content-type="css" data-oninclude=""
+        data-include="reference/qa/highway.mapcss"></pre>
+    </section>
+  </section>
+
+
+  <section>
+    <h2>SHACL</h2>
+    <p>
+      See [[[shacl]]].
+    </p>
+    <section>
+      <h3>Data Primitives SHACL</h3>
+      <pre class="example" title="poc/osm-wiki-onto2023.shacl.ttl" data-content-type="text/turtle"
+      data-oninclude="escapeExample" data-include="poc/osm-wiki-onto2023.shacl.ttl"></pre>
+    </section>
+  </section>
+
+
+  <section class="appendix informative">
+    <h2>Data Primitives Ontology</h2>
+    <p>This spec would not be possible without...</p>
+    <pre class="example" title="poc/osm-wiki-onto2023.owl.ttl" data-content-type="text/turtle"
+      data-oninclude="escapeExample" data-include="poc/osm-wiki-onto2023.owl.ttl"></pre>
   </section>
   <!--
   <section data-dfn-for="Foo">

@@ -9,7 +9,7 @@ PREFIX osmw: <https://wiki.openstreetmap.org/wiki/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
 osmnode:1
-    a osmw:Node ;  # infered
+    a osmw:Node ;  # inferred
     osmm:changeset 124176968 ;
     osmm:loc "Point(42.7957187 13.5690032)"^^geo:wktLiteral ;
     osmm:timestamp "2022-07-28T09:47:39Z"^^xsd:dateTime ;
@@ -28,7 +28,7 @@ osmnode:1
 .
 
 osmway:100
-    a osmw:Way ; # infered
+    a osmw:Way ; # inferred
     osmm:changeset 115876760 ;
     osmm:timestamp "2022-01-07T13:12:29+00:00"^^xsd:dateTime ;
     osmm:type "w" ;
@@ -66,5 +66,48 @@ osmway:100
             osmnode:260903
             osmnode:456386839
             osmnode:260904
+        ) ;
+.
+
+osmrel:10000
+    a osmw:Relation ; # inferred
+    osmm:changeset 105419300 ;
+    osmm:timestamp "2021-05-27T10:47:23+00:00"^^xsd:dateTime ;
+    osmm:user "salgo60" ;
+    osmm:version 6 ;
+    osmt:name "Kyrksjön" ;
+    osmt:natural "water" ;
+    osmt:source:lake "Review by So9q using LM Topographic Map" ;
+    osmt:type "multipolygon" ;
+    osmt:water "lake" ;
+    osmt:wikidata "Q18133662" ;
+    osmx:hasmembers (
+            [
+                osmx:hasroleouter osmway:23641716
+            ]
+            [
+                osmx:hasroleinner osmway:223698907
+            ]
+            [
+                osmx:hasroleinner osmway:225434252
+            ]
+            [
+                osmx:hasroleinner osmway:223698903
+            ]
+            [
+                osmx:hasroleinner osmway:23729231
+            ]
+            [
+                osmx:hasroleinner osmway:223698904
+            ]
+            [
+                osmx:hasroleinner osmway:223698908
+            ]
+            [
+                osmx:hasroleinner osmway:225434253
+            ]
+            [
+                osmx:hasroleinner osmway:23729234
+            ]
         ) ;
 .
