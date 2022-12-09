@@ -1,0 +1,70 @@
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX osmnode: <https://www.openstreetmap.org/node/>
+PREFIX osmrel: <https://www.openstreetmap.org/relation/>
+PREFIX osmway: <https://www.openstreetmap.org/way/>
+PREFIX osmm: <https://example.org/todo-meta/>
+PREFIX osmt: <https://example.org/todo-tag/>
+PREFIX osmx: <https://example.org/todo-xref/>
+PREFIX osmw: <https://wiki.openstreetmap.org/wiki/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+osmnode:1
+    a osmw:Node ;  # infered
+    osmm:changeset 124176968 ;
+    osmm:loc "Point(42.7957187 13.5690032)"^^geo:wktLiteral ;
+    osmm:timestamp "2022-07-28T09:47:39Z"^^xsd:dateTime ;
+    osmm:type "n" ;
+    osmm:user "owene" ;
+    osmm:userid 29598 ;
+    osmm:version 33 ;
+    osmt:communication:microwave "yes" ;
+    osmt:communication:radio "fm" ;
+    osmt:description "Radio Subasio" ;
+    osmt:frequency "105.5 MHz" ;
+    osmt:man_made "mast" ;
+    osmt:name "Monte Piselli - San Giacomo" ;
+    osmt:tower:construction "lattice" ;
+    osmt:tower:type "communication" ;
+.
+
+osmway:100
+    a osmw:Way ; # infered
+    osmm:changeset 115876760 ;
+    osmm:timestamp "2022-01-07T13:12:29+00:00"^^xsd:dateTime ;
+    osmm:type "w" ;
+    osmm:user "XXXVII" ;
+    osmm:version 16 ;
+    osmt:bicycle "use_sidepath" ;
+    osmt:foot "use_sidepath" ;
+    osmt:highway "secondary" ;
+    osmt:junction "roundabout" ;
+    osmt:maxspeed "100" ;
+    osmt:ref "St 2069" ;
+    osmt:surface "asphalt" ;
+    osmt:tmc "DE:32282/32283" ;
+    osmt:zone:traffic "DE:rural" ;
+    # Note: Sophox uses osmm:has (but not sure how is the semantics)
+    # https://www.w3.org/TR/turtle/#h3_collections
+    osmx:hasnodes (
+            osmnode:260904
+            osmnode:456386831
+            osmnode:260897
+            osmnode:456386832
+            osmnode:260898
+            osmnode:456386833
+            osmnode:185986175
+            osmnode:456386834
+            osmnode:260899
+            osmnode:456386835
+            osmnode:260900
+            osmnode:456386836
+            osmnode:260901
+            osmnode:456386837
+            osmnode:260902
+            osmnode:456386838
+            osmnode:1807516891
+            osmnode:260903
+            osmnode:456386839
+            osmnode:260904
+        ) ;
+.

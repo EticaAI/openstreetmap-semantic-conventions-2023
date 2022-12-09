@@ -2,7 +2,6 @@
 # ../prefixes.ttl
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
-# PREFIX osma: <https://www.openstreetmap.org/ontology/osm2023/>
 PREFIX osma: <https://example.org/todo-onto-toplevel/>
 PREFIX osmnode: <https://www.openstreetmap.org/node/>
 PREFIX osmrel: <https://www.openstreetmap.org/relation/>
@@ -13,6 +12,7 @@ PREFIX osmsh: <https://www.openstreetmap.org/validation/shacl/>
 PREFIX osmw: <https://wiki.openstreetmap.org/wiki/>
 PREFIX osmx: <https://example.org/todo-xref/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
 PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX schema: <https://schema.org/>
 PREFIX time: <http://www.w3.org/2006/time#>
@@ -25,13 +25,6 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
 osmw: a owl:Ontology ;
     rdfs:comment "OpenStreetMap Wiki base elements"@en ;
-    # rdfs:seeAlso <http://www.opengis.net/def/function/ogc-geosparql/1.0>,
-    #     <http://www.opengis.net/def/rule/ogc-geosparql/1.0>,
-    #     <http://www.opengis.net/doc/IS/geosparql/1.0> ;
-    # owl:imports
-    #     <http://www.opengis.net/ont/gml>,
-    #     <http://www.opengis.net/ont/sf>,
-    #     <http://www.w3.org/2004/02/skos/core> ;
     owl:versionInfo "OSMWiki2023"^^xsd:string .
 
 osma:Element

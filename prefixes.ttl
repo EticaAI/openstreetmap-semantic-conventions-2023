@@ -1,5 +1,6 @@
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX osma: <https://example.org/todo-onto-toplevel/>
 PREFIX osmnode: <https://www.openstreetmap.org/node/>
 PREFIX osmrel: <https://www.openstreetmap.org/relation/>
 PREFIX osmway: <https://www.openstreetmap.org/way/>
@@ -10,6 +11,7 @@ PREFIX osmw: <https://wiki.openstreetmap.org/wiki/>
 PREFIX osmx: <https://example.org/todo-xref/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX schema: <https://schema.org/>
 PREFIX time: <http://www.w3.org/2006/time#>

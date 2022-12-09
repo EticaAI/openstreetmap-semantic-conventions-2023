@@ -5,6 +5,7 @@ PREFIX osmway: <https://www.openstreetmap.org/way/>
 PREFIX osmm: <https://example.org/todo-meta/>
 PREFIX osmt: <https://example.org/todo-tag/>
 PREFIX osmx: <https://example.org/todo-xref/>
+PREFIX osmw: <https://wiki.openstreetmap.org/wiki/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
 osmnode:1

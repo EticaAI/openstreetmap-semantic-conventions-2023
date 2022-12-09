@@ -1,3 +1,4 @@
+PREFIX osma: <https://example.org/todo-onto-toplevel/>
 PREFIX osmnode: <https://www.openstreetmap.org/node/>
 PREFIX osmrel: <https://www.openstreetmap.org/relation/>
 PREFIX osmway: <https://www.openstreetmap.org/way/>

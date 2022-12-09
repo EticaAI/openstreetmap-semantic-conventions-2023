@@ -1,0 +1,147 @@
+
+# ../prefixes.ttl
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX osma: <https://example.org/todo-onto-toplevel/>
+PREFIX osmnode: <https://www.openstreetmap.org/node/>
+PREFIX osmrel: <https://www.openstreetmap.org/relation/>
+PREFIX osmway: <https://www.openstreetmap.org/way/>
+PREFIX osmm: <https://example.org/todo-meta/>
+PREFIX osmt: <https://example.org/todo-tag/>
+PREFIX osmsh: <https://www.openstreetmap.org/validation/shacl/>
+PREFIX osmw: <https://wiki.openstreetmap.org/wiki/>
+PREFIX osmx: <https://example.org/todo-xref/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <https://schema.org/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX wikidata: <http://www.wikidata.org/entity/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+
+# osmw: -> exist page on Wiki
+# osma: -> no page on Wiki (example: osma:Collection)
+
+# Inspired by https://www.w3.org/ns/shacl.ttl
+osmsh:
+    a owl:Ontology ;
+    rdfs:label "OpenStreetMap Wiki base elements SHACL"@en ;
+    rdfs:comment "This vocabulary defines terms used in SHACL, the W3C Shapes Constraint Language."@en ;
+    sh:declare [
+        sh:prefix "osmsh" ;
+        sh:namespace "https://www.openstreetmap.org/validation/shacl/" ;
+    ] ;
+    # sh:suggestedShapesGraph <http://www.w3.org/ns/shacl-shacl#> .
+.
+
+# osma:Element
+#     a
+#         rdfs:Class ,
+#         owl:Class ;
+#     rdfs:label "Element"@en ;
+#     rdfs:isDefinedBy osmw: ;
+#     owl:disjointWith osma:Collection ;
+#     owl:unionOf (
+#             osmw:Node
+#             osmw:Way
+#             osmw:Relation
+#         ) ;
+#     rdfs:seeAlso <osmw:Elements> ;
+# .
+
+# osmw:Node
+#     a
+#         rdfs:Class ,
+#         owl:Class ;
+#     rdfs:label "Node"@en ;
+#     rdfs:isDefinedBy osmw: ;
+#     rdfs:subClassOf geo:Point ;
+#     owl:disjointWith
+#         osma:Collection ,
+#         osmw:Relation ,
+#         osmw:Way ;
+#     rdfs:seeAlso <osmw:Node> ;
+# .
+
+osmsh:ShNode
+    a sh:NodeShape ;
+    sh:targetClass osmw:Node ;
+    sh:property [
+        sh:path osmm:loc ;
+        sh:maxCount 1 ;
+        sh:minCount 1 ;
+        sh:datatype geo:wktLiteral ;
+        sh:message "Node without coordinates or wrong type"@en ;
+        sh:severity sh:Violation ;
+    ] ;
+
+    sh:ignoredProperties ( rdf:type ) ;
+    #sh:closed true ;
+.
+
+
+
+# osmw:Relation
+#     a
+#         rdfs:Class ,
+#         owl:Class ;
+#     rdfs:label "Relation"@en ;
+#     rdfs:isDefinedBy osmw: ;
+#     owl:disjointWith
+#         osma:Collection ,
+#         osmw:Node ,
+#         osmw:Way ;
+#     rdfs:seeAlso <osmw:Relation> ;
+# .
+
+# osmw:Way
+#     a
+#         rdfs:Class ,
+#         owl:Class ;
+#     rdfs:label "Way"@en ;
+#     rdfs:isDefinedBy osmw: ;
+#     owl:disjointWith
+#         osma:Collection ,
+#         osmw:Node ,
+#         osmw:Relation ;
+# .
+
+osmsh:ShWay
+    a sh:NodeShape ;
+    sh:targetClass osmw:Way ;
+    sh:property [
+        # sh:path osmm:loc ;
+        sh:path osmx:hasnodes ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        # sh:datatype geo:wktLiteral ;
+        # sh:datatype rdf:List ;
+        # sh:message "Node without coordinates or wrong type"@en ;
+        # @TODO check minimal number of ordered nodes
+        sh:severity sh:Violation ;
+    ] ;
+
+    sh:ignoredProperties ( rdf:type ) ;
+    #sh:closed true ;
+.
+
+# osma:Collection
+#     a
+#         rdfs:Class ,
+#         owl:Class ;
+#     rdfs:label "Collection"@en ;
+#     rdfs:isDefinedBy osmw: ;
+#     owl:disjointWith
+#         osma:Collection ,
+#         osmw:Node ,
+#         osmw:Relation ;
+#     rdfs:seeAlso <osmw:Relation:collection>,
+#         <osmw:Relations_are_not_categories> ;
+# .
+
+# shacl validate --shapes poc/osm-wiki-onto2023.shacl.ttl --data proposal/node-1.ttl
+# shacl validate --shapes poc/osm-wiki-onto2023.shacl.ttl --data proposal/shacl/tests/osm-wiki-onto2023.tdata.ttl
+
+# rdfpipe proposal/shacl/tests/osm-wiki-onto2023.tdata.ttl
