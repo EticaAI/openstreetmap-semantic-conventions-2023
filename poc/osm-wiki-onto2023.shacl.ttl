@@ -1,5 +1,4 @@
 
-# ../prefixes.ttl
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX osma: <https://example.org/todo-onto-toplevel/>
@@ -14,7 +13,7 @@ PREFIX osmx: <https://example.org/todo-xref/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX sh: <http://www.w3.org/ns/shacl#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX schema: <https://schema.org/>
 PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX wikidata: <http://www.wikidata.org/entity/>
@@ -33,7 +32,6 @@ osmsh:
         sh:prefix "osmsh" ;
         sh:namespace "https://www.openstreetmap.org/validation/shacl/" ;
     ] ;
-    # sh:suggestedShapesGraph <http://www.w3.org/ns/shacl-shacl#> .
 .
 
 osmsh:ShNode
@@ -47,9 +45,6 @@ osmsh:ShNode
         sh:message "Node without coordinates or wrong type"@en ;
         sh:severity sh:Violation ;
     ] ;
-
-    sh:ignoredProperties ( rdf:type ) ;
-    #sh:closed true ;
 .
 
 osmsh:ShWay
@@ -59,15 +54,10 @@ osmsh:ShWay
         sh:path osmx:hasnodes ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
-        # sh:datatype geo:wktLiteral ;
-        # sh:datatype rdf:List ;
-        # sh:message "Node without coordinates or wrong type"@en ;
-        # @TODO check minimal number of ordered nodes
+        sh:message "Way without nodes"@en ;
+        # @FIXME check minimal number of ordered nodes
         sh:severity sh:Violation ;
     ] ;
-
-    sh:ignoredProperties ( rdf:type ) ;
-    #sh:closed true ;
 .
 
 osmsh:ShRelation
@@ -77,15 +67,10 @@ osmsh:ShRelation
         sh:path osmx:hasmembers ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
-        # sh:datatype geo:wktLiteral ;
-        # sh:datatype rdf:List ;
-        # sh:message "Node without coordinates or wrong type"@en ;
-        # @TODO check minimal number of ordered nodes
+        sh:message "Relation without members"@en ;
+        # @FIXME check minimal number of members
         sh:severity sh:Violation ;
     ] ;
-
-    sh:ignoredProperties ( rdf:type ) ;
-    #sh:closed true ;
 .
 
 # shacl validate --shapes poc/osm-wiki-onto2023.shacl.ttl --data proposal/node-1.ttl

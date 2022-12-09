@@ -1,5 +1,4 @@
 
-# ../prefixes.ttl
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX osma: <https://example.org/todo-onto-toplevel/>
@@ -13,15 +12,11 @@ PREFIX osmw: <https://wiki.openstreetmap.org/wiki/>
 PREFIX osmx: <https://example.org/todo-xref/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX sh: <http://www.w3.org/ns/shacl#>
-PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX schema: <https://schema.org/>
 PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX wikidata: <http://www.wikidata.org/entity/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-
-# osmw: -> exist page on Wiki
-# osma: -> no page on Wiki (example: osma:Collection)
 
 osmw: a owl:Ontology ;
     rdfs:comment "OpenStreetMap Wiki base elements"@en ;
@@ -39,7 +34,6 @@ osma:Element
             osmw:Way
             osmw:Relation
         ) ;
-    rdfs:seeAlso <osmw:Elements> ;
 .
 
 osmw:Node
@@ -53,7 +47,6 @@ osmw:Node
         osma:Collection ,
         osmw:Relation ,
         osmw:Way ;
-    rdfs:seeAlso <osmw:Node> ;
 .
 
 osmw:Relation
@@ -66,7 +59,6 @@ osmw:Relation
         osma:Collection ,
         osmw:Node ,
         osmw:Way ;
-    rdfs:seeAlso <osmw:Relation> ;
 .
 
 osmw:Way
@@ -95,6 +87,7 @@ osma:Collection
         <osmw:Relations_are_not_categories> ;
 .
 
-
+# osmw: -> exist page on Wiki
+# osma: -> no page on Wiki (example: osma:Collection)
 # infer --rdfs poc/osm-onto2023.ttl proposal/shacl/XZ_tags_wikidata.shacl.ttl
 # infer --rdfs poc/osm-onto2023.ttl proposal/shacl/XZ_tags_wikidata.shacl.ttl | rdfpipe -

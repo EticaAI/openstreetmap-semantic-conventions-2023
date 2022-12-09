@@ -581,6 +581,8 @@ This is a draft. Examples to format this document
       <h3>JSOM data validator (mapcss)</h3>
       <pre class="example" title="highway.mapcss (reference)" data-content-type="css" data-oninclude=""
         data-include="reference/qa/highway.mapcss"></pre>
+      <pre class="example" title="proposal/qa/highway.shacl.ttl (SHACL)" data-content-type="text/turtle" data-oninclude="escapeExample escapeExamplePREFIX"
+        data-include="proposal/shacl/highway.shacl.ttl"></pre>
     </section>
   </section>
 
@@ -592,17 +594,22 @@ This is a draft. Examples to format this document
     </p>
     <section>
       <h3>Data Primitives SHACL</h3>
+      <p class="ednote" title="About use of SHACL to validate malformed data">
+        This section documents how to use SHACL to validate [[[#data-primitives]]] if encoded like the [[[#data-primitives-ontology]]].
+        It's simple, allows readers to have an overview on how to use SHACL to check for errors with rules most people would already agree with.
+        <br>
+        But this use might be not necessary if the input data is known to be working (e.g. either database or validations of file formats would detect syntax errors).
+      </p>
       <pre class="example" title="poc/osm-wiki-onto2023.shacl.ttl" data-content-type="text/turtle"
-      data-oninclude="escapeExample" data-include="poc/osm-wiki-onto2023.shacl.ttl"></pre>
+      data-oninclude="escapeExample escapeExamplePREFIX" data-include="poc/osm-wiki-onto2023.shacl.ttl"></pre>
     </section>
   </section>
 
 
   <section class="appendix informative">
     <h2>Data Primitives Ontology</h2>
-    <p>This spec would not be possible without...</p>
     <pre class="example" title="poc/osm-wiki-onto2023.owl.ttl" data-content-type="text/turtle"
-      data-oninclude="escapeExample" data-include="poc/osm-wiki-onto2023.owl.ttl"></pre>
+      data-oninclude="escapeExample escapeExamplePREFIX" data-include="poc/osm-wiki-onto2023.owl.ttl"></pre>
   </section>
   <!--
   <section data-dfn-for="Foo">

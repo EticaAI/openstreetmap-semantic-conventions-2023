@@ -1,0 +1,25 @@
+PREFIX ex: <http://example.org/>
+PREFIX osmm: <https://example.org/todo-meta/>
+PREFIX osmt: <https://example.org/todo-tag/>
+PREFIX osmx: <https://example.org/todo-xref/>
+PREFIX osmw: <https://wiki.openstreetmap.org/wiki/>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+
+# ex:qa_highway_1 a [ "road" "yes"] ;
+ex:qa_highway_1_v a ( "road" "yes" ) .
+# [] ex:qa_highway_1_v ( "road" "yes" ) .
+
+ex:qa_highway_1
+    a sh:NodeShape ;
+    sh:targetClass osmw:Way ;
+    sh:property [
+        sh:path osmt:highway ;
+        # sh:in ( "road" "yes" ) ;
+        # sh:in "road", "yes" ;
+        sh:in ex:qa_highway_1_v ;
+        # sh:hasValue ( "road" "yes" ) ;
+        # sh:datatype geo:wktLiteral ;
+        # sh:message "Unspecific highway type"@en ;
+        sh:severity sh:Warning ;
+    ] ;
+.
