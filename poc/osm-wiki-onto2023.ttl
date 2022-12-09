@@ -1,0 +1,107 @@
+
+# ../prefixes.ttl
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+# PREFIX osma: <https://www.openstreetmap.org/ontology/osm2023/>
+PREFIX osma: <https://example.org/todo-onto-toplevel/>
+PREFIX osmnode: <https://www.openstreetmap.org/node/>
+PREFIX osmrel: <https://www.openstreetmap.org/relation/>
+PREFIX osmway: <https://www.openstreetmap.org/way/>
+PREFIX osmm: <https://example.org/todo-meta/>
+PREFIX osmt: <https://example.org/todo-tag/>
+PREFIX osmsh: <https://www.openstreetmap.org/validation/shacl/>
+PREFIX osmw: <https://wiki.openstreetmap.org/wiki/>
+PREFIX osmx: <https://example.org/todo-xref/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <https://schema.org/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX wikidata: <http://www.wikidata.org/entity/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+
+# osmw: -> exist page on Wiki
+# osma: -> no page on Wiki (example: osma:Collection)
+
+osmw: a owl:Ontology ;
+    rdfs:comment "OpenStreetMap Wiki base elements"@en ;
+    # rdfs:seeAlso <http://www.opengis.net/def/function/ogc-geosparql/1.0>,
+    #     <http://www.opengis.net/def/rule/ogc-geosparql/1.0>,
+    #     <http://www.opengis.net/doc/IS/geosparql/1.0> ;
+    # owl:imports
+    #     <http://www.opengis.net/ont/gml>,
+    #     <http://www.opengis.net/ont/sf>,
+    #     <http://www.w3.org/2004/02/skos/core> ;
+    owl:versionInfo "OSMWiki2023"^^xsd:string .
+
+osma:Element
+    a
+        rdfs:Class ,
+        owl:Class ;
+    rdfs:label "Element"@en ;
+    rdfs:isDefinedBy osmw: ;
+    owl:disjointWith osma:Collection ;
+    owl:unionOf (
+            osmw:Node
+            osmw:Way
+            osmw:Relation
+        ) ;
+    rdfs:seeAlso <osmw:Elements> ;
+.
+
+osmw:Node
+    a
+        rdfs:Class ,
+        owl:Class ;
+    rdfs:label "Node"@en ;
+    rdfs:isDefinedBy osmw: ;
+    rdfs:subClassOf geo:Point ;
+    owl:disjointWith
+        osma:Collection ,
+        osmw:Relation ,
+        osmw:Way ;
+    rdfs:seeAlso <osmw:Node> ;
+.
+
+osmw:Relation
+    a
+        rdfs:Class ,
+        owl:Class ;
+    rdfs:label "Relation"@en ;
+    rdfs:isDefinedBy osmw: ;
+    owl:disjointWith
+        osma:Collection ,
+        osmw:Node ,
+        osmw:Way ;
+    rdfs:seeAlso <osmw:Relation> ;
+.
+
+osmw:Way
+    a
+        rdfs:Class ,
+        owl:Class ;
+    rdfs:label "Way"@en ;
+    rdfs:isDefinedBy osmw: ;
+    owl:disjointWith
+        osma:Collection ,
+        osmw:Node ,
+        osmw:Relation ;
+.
+
+osma:Collection
+    a
+        rdfs:Class ,
+        owl:Class ;
+    rdfs:label "Collection"@en ;
+    rdfs:isDefinedBy osmw: ;
+    owl:disjointWith
+        osma:Collection ,
+        osmw:Node ,
+        osmw:Relation ;
+    rdfs:seeAlso <osmw:Relation:collection>,
+        <osmw:Relations_are_not_categories> ;
+.
+
+
+# infer --rdfs poc/osm-onto2023.ttl proposal/shacl/XZ_tags_wikidata.shacl.ttl
+# infer --rdfs poc/osm-onto2023.ttl proposal/shacl/XZ_tags_wikidata.shacl.ttl | rdfpipe -
