@@ -3,10 +3,8 @@ PREFIX osmt: <https://example.org/todo-tag/>
 PREFIX osmw: <https://wiki.openstreetmap.org/wiki/>
 PREFIX ex: <https://example.org/>
 
-# @FIXME decide ex:_ prefix for something better
-
+# @FIXME use better prefix than ex:_
 <https://wiki.openstreetmap.org/wiki/Tag:highway=track>
-#  osmm:highway=track
     a osmw:Tag ;
     ex:_key "highway" ;
     ex:_value "track" ;

@@ -97,8 +97,8 @@ This is a draft. Examples to format this document
     function escapeExample(utils, content, url) {
       return content.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     }
-    function escapeExamplePREFIX(utils, content, url) {
-      return content.replace(/PREFIX(.*)/g, "");
+    function removeExamplePREFIX(utils, content, url) {
+      return content.replace(/PREFIX (.*)/g, "");
     }
     function escapeExampleCommentsLineStart(utils, content, url) {
       return content.replace(/^# (.*)/g, "");
@@ -258,7 +258,7 @@ This is a draft. Examples to format this document
       </pre>
 
       <pre class="example" title="The reference Node in RDF/Turtle" data-content-type="text/turtle"
-        data-oninclude="escapeExample escapeExamplePREFIX" data-include="proposal/node-1.ttl">
+        data-oninclude="escapeExample removeExamplePREFIX" data-include="proposal/node-1.ttl">
       </pre>
     </section>
 
@@ -274,7 +274,7 @@ This is a draft. Examples to format this document
       </pre>
 
       <pre class="example" title="The reference Way in RDF/Turtle" data-content-type="text/turtle"
-        data-oninclude="escapeExample escapeExamplePREFIX" data-include="proposal/way-100.ttl">
+        data-oninclude="escapeExample removeExamplePREFIX" data-include="proposal/way-100.ttl">
       </pre>
     </section>
 
@@ -290,7 +290,7 @@ This is a draft. Examples to format this document
       </pre>
 
       <pre class="example" title="The reference Relation in RDF/Turtle" data-content-type="text/turtle"
-        data-oninclude="escapeExample escapeExamplePREFIX" data-include="proposal/relation-10000.ttl"></pre>
+        data-oninclude="escapeExample removeExamplePREFIX" data-include="proposal/relation-10000.ttl"></pre>
     </section>
 
     <section>
@@ -349,8 +349,10 @@ This is a draft. Examples to format this document
       </div>
       <pre class="example" title="Tag:highway=track (reference)" data-content-type="txt" data-oninclude="escapeExample"
         data-include="reference/highway=track.wiki.txt"></pre>
+      <!-- <pre class="example" title="Tag:highway=track in RDF/Turtle" data-content-type="text/turtle"
+        data-oninclude="escapeExample removeExamplePREFIX" data-include="proposal/highway=track.wiki.ttl"></pre> -->
       <pre class="example" title="Tag:highway=track in RDF/Turtle" data-content-type="text/turtle"
-        data-oninclude="escapeExample escapeExamplePREFIX" data-include="proposal/highway=track.wiki.ttl"></pre>
+        data-oninclude="escapeExample" data-include="proposal/highway=track.wiki.ttl"></pre>
     </section>
   </section>
 
@@ -581,11 +583,10 @@ This is a draft. Examples to format this document
       <h3>JSOM data validator (mapcss)</h3>
       <pre class="example" title="highway.mapcss (reference)" data-content-type="css" data-oninclude=""
         data-include="reference/qa/highway.mapcss"></pre>
-      <pre class="example" title="proposal/qa/highway.shacl.ttl (SHACL)" data-content-type="text/turtle" data-oninclude="escapeExample escapeExamplePREFIX"
+      <pre class="example" title="proposal/qa/highway.shacl.ttl (SHACL)" data-content-type="text/turtle" data-oninclude="escapeExample removeExamplePREFIX"
         data-include="proposal/shacl/highway.shacl.ttl"></pre>
     </section>
   </section>
-
 
   <section>
     <h2>SHACL</h2>
@@ -601,15 +602,30 @@ This is a draft. Examples to format this document
         But this use might be not necessary if the input data is known to be working (e.g. either database or validations of file formats would detect syntax errors).
       </p>
       <pre class="example" title="poc/osm-wiki-onto2023.shacl.ttl" data-content-type="text/turtle"
-      data-oninclude="escapeExample escapeExamplePREFIX" data-include="poc/osm-wiki-onto2023.shacl.ttl"></pre>
+      data-oninclude="escapeExample removeExamplePREFIX" data-include="poc/osm-wiki-onto2023.shacl.ttl"></pre>
     </section>
   </section>
 
+  <section>
+    <h2>Inference</h2>
+    <p class="ednote" title="">
+      The inference may be moved out of this document.
+    </p>
+    <section>
+      <h3>Wiki explanation about maxspeed</h3>
+
+      <pre class="example" title="proposal/text/maxspeed-simple.md (reference)" data-content-type="text" data-oninclude=""
+        data-include="proposal/text/maxspeed-simple.md"></pre>
+
+      <!-- <pre class="example" title="Tag:highway=track in RDF/Turtle" data-content-type="text/turtle"
+        data-oninclude="escapeExample" data-include="proposal/highway=track.wiki.ttl"></pre> -->
+    </section>
+  </section>
 
   <section class="appendix informative">
     <h2>Data Primitives Ontology</h2>
     <pre class="example" title="poc/osm-wiki-onto2023.owl.ttl" data-content-type="text/turtle"
-      data-oninclude="escapeExample escapeExamplePREFIX" data-include="poc/osm-wiki-onto2023.owl.ttl"></pre>
+      data-oninclude="escapeExample removeExamplePREFIX" data-include="poc/osm-wiki-onto2023.owl.ttl"></pre>
   </section>
   <!--
   <section data-dfn-for="Foo">
