@@ -87,7 +87,31 @@ osma:Collection
         <osmw:Relations_are_not_categories> ;
 .
 
+# https://wiki.openstreetmap.org/wiki/Highways
+# Note: wiki uses plural; singular redirect to "Key:highway"
+osmw:Highways
+    a
+        rdfs:Class ,
+        owl:Class ;
+    rdfs:label "Highway"@en ;
+    skos:definition "roads, paths and cycletracks and other recognised routes on land."@en;
+.
+
+# https://wiki.openstreetmap.org/wiki/Railways
+osmw:Railways
+    a
+        rdfs:Class ,
+        owl:Class ;
+    rdfs:label "Railway"@en ;
+    # skos:definition "TODO"@en;
+.
+
+## Ignore after here
+
 # osmw: -> exist page on Wiki
 # osma: -> no page on Wiki (example: osma:Collection)
 # infer --rdfs poc/osm-onto2023.ttl proposal/shacl/XZ_tags_wikidata.shacl.ttl
 # infer --rdfs poc/osm-onto2023.ttl proposal/shacl/XZ_tags_wikidata.shacl.ttl | rdfpipe -
+
+# pyshacl --ont-graph poc/osm-onto2023.ttl --shacl proposal/shacl/highway.shacl.ttl proposal/shacl/tests/BR_highways.tdata.ttl
+# pyshacl --ont-graph poc/osm-onto2023.ttl --shacl proposal/shacl/highway.shacl.ttl proposal/shacl/tests/highway-invalid.tdata.ttl
