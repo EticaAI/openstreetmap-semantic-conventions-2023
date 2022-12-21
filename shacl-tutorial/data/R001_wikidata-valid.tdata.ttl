@@ -1,5 +1,5 @@
 PREFIX osmway: <https://www.openstreetmap.org/way/>
-PREFIX osmt: <https://example.org/todo-tag/>
+PREFIX osmt: <https://wiki.openstreetmap.org/wiki/Key:>
 PREFIX osmw: <https://wiki.openstreetmap.org/wiki/>
 
 osmway:220660292

@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>SHACL tutorial for OpenStreetMap™ 2023</title>
+  <title>Inference for values of tags of OpenStreetMap™ 2023</title>
   <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer></script>
   <script class="remove">
     // All config options at https://respec.org/docs/
@@ -29,7 +29,7 @@
         }
       ],
       github: "eticaai/openstreetmap-semantic-conventions-2023",
-      shortName: "osm-sc-23-shacl",
+      shortName: "osm-sc-23-tagval",
       // xref: "web-platform",
       // group: "my-working-group",
       license: 'cc0',
@@ -50,13 +50,11 @@
 
 <body>
   <section id="abstract">
-    <!--
     <p>
       This page is a quick introduction of using [[[SHACL]]] with OpenStreetMap data.
       Uses [[[Turtle]]] as an example, but could be expressed in other serializations,
       such as [[[JSON-LD]]].
     </p>
-    -->
     <div class="note" title="TODO abstract">
       <p>Finish the abstract</p>
     </div>
@@ -66,7 +64,6 @@
   </section>
   <section class="informative">
     <h2>Introduction</h2>
-    <!--
     <p>
       The [[[SHACL]]] is a World Wide Web Consortium (W3C) standard language for describing Resource Description
       Framework (RDF) graphs.
@@ -76,7 +73,6 @@
       SHACL also includes an extension mechanism to express more complex conditions in languages such as SPARQL and
       JavaScript.
     </p>
-    -->
     <div class="note" title="TODO introduction">
       <p>Finish the instroduction</p>
     </div>
@@ -119,16 +115,13 @@
   -->
   <!-- <section class="appendix informative"> -->
   <section class="">
-    <h2>Generic tag-values validation</h2>
+    <h2>Wikidata</h2>
     <section>
       <h3>Wikidata (not) brand</h3>
-      <pre class="example" title="shapes/R001_wikidata.shacl.ttl" data-content-type="text/turtle"
-        data-oninclude="escapeExample removeExamplePREFIX" data-include="shapes/R001_wikidata.shacl.ttl"></pre>
-
       <pre class="example" title="data/R001_wikidata-valid.tdata.ttl" data-content-type="text/turtle"
-        data-oninclude="escapeExample removeExamplePREFIX" data-include="data/R001_wikidata-valid.tdata.ttl"></pre>
-      <pre class="example" title="data/R001_wikidata-invalid.tdata.ttl" data-content-type="text/turtle"
-        data-oninclude="escapeExample removeExamplePREFIX" data-include="data/R001_wikidata-invalid.tdata.ttl"></pre>
+        data-oninclude="escapeExample " data-include="data/R001_wikidata-valid.tdata.ttl"></pre>
+      <pre class="example" title="data/R001_wikidata-inf-valid.tdata.ttl" data-content-type="text/turtle"
+        data-oninclude="escapeExample " data-include="data/R001_wikidata-inf-valid.tdata.ttl"></pre>
     </section>
 
   </section>

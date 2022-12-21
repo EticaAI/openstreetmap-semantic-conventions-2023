@@ -1,10 +1,9 @@
-PREFIX osmnode: <https://www.openstreetmap.org/node/>
 PREFIX osmway: <https://www.openstreetmap.org/way/>
 PREFIX osmt: <https://wiki.openstreetmap.org/wiki/Key:>
 PREFIX osmw: <https://wiki.openstreetmap.org/wiki/>
 
 osmway:220660292
     a osmw:Way ;
-    osmt:brand:wikidata "Q701338" ;
-    osmt:not:brand:wikidata "Q701338" ;
+    osmt:brand:wikidata "Q1" ;
+    osmt:not:brand:wikidata "Q2;Q3" ;
 .

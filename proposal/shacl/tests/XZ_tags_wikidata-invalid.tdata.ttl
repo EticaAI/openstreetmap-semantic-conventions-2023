@@ -3,7 +3,7 @@ PREFIX osmnode: <https://www.openstreetmap.org/node/>
 PREFIX osmrel: <https://www.openstreetmap.org/relation/>
 PREFIX osmway: <https://www.openstreetmap.org/way/>
 PREFIX osmm: <https://example.org/todo-meta/>
-PREFIX osmt: <https://example.org/todo-tag/>
+PREFIX osmt: <https://wiki.openstreetmap.org/wiki/Key:>
 PREFIX osmx: <https://example.org/todo-xref/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX ex: <https://example.org/>

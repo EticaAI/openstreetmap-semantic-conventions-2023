@@ -1,5 +1,5 @@
 PREFIX osmm: <https://example.org/todo-meta/>
-PREFIX osmt: <https://example.org/todo-tag/>
+PREFIX osmt: <https://wiki.openstreetmap.org/wiki/Key:>
 PREFIX osmw: <https://wiki.openstreetmap.org/wiki/>
 PREFIX ex: <https://example.org/>
 

@@ -1,0 +1,16 @@
+PREFIX osmway: <https://www.openstreetmap.org/way/>
+PREFIX osmt: <https://wiki.openstreetmap.org/wiki/Key:>
+PREFIX osmtx: <https://wiki.openstreetmap.org/wiki/Key:>
+PREFIX osmw: <https://wiki.openstreetmap.org/wiki/>
+PREFIX wikidata: <http://www.wikidata.org/entity/>
+
+osmway:220660292
+    a osmw:Way ;
+    osmt:brand:wikidata "Q1" ;
+    osmt:not:brand:wikidata "Q2;Q3" ;
+    osmtx:brand:wikidata wikidata:Q1 ;
+    osmtx:not:brand:wikidata (
+        wikidata:Q2
+        wikidata:Q3
+    ) ;
+.
