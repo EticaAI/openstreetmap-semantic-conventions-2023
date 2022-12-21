@@ -32,6 +32,11 @@ PREFIX xpto: <https://example.org/todo-fixme/>
 #      - Pan-American Highway (osmq:10002)
 #   - Asian Highway Network (osmq:10003)
 
+### ... ________________________________________________________________________
+# osmtx:is_in rdfs:subPropertyOf geo:sfWithin .
+# osmtx:is_in owl:equivalentProperty geo:sfWithin .
+# osmtx:is_in owl:sameAs geo:sfWithin .
+
 ### Administrative boundaries (contain the PPIs) _______________________________
 # Trivia: osmq 1-999 follows https://en.wikipedia.org/wiki/UN_M49 convention
 osmq:1
@@ -43,6 +48,8 @@ osmq:1
 osmq:19
     a osmw:Persistent_Place_Identifier ;
     osmtx:is_in osmq:1 ;
+    # geo:sfWithin osmq:1 ;
+    # geo:sfContains osmq:419 ;
     owl:sameAs wikidata:Q828 ;
     skos:prefLabel "Americas"@en ;
 .
@@ -50,6 +57,7 @@ osmq:19
 osmq:419
     a osmw:Persistent_Place_Identifier ;
     osmtx:is_in osmq:19 ;
+    # geo:sfWithin osmq:19 ;
     skos:prefLabel "Latin America and the Caribbean"@en ;
 .
 
@@ -77,6 +85,11 @@ osmq:10001
     xpto:perm [
         osmt:ref "BR-116"
     ] ;
+    # hug --port 8000 -f ./osmapi2rdfproxy.py
+    # https://www.wikidata.org/wiki/Q2739838
+    # http://localhost:8000/relation/4551466.ttl
+    # http://localhost:8000/relation/4551468.ttl
+    # http://localhost:8000/relation/4551469.ttl
 .
 
 osmq:10002
@@ -93,8 +106,9 @@ osmq:10003
     skos:prefLabel "Asian Highway Network"@en ;
 .
 
-# hug --port 8000 -f ./osmapi2rdfproxy.py
-# https://www.wikidata.org/wiki/Q2739838
-# http://localhost:8000/relation/4551466.ttl
-# http://localhost:8000/relation/4551468.ttl
-# http://localhost:8000/relation/4551469.ttl
+### Example of invalid data ____________________________________________________
+osmq:999002
+    a osmw:Persistent_Place_Identifier, osmw:Relation ;
+    osmtx:is_in wikidata:Q72880 ;
+    skos:prefLabel "Invalid mix PPI with other elements"@en ;
+.
