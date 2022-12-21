@@ -5,6 +5,7 @@ PREFIX osmtx: <https://wiki.openstreetmap.org/wiki/Key:>
 PREFIX osmw: <https://wiki.openstreetmap.org/wiki/>
 PREFIX osmvsh: <https://www.openstreetmap.org/validation/shacl/>
 PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 osmvsh:R001__Persistent_Place_Identifier__is_in
     a sh:NodeShape ;
@@ -13,20 +14,28 @@ osmvsh:R001__Persistent_Place_Identifier__is_in
         sh:path osmtx:is_in ;
         sh:class osmw:Persistent_Place_Identifier ;
         sh:message "PPIs can only be inside PPIs"@en ;
-    ]
+    ] ;
 .
 
-osmvsh:R001__Persistent_Place_Identifier__is_in
-    a sh:NodeShape ;
-    # sh:targetClass osmw:Persistent_Place_Identifier, osmw:Node, osmw:Way, osmw:Relation ;
-    sh:targetClass osmw:Persistent_Place_Identifier ;
-    sh:property [
-        # sh:path sh:class ;
-        # sh:disjoint osmw:Persistent_Place_Identifier ;
-        sh:path osmtx:is_in ;
-        sh:class osmw:Persistent_Place_Identifier ;
-        # sh:disjoint osmw:Persistent_Place_Identifier ;
-        sh:message "PPIs can only be inside PPIs"@en ;
-        # sh:message "Impossível ser, e não ser, ao mesmo tempo algo"@pt ;
-    ]
-.
+# osmvsh:R001__Persistent_Place_Identifier__is_in2
+#     a sh:NodeShape ;
+#     # sh:targetClass osmw:Persistent_Place_Identifier, osmw:Node, osmw:Way, osmw:Relation ;
+#     sh:targetClass osmw:Persistent_Place_Identifier ;
+#     # sh:property [
+#     #     # sh:path sh:class ;
+#     #     # sh:disjoint osmw:Persistent_Place_Identifier ;
+#     #     sh:path osmtx:is_in ;
+#     #     sh:class osmw:Persistent_Place_Identifier ;
+#     #     # sh:disjoint osmw:Persistent_Place_Identifier ;
+#     #     sh:message "PPIs can only be inside PPIs"@en ;
+#     #     # sh:message "Impossível ser, e não ser, ao mesmo tempo algo"@pt ;
+#     # ] ;
+#     # sh:not [
+#     #     a sh:PropertyShape ;
+#     #     sh:path rdf:type ;
+#     #     sh:in (
+#     #         osmw:Relation
+#     #         # osmw:Persistent_Place_Identifier
+#     #     ) ;
+#     # ] ;
+# .

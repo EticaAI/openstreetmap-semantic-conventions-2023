@@ -21,7 +21,7 @@ PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX wikidata: <http://www.wikidata.org/entity/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX osmq: <https://community.openstreetmap.org/t/persistent-and-stable-identifiers/6819#>
-PREFIX xpto: <https://example.org/todo-fixme/>
+PREFIX osmTEMPdef: <https://community.openstreetmap.org/t/persistent-and-stable-identifiers/6819#>
 
 # - World (osmq:1)
 #   - Americas (osmq:19)
@@ -32,33 +32,28 @@ PREFIX xpto: <https://example.org/todo-fixme/>
 #      - Pan-American Highway (osmq:10002)
 #   - Asian Highway Network (osmq:10003)
 
-### ... ________________________________________________________________________
-# osmtx:is_in rdfs:subPropertyOf geo:sfWithin .
-# osmtx:is_in owl:equivalentProperty geo:sfWithin .
-# osmtx:is_in owl:sameAs geo:sfWithin .
-
 ### Administrative boundaries (contain the PPIs) _______________________________
 # Trivia: osmq 1-999 follows https://en.wikipedia.org/wiki/UN_M49 convention
 osmq:1
     a osmw:Persistent_Place_Identifier ;
     owl:sameAs wikidata:Q16502 ;
     skos:prefLabel "World"@en ;
+    osmTEMPdef:primaryFeature osmw:Boundaries ;
 .
 
 osmq:19
     a osmw:Persistent_Place_Identifier ;
     osmtx:is_in osmq:1 ;
-    # geo:sfWithin osmq:1 ;
-    # geo:sfContains osmq:419 ;
     owl:sameAs wikidata:Q828 ;
     skos:prefLabel "Americas"@en ;
+    osmTEMPdef:primaryFeature osmw:Boundaries ;
 .
 
 osmq:419
     a osmw:Persistent_Place_Identifier ;
     osmtx:is_in osmq:19 ;
-    # geo:sfWithin osmq:19 ;
     skos:prefLabel "Latin America and the Caribbean"@en ;
+    osmTEMPdef:primaryFeature osmw:Boundaries ;
 .
 
 osmq:5
@@ -66,6 +61,7 @@ osmq:5
     osmtx:is_in osmq:419 ;
     owl:sameAs wikidata:Q18 ;
     skos:prefLabel "South America"@en ;
+    osmTEMPdef:primaryFeature osmw:Boundaries ;
 .
 
 osmq:76
@@ -73,6 +69,7 @@ osmq:76
     osmtx:is_in osmq:1 ;
     owl:sameAs wikidata:Q155 ;
     skos:prefLabel "Brazil"@en ;
+    osmTEMPdef:primaryFeature osmw:Boundaries ;
 .
 
 ### The Persistent Place Identifier inside A.B._________________________________
@@ -82,9 +79,10 @@ osmq:10001
     osmtx:is_in osmq:76 ;
     owl:sameAs wikidata:Q2739838 ;
     skos:prefLabel "BR-116"@en ;
-    xpto:perm [
-        osmt:ref "BR-116"
-    ] ;
+    osmTEMPdef:equivalentElements (
+        [ osmt:ref "BR-116" ]
+    ) ;
+    osmTEMPdef:primaryFeature osmw:Highways ;
     # hug --port 8000 -f ./osmapi2rdfproxy.py
     # https://www.wikidata.org/wiki/Q2739838
     # http://localhost:8000/relation/4551466.ttl
@@ -97,6 +95,7 @@ osmq:10002
     osmtx:is_in osmq:19 ;
     owl:sameAs wikidata:Q271839 ;
     skos:prefLabel "Pan-American Highway"@en ;
+    osmTEMPdef:primaryFeature osmw:Highways ;
 .
 
 osmq:10003
@@ -104,11 +103,37 @@ osmq:10003
     osmtx:is_in osmq:1 ;
     owl:sameAs wikidata:Q728802 ;
     skos:prefLabel "Asian Highway Network"@en ;
+    osmTEMPdef:primaryFeature osmw:Highways ;
 .
 
 ### Example of invalid data ____________________________________________________
 osmq:999002
-    a osmw:Persistent_Place_Identifier, osmw:Relation ;
+    a osmw:Persistent_Place_Identifier;
     osmtx:is_in wikidata:Q72880 ;
     skos:prefLabel "Invalid mix PPI with other elements"@en ;
+    osmTEMPdef:primaryFeature osmw:Highways ;
+.
+
+osmq:999002
+    a osmw:Persistent_Place_Identifier, osmw:Relation ;
+    skos:prefLabel "Invalid mix PPI with other elements"@en ;
+    osmTEMPdef:primaryFeature osmw:Highways ;
+.
+
+### Definitions ________________________________________________________________
+# osmtx:is_in rdfs:subPropertyOf geo:sfWithin .
+# osmtx:is_in owl:equivalentProperty geo:sfWithin .
+# osmtx:is_in owl:sameAs geo:sfWithin .
+
+osmTEMPdef:equivalentElements
+    a rdfs:class, owl:Class ;
+    skos:prefLabel "equivalentElements"@en ;
+    skos:definition "define equivalent of Elements directly or by query type"@en ;
+    skos:note "use of this property does not implies completeness unless explicitly affirmed"@en ;
+.
+
+osmTEMPdef:primaryFeature
+    a rdfs:class, owl:Class ;
+    skos:prefLabel "primaryFeature"@en ;
+    rdfs:isDefinedBy <https://wiki.openstreetmap.org/wiki/Map_features#Primary_features> ;
 .
