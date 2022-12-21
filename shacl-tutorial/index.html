@@ -65,9 +65,13 @@
   <section class="informative">
     <h2>Introduction</h2>
     <p>
-      The [[[SHACL]]] is a World Wide Web Consortium (W3C) standard language for describing Resource Description Framework (RDF) graphs.
-      Among others, it includes features to express conditions that constrain the number of values that a property may have, the type of such values, numeric ranges, string matching patterns, and logical combinations of such constraints.
-      SHACL also includes an extension mechanism to express more complex conditions in languages such as SPARQL and JavaScript.
+      The [[[SHACL]]] is a World Wide Web Consortium (W3C) standard language for describing Resource Description
+      Framework (RDF) graphs.
+      Among others, it includes features to express conditions that constrain the number of values that a property may
+      have, the type of such values, numeric ranges, string matching patterns, and logical combinations of such
+      constraints.
+      SHACL also includes an extension mechanism to express more complex conditions in languages such as SPARQL and
+      JavaScript.
     </p>
     <div class="note" title="TODO introduction">
       <p>Finish the instroduction</p>
@@ -75,27 +79,55 @@
     <!-- <aside class="note" title="A useful note">
       <p>I'm a note!</p>
     </aside> -->
-  </section>
-  <section>
-    <h2>A section</h2>
-    <aside class="example">
-      <p>This is an example.</p>
-      <pre class="js">
-        // Automatic syntax highlighting
-        function someJavaScript(){}
-        </pre>
-    </aside>
     <section>
-      <h3>I'm a sub-section</h3>
-      <p class="issue" data-number="121">
-        <!-- Issue can automatically be populated from GitHub -->
-      </p>
+      <h3>Software suggestions for test</h3>
+      <ul>
+        <li>
+          Online
+          <ul>
+            <li>
+              <a href="https://shacl-playground.zazuko.com/">https://shacl-playground.zazuko.com/</a>
+            </li>
+            <li>
+              <a href="https://shacl.org/playground/">https://shacl.org/playground/</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          Command line / Library
+          <ul>
+            <li>
+              <a
+                href="https://jena.apache.org/documentation/shacl/index.html">https://jena.apache.org/documentation/shacl/index.html</a>
+            </li>
+            <li>
+              <a href="https://github.com/RDFLib/pySHACL">https://github.com/RDFLib/pySHACL</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </section>
   </section>
   <section>
     <h2>Section 2 (...)</h2>
   </section>
-  <section data-dfn-for="Foo">
+  <!-- <section class="appendix informative"> -->
+  <section class="">
+    <h2>Generic tag-values validation</h2>
+    <section>
+      <h3>Wikidata (not) brand</h3>
+      <pre class="example" title="shapes/R001_wikidata.shacl.ttl" data-content-type="text/turtle"
+        data-oninclude="escapeExample removeExamplePREFIX" data-include="shapes/R001_wikidata.shacl.ttl"></pre>
+
+      <pre class="example" title="data/R001_wikidata-valid.tdata.ttl" data-content-type="text/turtle"
+        data-oninclude="escapeExample removeExamplePREFIX" data-include="data/R001_wikidata-valid.tdata.ttl"></pre>
+      <pre class="example" title="data/R001_wikidata-invalid.tdata.ttl" data-content-type="text/turtle"
+        data-oninclude="escapeExample removeExamplePREFIX" data-include="data/R001_wikidata-invalid.tdata.ttl"></pre>
+    </section>
+
+  </section>
+  <!--
+    <section data-dfn-for="Foo">
     <h2>Start your spec!</h2>
     <pre class="idl">
         [Exposed=Window]
@@ -113,6 +145,8 @@
       <li>A |variable:DOMString| can be declared like this.</li>
     </ol>
   </section>
+  -->
+  <!--
   <section class="appendix informative">
     <h2>Software used to test</h2>
     <ul>
@@ -124,6 +158,7 @@
       </li>
     </ul>
   </section>
+  -->
   <section id="conformance">
     <p>
       This is required for specifications that contain normative material.

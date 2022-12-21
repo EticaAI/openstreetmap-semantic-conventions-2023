@@ -1,4 +1,4 @@
-# [Request for Feedback] Semantic Conventions for OpenStreetMap™ 2023
+# Semantic Conventions for OpenStreetMap™ 2023
 **[Request for Feedback] Semantic Conventions for OpenStreetMap™ 2023. Mappings from common file formats to RDF, and other considerations**
 
 > This initial draft was based on discussions from [Emerson Rocha 400329 Diary](https://www.openstreetmap.org/user/fititnt/diary/400329).
@@ -13,6 +13,10 @@ The structure for the directory is:
   - [proposal/shacl](proposal/shacl/): proof of convept of [Shapes Constraint Language (SHACL)](https://www.w3.org/TR/shacl/) usable with the proposed RDF encoding.
   - [proposal/query](proposal/query/): proof of convept of [SPARQL 1.1 Query Language](https://www.w3.org/TR/sparql11-query/) usable with the proposed RDF encoding.
 - [poc/](poc/): public domain scripts to convert between the formats
+
+### SHACL Tutorial <sup>new!</sup>
+
+Please visit <https://eticaai.github.io/openstreetmap-semantic-conventions-2023/shacl-tutorial/>.
 
 ## Become an editor
 
