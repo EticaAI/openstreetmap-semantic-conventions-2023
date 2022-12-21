@@ -21,10 +21,18 @@ PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX wikidata: <http://www.wikidata.org/entity/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX osmq: <https://community.openstreetmap.org/t/persistent-and-stable-identifiers/6819#>
+PREFIX xpto: <https://example.org/todo-fixme/>
 
+# - World (osmq:1)
+#   - Americas (osmq:19)
+#     - Latin America and the Caribbean (osmq:419)
+#       - South America (osmq:5)
+#         - Brazil (osmq:76)
+#           - BR-116 (osmq:10001)
+#      - Pan-American Highway (osmq:10002)
+#   - Asian Highway Network (osmq:10003)
 
-# https://en.wikipedia.org/wiki/List_of_longest_highways
-
+### Administrative boundaries (contain the PPIs) _______________________________
 # Trivia: osmq 1-999 follows https://en.wikipedia.org/wiki/UN_M49 convention
 osmq:1
     a osmw:Persistent_Place_Identifier ;
@@ -59,10 +67,30 @@ osmq:76
     skos:prefLabel "Brazil"@en ;
 .
 
+### The Persistent Place Identifier inside A.B._________________________________
+# Trivia: https://en.wikipedia.org/wiki/List_of_longest_highways
 osmq:10001
     a osmw:Persistent_Place_Identifier ;
+    osmtx:is_in osmq:76 ;
     owl:sameAs wikidata:Q2739838 ;
-    skos:prefLabel "Brazil"@en ;
+    skos:prefLabel "BR-116"@en ;
+    xpto:perm [
+        osmt:ref "BR-116"
+    ] ;
+.
+
+osmq:10002
+    a osmw:Persistent_Place_Identifier ;
+    osmtx:is_in osmq:19 ;
+    owl:sameAs wikidata:Q271839 ;
+    skos:prefLabel "Pan-American Highway"@en ;
+.
+
+osmq:10003
+    a osmw:Persistent_Place_Identifier ;
+    osmtx:is_in osmq:1 ;
+    owl:sameAs wikidata:Q728802 ;
+    skos:prefLabel "Asian Highway Network"@en ;
 .
 
 # hug --port 8000 -f ./osmapi2rdfproxy.py
