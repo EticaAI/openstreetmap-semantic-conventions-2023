@@ -1,0 +1,72 @@
+PREFIX ex: <http://example.org/>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX osma: <https://example.org/todo-onto-toplevel/>
+PREFIX osmnode: <https://www.openstreetmap.org/node/>
+PREFIX osmrel: <https://www.openstreetmap.org/relation/>
+PREFIX osmway: <https://www.openstreetmap.org/way/>
+PREFIX osmm: <https://example.org/todo-meta/>
+PREFIX osmt: <https://wiki.openstreetmap.org/wiki/Key:>
+PREFIX osmtx: <https://wiki.openstreetmap.org/wiki/Key:>
+PREFIX osmsh: <https://www.openstreetmap.org/validation/shacl/>
+PREFIX osmw: <https://wiki.openstreetmap.org/wiki/>
+PREFIX osmx: <https://example.org/todo-xref/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <https://schema.org/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX wikidata: <http://www.wikidata.org/entity/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX osmq: <https://community.openstreetmap.org/t/persistent-and-stable-identifiers/6819#>
+
+
+# https://en.wikipedia.org/wiki/List_of_longest_highways
+
+# Trivia: osmq 1-999 follows https://en.wikipedia.org/wiki/UN_M49 convention
+osmq:1
+    a osmw:Persistent_Place_Identifier ;
+    owl:sameAs wikidata:Q16502 ;
+    skos:prefLabel "World"@en ;
+.
+
+osmq:19
+    a osmw:Persistent_Place_Identifier ;
+    osmtx:is_in osmq:1 ;
+    owl:sameAs wikidata:Q828 ;
+    skos:prefLabel "Americas"@en ;
+.
+
+osmq:419
+    a osmw:Persistent_Place_Identifier ;
+    osmtx:is_in osmq:19 ;
+    skos:prefLabel "Latin America and the Caribbean"@en ;
+.
+
+osmq:5
+    a osmw:Persistent_Place_Identifier ;
+    osmtx:is_in osmq:419 ;
+    owl:sameAs wikidata:Q18 ;
+    skos:prefLabel "South America"@en ;
+.
+
+osmq:76
+    a osmw:Persistent_Place_Identifier ;
+    osmtx:is_in osmq:1 ;
+    owl:sameAs wikidata:Q155 ;
+    skos:prefLabel "Brazil"@en ;
+.
+
+osmq:10001
+    a osmw:Persistent_Place_Identifier ;
+    owl:sameAs wikidata:Q2739838 ;
+    skos:prefLabel "Brazil"@en ;
+.
+
+# hug --port 8000 -f ./osmapi2rdfproxy.py
+# https://www.wikidata.org/wiki/Q2739838
+# http://localhost:8000/relation/4551466.ttl
+# http://localhost:8000/relation/4551468.ttl
+# http://localhost:8000/relation/4551469.ttl

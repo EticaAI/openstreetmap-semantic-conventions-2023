@@ -41,7 +41,7 @@ Please visit <https://eticaai.github.io/openstreetmap-semantic-conventions-2023/
 
 **Public domain code**
 - [poc/osmapi2rdfproxy.py](poc/osmapi2rdfproxy.py): early proof of concept to generate the RFC data; not intented for production use, but for test viability. Is a proxy
-  - [poc/osmrdf2022.py](poc/osmrdf2022.py): logic of the proof of concept proxy
+  - [poc/osmrdf2023.py](poc/osmrdf2023.py): logic of the proof of concept proxy
 -->
 
 <!--

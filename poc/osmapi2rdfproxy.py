@@ -23,20 +23,22 @@
 #  REQUIREMENTS:  - python3
 #                   - hug (pip install hug -U)
 #                   - requests-cache (pip install requests-cache)
-#                 - osmrdf2022.py (Python library)
+#                 - osmrdf2023.py (Python library)
 #          BUGS:  ---
 #         NOTES:  ---
 #       AUTHORS:  Emerson Rocha <rocha[at]ieee.org>
 # COLLABORATORS:  ---
 #       LICENSE:  Public Domain dedication or Zero-Clause BSD
 #                 SPDX-License-Identifier: Unlicense OR 0BSD
-#       VERSION:  v0.2.0
+#       VERSION:  v0.3.0
 #       CREATED:  2022-11-25 15:53:00Z v0.1.0 started
 #      REVISION:  2022-11-26 20:47:00Z v0.2.0 node, way, relation basic turtle,
 #                                      only attached tags (no <nd> <member> yet)
+#                 2022-12-21 01:46:00Z v0.3.0 osmrdf2022.py -> osmrdf2023.py
 # ==============================================================================
 
-from osmrdf2022 import (
+# from poc.osmrdf2023 import (
+from osmrdf2023 import (
     osmrdf_node_xml2ttl,
     osmrdf_relation_xml2ttl,
     osmrdf_way_xml2ttl
@@ -99,7 +101,7 @@ suffix_output = hug.output_format.suffix({
 # ### Logic for API endpoints __________________________________________________
 # @NOTE: This section mostly:
 #        - Request+cache openstreetmap.org/api/0.6/ API calls and serve as it is
-#        - If user ask .ttl, uses osmrdf2022.py to generate
+#        - If user ask .ttl, uses osmrdf2023.py to generate
 # @BUG   While osmapi2rdfproxy.py is intented to only generate Turtle for
 #        discussed types of data, the actuall OpenStreetMap API have more
 #        endpoints than the ones here.

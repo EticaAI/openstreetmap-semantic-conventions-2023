@@ -15,15 +15,16 @@
 # COLLABORATORS:  ---
 #       LICENSE:  Public Domain dedication or Zero-Clause BSD
 #                 SPDX-License-Identifier: Unlicense OR 0BSD
-#       VERSION:  v0.2.0
+#       VERSION:  v0.3.0
 #       CREATED:  2022-11-27 03:14 UTC v0.2.0 started
-#      REVISION:  ---
+#      REVISION:  2022-12-21 01:46:00Z v0.3.0 osmrdf2022.py -> osmrdf2023.py
 # ==============================================================================
 
 import argparse
 import sys
-from osmrdf2022 import (
-    osmrdf_xmldump2_ttl,
+# from poc.osmrdf2023 import (
+from osmrdf2023 import (
+    # osmrdf_xmldump2_ttl,
     osmrdf_xmldump2_ttl_v2,
     OSMElementFilter
 )

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # ==============================================================================
 #
-#          FILE:  osmrdf2022.py
+#          FILE:  osmrdf2023.py
 #
 #         USAGE:  # this is a library. Import into your code:
 #                     from osmrdf2022 import *
@@ -19,10 +19,11 @@
 # COLLABORATORS:  ---
 #       LICENSE:  Public Domain dedication or Zero-Clause BSD
 #                 SPDX-License-Identifier: Unlicense OR 0BSD
-#       VERSION:  v0.2.0
+#       VERSION:  v0.3.0
 #       CREATED:  2022-11-25 19:22:00Z v0.1.0 started
 #      REVISION:  2022-11-26 20:47:00Z v0.2.0 node, way, relation basic turtle,
 #                                      only attached tags (no <nd> <member> yet)
+#                 2022-12-21 01:46:00Z v0.3.0 osmrdf2022.py -> osmrdf2023.py
 # ==============================================================================
 
 import sys
@@ -239,7 +240,7 @@ class OSMElement:
                 data.append(
                     f'    osmt:{_escp_key} "{value}" ;')
 
-                if self._tagcaster.can_cast(_escp_key):
+                if self._tagcaster and self._tagcaster.can_cast(_escp_key):
                     data.append(self._tagcaster.to_ttl(_escp_key, value))
 
         if self._el_osm_nds:
